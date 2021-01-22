@@ -8,12 +8,17 @@ import {makeStyles} from "@material-ui/core/styles";
 import classNames from "classnames";
 import landingPageStyle from "../MaterialKitProReact/assets/jss/material-kit-pro-react/views/landingPageStyle";
 import TeamComponent from "../components/TeamComponent";
+import Card from "../MaterialKitProReact/components/Card/Card";
+import CardHeader from "../MaterialKitProReact/components/Card/CardHeader";
+import CardBody from "../MaterialKitProReact/components/Card/CardBody";
+import gucci from "../MaterialKitProReact/assets/img/examples/gucci.jpg";
+import TripleCardShow from "../components/TripleCardShow";
+
 
 const useStyles = makeStyles(landingPageStyle);
 
 const HomePage = ({ ...rest }) => {
     const classes = useStyles();
-
     return (
         <>
             <Header
@@ -44,6 +49,14 @@ const HomePage = ({ ...rest }) => {
             </Parallax>
             <div className={classNames(classes.main, classes.mainRaised)}>
                 <div className={classes.container}>
+                    <h2 style={{color: "black", paddingTop: 30, textAlign: "center"}}>Social Events</h2>
+                    <TripleCardShow/>
+                    <h2 style={{color: "black", paddingTop: 30, textAlign: "center"}}>Rent Equipment</h2>
+                    <TripleCardShow/>
+                    <h2 style={{color: "black", paddingTop: 30, textAlign: "center"}}>In House Services</h2>
+                    <TripleCardShow/>
+                    <h2 style={{color: "black", paddingTop: 30, textAlign: "center"}}>External Services</h2>
+                    <TripleCardShow/>
                     <TeamComponent />
                 </div>
             </div>
