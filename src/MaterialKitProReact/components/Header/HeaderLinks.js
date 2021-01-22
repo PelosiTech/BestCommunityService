@@ -119,7 +119,8 @@ export default function HeaderLinks(props) {
           <LineStyle className={classes.dropdownIcons} />
           In House Services
         </Link>
-      </ListItem>      <ListItem className={classes.listItem}>
+      </ListItem>
+      <ListItem className={classes.listItem}>
       <Link to="/external-services" className={classes.dropdownLink}>
         <Icon className={classes.dropdownIcons}>content_paste</Icon>
         External Services

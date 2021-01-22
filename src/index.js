@@ -6,13 +6,15 @@ import { Router, Route, Switch } from "react-router";
 import "MaterialKitProReact/assets/scss/material-kit-pro-react.scss?v=1.9.0";
 
 import HomePage from "./pages/HomePage";
+import LoginPage from "./pages/LoginPage";
 
 var hist = createBrowserHistory();
 
 ReactDOM.render(
   <Router history={hist}>
     <Switch>
-      <Route path="/" component={HomePage} />
+      <Route path="/" exact component={HomePage} />
+      <Route path="/login" exact component={LoginPage} />
     </Switch>
   </Router>,
   document.getElementById("root")
