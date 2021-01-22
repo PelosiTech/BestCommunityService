@@ -9,7 +9,10 @@ import classNames from "classnames";
 import landingPageStyle from "../MaterialKitProReact/assets/jss/material-kit-pro-react/views/landingPageStyle";
 import TeamComponent from "../components/TeamComponent";
 import TripleCardShow from "../components/TripleCardShow";
-
+import SocialEvents from "../data/Event";
+import EquipmentData from "../data/EquipmentData";
+import InHouseServices from "../data/InHouseServices";
+import ExternalServices from "../data/ExternalServices";
 
 const useStyles = makeStyles(landingPageStyle);
 
@@ -46,13 +49,13 @@ const HomePage = ({ ...rest }) => {
             <div className={classNames(classes.main, classes.mainRaised)}>
                 <div className={classes.container}>
                     <h2 style={{color: "black", paddingTop: 30, textAlign: "center"}}>Social Events</h2>
-                    <TripleCardShow/>
-                    <h2 style={{color: "black", paddingTop: 30, textAlign: "center"}}>Rent Equipment</h2>
-                    <TripleCardShow/>
+                    <TripleCardShow data={SocialEvents}/>
+                    <h2 style={{color: "black", paddingTop: 30, textAlign: "center"}}>Rent Equipment & Services</h2>
+                    <TripleCardShow data={EquipmentData}/>
                     <h2 style={{color: "black", paddingTop: 30, textAlign: "center"}}>In House Services</h2>
-                    <TripleCardShow/>
+                    <TripleCardShow data={InHouseServices}/>
                     <h2 style={{color: "black", paddingTop: 30, textAlign: "center"}}>External Services</h2>
-                    <TripleCardShow/>
+                    <TripleCardShow data={ExternalServices}/>
                     <TeamComponent />
                 </div>
             </div>

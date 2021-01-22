@@ -1,10 +1,10 @@
 import React from 'react';
 import Card from "../MaterialKitProReact/components/Card/Card";
 import CardHeader from "../MaterialKitProReact/components/Card/CardHeader";
-import gucci from "../MaterialKitProReact/assets/img/examples/gucci.jpg";
 import CardBody from "../MaterialKitProReact/components/Card/CardBody";
 import {makeStyles} from "@material-ui/core/styles";
-import styles from "../MaterialKitProReact/assets/jss/material-kit-pro-react/views/ecommerceSections/latestOffersStyle.js";
+import styles
+    from "../MaterialKitProReact/assets/jss/material-kit-pro-react/views/ecommerceSections/latestOffersStyle.js";
 import GridContainer from "../MaterialKitProReact/components/Grid/GridContainer";
 import GridItem from "../MaterialKitProReact/components/Grid/GridItem";
 
@@ -12,10 +12,9 @@ const useStyles = makeStyles(styles);
 
 const TripleCardShow = ({data}) => {
     const classes = useStyles();
-    if(!data) {
+    if (!data) {
         return null
     }
-    console.log(data)
     const firstCard = data[0];
     const secondCard = data[1];
     const thirdCard = data[2];
@@ -24,9 +23,7 @@ const TripleCardShow = ({data}) => {
             <GridItem md={4} sm={4}>
                 <Card product plain>
                     <CardHeader image plain>
-                        <a href="#weddings">
-                            <img src={firstCard.image} alt="..."/>
-                        </a>
+                        <img src={firstCard.image} alt="..."/>
                         <div
                             className={classes.coloredShadow}
                             style={{backgroundImage: `url(${firstCard.image})`, opacity: 1}}
@@ -43,9 +40,7 @@ const TripleCardShow = ({data}) => {
             <GridItem md={4} sm={4}>
                 <Card product plain>
                     <CardHeader image plain>
-                        <a href="#communitymeetings">
-                            <img src={secondCard.image} alt="..."/>
-                        </a>
+                        <img src={secondCard.image} alt="..."/>
                         <div
                             className={classes.coloredShadow}
                             style={{backgroundImage: `url(${secondCard.image})`, opacity: 1}}
@@ -62,9 +57,7 @@ const TripleCardShow = ({data}) => {
             <GridItem md={4} sm={4}>
                 <Card product plain>
                     <CardHeader image plain>
-                        <a href="#gatherings">
-                            <img src={thirdCard.image} alt="..."/>
-                        </a>
+                        <img src={thirdCard.image} alt="..."/>
                         <div
                             className={classes.coloredShadow}
                             style={{backgroundImage: `url(${thirdCard.image})`, opacity: 1}}
