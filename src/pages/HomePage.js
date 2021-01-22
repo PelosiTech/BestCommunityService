@@ -18,7 +18,7 @@ const HomePage = ({ ...rest }) => {
         <>
             <Header
                 color="transparent"
-                brand="Material Kit PRO React"
+                brand="Best Community Service"
                 links={<HeaderLinks dropdownHoverColor="info" />}
                 fixed
                 changeColorOnScroll={{
@@ -27,27 +27,26 @@ const HomePage = ({ ...rest }) => {
                 }}
                 {...rest}
             />
-            <Parallax image={require("MaterialKitProReact/assets/img/bg8.jpg")} filter="dark">
+            <Parallax image={require("MaterialKitProReact/assets/img/bg43.jpg")} filter="dark">
                 <div className={classes.container}>
                     <GridContainer>
                         <GridItem xs={12} sm={6} md={6}>
-                            <h1 className={classes.title}>Your Story Starts With Us.</h1>
+                            <h1 className={classes.title}>Helping our community one day at a time!</h1>
                             <h4>
-                                Every landing page needs a small description after the big bold
-                                title, that{"'"}s why we added this text here. Add here all the
-                                information that can make you or your product create the first
-                                impression.
+                                Take a look around at some of the current events held at our building!
+                                You can choose to attend an event, request a service, or even rent some space
+                                in our building!
                             </h4>
                             <br />
-                            <Button
-                                color="danger"
-                                size="lg"
-                                href="https://www.youtube.com/watch?v=dQw4w9WgXcQ&ref=creativetim"
-                                target="_blank"
-                            >
-                                <i className="fas fa-play" />
-                                Watch video
-                            </Button>
+                            {/*<Button*/}
+                            {/*    color="danger"*/}
+                            {/*    size="lg"*/}
+                            {/*    href="https://www.youtube.com/watch?v=dQw4w9WgXcQ&ref=creativetim"*/}
+                            {/*    target="_blank"*/}
+                            {/*>*/}
+                            {/*    <i className="fas fa-play" />*/}
+                            {/*    Watch video*/}
+                            {/*</Button>*/}
                         </GridItem>
                     </GridContainer>
                 </div>
