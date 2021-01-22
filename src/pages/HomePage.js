@@ -6,8 +6,8 @@ import GridContainer from "../MaterialKitProReact/components/Grid/GridContainer"
 import GridItem from "../MaterialKitProReact/components/Grid/GridItem";
 import {makeStyles} from "@material-ui/core/styles";
 import classNames from "classnames";
-import Button from "../MaterialKitProReact/components/CustomButtons/Button";
 import landingPageStyle from "../MaterialKitProReact/assets/jss/material-kit-pro-react/views/landingPageStyle";
+import TeamComponent from "../components/TeamComponent";
 
 const useStyles = makeStyles(landingPageStyle);
 
@@ -38,21 +38,13 @@ const HomePage = ({ ...rest }) => {
                                 in our building!
                             </h4>
                             <br />
-                            {/*<Button*/}
-                            {/*    color="danger"*/}
-                            {/*    size="lg"*/}
-                            {/*    href="https://www.youtube.com/watch?v=dQw4w9WgXcQ&ref=creativetim"*/}
-                            {/*    target="_blank"*/}
-                            {/*>*/}
-                            {/*    <i className="fas fa-play" />*/}
-                            {/*    Watch video*/}
-                            {/*</Button>*/}
                         </GridItem>
                     </GridContainer>
                 </div>
             </Parallax>
             <div className={classNames(classes.main, classes.mainRaised)}>
                 <div className={classes.container}>
+                    <TeamComponent />
                 </div>
             </div>
         </>
