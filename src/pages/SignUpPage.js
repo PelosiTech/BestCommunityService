@@ -5,8 +5,6 @@ import { makeStyles } from "@material-ui/core/styles";
 import InputAdornment from "@material-ui/core/InputAdornment";
 import Checkbox from "@material-ui/core/Checkbox";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
-import List from "@material-ui/core/List";
-import ListItem from "@material-ui/core/ListItem";
 import Icon from "@material-ui/core/Icon";
 // @material-ui/icons
 import Timeline from "@material-ui/icons/Timeline";
@@ -15,11 +13,9 @@ import Group from "@material-ui/icons/Group";
 import Face from "@material-ui/icons/Face";
 import Email from "@material-ui/icons/Email";
 import Check from "@material-ui/icons/Check";
-import Favorite from "@material-ui/icons/Favorite";
 // core ../MaterialKitProReact/components
 import Header from "../MaterialKitProReact/components/Header/Header.js";
 import HeaderLinks from "../MaterialKitProReact/components/Header/HeaderLinks.js";
-import Footer from "../MaterialKitProReact/components/Footer/Footer.js";
 import GridContainer from "../MaterialKitProReact/components/Grid/GridContainer.js";
 import GridItem from "../MaterialKitProReact/components/Grid/GridItem.js";
 import Button from "../MaterialKitProReact/components/CustomButtons/Button.js";

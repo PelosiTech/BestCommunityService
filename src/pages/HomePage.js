@@ -8,10 +8,6 @@ import {makeStyles} from "@material-ui/core/styles";
 import classNames from "classnames";
 import landingPageStyle from "../MaterialKitProReact/assets/jss/material-kit-pro-react/views/landingPageStyle";
 import TeamComponent from "../components/TeamComponent";
-import Card from "../MaterialKitProReact/components/Card/Card";
-import CardHeader from "../MaterialKitProReact/components/Card/CardHeader";
-import CardBody from "../MaterialKitProReact/components/Card/CardBody";
-import gucci from "../MaterialKitProReact/assets/img/examples/gucci.jpg";
 import TripleCardShow from "../components/TripleCardShow";
 
 
