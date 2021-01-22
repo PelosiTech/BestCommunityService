@@ -13,11 +13,15 @@ import SocialEvents from "../data/Event";
 import EquipmentData from "../data/EquipmentData";
 import InHouseServices from "../data/InHouseServices";
 import ExternalServices from "../data/ExternalServices";
+import { useHistory } from 'react-router-dom';
+import Button from "../MaterialKitProReact/components/CustomButtons/Button";
 
 const useStyles = makeStyles(landingPageStyle);
 
 const HomePage = ({ ...rest }) => {
     const classes = useStyles();
+    const history = useHistory()
+
     return (
         <>
             <Header
@@ -48,14 +52,34 @@ const HomePage = ({ ...rest }) => {
             </Parallax>
             <div className={classNames(classes.main, classes.mainRaised)}>
                 <div className={classes.container}>
-                    <h2 style={{color: "black", paddingTop: 30, textAlign: "center"}}>Social Events</h2>
+                    <h2 style={{color: "black", paddingTop: 30, textAlign: "center"}} onClick={() => history.push("/social-events")}>Social Events</h2>
                     <TripleCardShow data={SocialEvents}/>
-                    <h2 style={{color: "black", paddingTop: 30, textAlign: "center"}}>Rent Equipment & Services</h2>
+                    <div style={{display: "flex", justifyContent: "center", alignItems: "center"}}>
+                        <Button round color="info" size="lg" onClick={() => history.push("/social-events")}>
+                            Go to Social Events Page!
+                        </Button>
+                    </div>
+                    <h2 style={{color: "black", paddingTop: 30, textAlign: "center"}} onClick={() => history.push("/rent-equipment")}>Rent Equipment & Services</h2>
                     <TripleCardShow data={EquipmentData}/>
-                    <h2 style={{color: "black", paddingTop: 30, textAlign: "center"}}>In House Services</h2>
+                    <div style={{display: "flex", justifyContent: "center", alignItems: "center"}}>
+                        <Button round color="info" size="lg" onClick={() => history.push("/rent-equipment")}>
+                            Go to Rent Equipment & Services Page!
+                        </Button>
+                    </div>
+                    <h2 style={{color: "black", paddingTop: 30, textAlign: "center"}} onClick={() => history.push("/in-house-services")}>In House Services</h2>
                     <TripleCardShow data={InHouseServices}/>
-                    <h2 style={{color: "black", paddingTop: 30, textAlign: "center"}}>External Services</h2>
+                    <div style={{display: "flex", justifyContent: "center", alignItems: "center"}}>
+                        <Button round color="info" size="lg" onClick={() => history.push("/in-house-services")}>
+                            Go to In House Services Page!
+                        </Button>
+                    </div>
+                    <h2 style={{color: "black", paddingTop: 30, textAlign: "center"}} onClick={() => history.push("/external-services")}>External Services</h2>
                     <TripleCardShow data={ExternalServices}/>
+                    <div style={{display: "flex", justifyContent: "center", alignItems: "center"}}>
+                        <Button round color="info" size="lg" onClick={() => history.push("/external-services")}>
+                            Go to External Services Page!
+                        </Button>
+                    </div>
                     <TeamComponent />
                 </div>
             </div>
