@@ -10,27 +10,32 @@ import GridItem from "../MaterialKitProReact/components/Grid/GridItem";
 
 const useStyles = makeStyles(styles);
 
-const TripleCardShow = () => {
+const TripleCardShow = ({data}) => {
     const classes = useStyles();
+    if(!data) {
+        return null
+    }
+    console.log(data)
+    const firstCard = data[0];
+    const secondCard = data[1];
+    const thirdCard = data[2];
     return (
         <GridContainer>
             <GridItem md={4} sm={4}>
                 <Card product plain>
                     <CardHeader image plain>
-                        <a href="#pablo">
-                            <img src={gucci} alt="..."/>
+                        <a href="#weddings">
+                            <img src={firstCard.image} alt="..."/>
                         </a>
                         <div
                             className={classes.coloredShadow}
-                            style={{backgroundImage: `url(${gucci})`, opacity: 1}}
+                            style={{backgroundImage: `url(${firstCard.image})`, opacity: 1}}
                         />
                     </CardHeader>
                     <CardBody className={classes.textCenter} plain>
-                        <h4 className={classes.cardTitle}>Gucci</h4>
+                        <h4 className={classes.cardTitle}>{firstCard.title}</h4>
                         <p className={classes.cardDescription}>
-                            The structured shoulders and sleek detailing ensure a sharp
-                            silhouette. Team it with a silk pocket square and leather
-                            loafers.
+                            {firstCard.description}
                         </p>
                     </CardBody>
                 </Card>
@@ -38,20 +43,18 @@ const TripleCardShow = () => {
             <GridItem md={4} sm={4}>
                 <Card product plain>
                     <CardHeader image plain>
-                        <a href="#pablo">
-                            <img src={gucci} alt="..."/>
+                        <a href="#communitymeetings">
+                            <img src={secondCard.image} alt="..."/>
                         </a>
                         <div
                             className={classes.coloredShadow}
-                            style={{backgroundImage: `url(${gucci})`, opacity: 1}}
+                            style={{backgroundImage: `url(${secondCard.image})`, opacity: 1}}
                         />
                     </CardHeader>
                     <CardBody className={classes.textCenter} plain>
-                        <h4 className={classes.cardTitle}>Gucci</h4>
+                        <h4 className={classes.cardTitle}>{secondCard.title}</h4>
                         <p className={classes.cardDescription}>
-                            The structured shoulders and sleek detailing ensure a sharp
-                            silhouette. Team it with a silk pocket square and leather
-                            loafers.
+                            {secondCard.description}
                         </p>
                     </CardBody>
                 </Card>
@@ -59,20 +62,18 @@ const TripleCardShow = () => {
             <GridItem md={4} sm={4}>
                 <Card product plain>
                     <CardHeader image plain>
-                        <a href="#pablo">
-                            <img src={gucci} alt="..."/>
+                        <a href="#gatherings">
+                            <img src={thirdCard.image} alt="..."/>
                         </a>
                         <div
                             className={classes.coloredShadow}
-                            style={{backgroundImage: `url(${gucci})`, opacity: 1}}
+                            style={{backgroundImage: `url(${thirdCard.image})`, opacity: 1}}
                         />
                     </CardHeader>
                     <CardBody className={classes.textCenter} plain>
-                        <h4 className={classes.cardTitle}>Gucci</h4>
+                        <h4 className={classes.cardTitle}>{thirdCard.title}</h4>
                         <p className={classes.cardDescription}>
-                            The structured shoulders and sleek detailing ensure a sharp
-                            silhouette. Team it with a silk pocket square and leather
-                            loafers.
+                            {thirdCard.description}
                         </p>
                     </CardBody>
                 </Card>
