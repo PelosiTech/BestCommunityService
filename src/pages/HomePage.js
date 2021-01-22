@@ -11,7 +11,7 @@ import landingPageStyle from "../MaterialKitProReact/assets/jss/material-kit-pro
 
 const useStyles = makeStyles(landingPageStyle);
 
-const StandardPage = ({ ...rest }) => {
+const HomePage = ({ ...rest }) => {
     const classes = useStyles();
 
     return (
@@ -60,4 +60,4 @@ const StandardPage = ({ ...rest }) => {
     );
 };
 
-export default StandardPage;
+export default HomePage;

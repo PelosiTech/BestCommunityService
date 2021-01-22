@@ -5,14 +5,14 @@ import { Router, Route, Switch } from "react-router";
 
 import "MaterialKitProReact/assets/scss/material-kit-pro-react.scss?v=1.9.0";
 
-import StandardPage from "./views/StandardPage";
+import HomePage from "./pages/HomePage";
 
 var hist = createBrowserHistory();
 
 ReactDOM.render(
   <Router history={hist}>
     <Switch>
-      <Route path="/" component={StandardPage} />
+      <Route path="/" component={HomePage} />
     </Switch>
   </Router>,
   document.getElementById("root")
