@@ -9,6 +9,7 @@ import HomePage from "./pages/HomePage";
 import LoginPage from "./pages/LoginPage";
 import SignUpPage from "./pages/SignUpPage";
 import SocialEventsPage from "./pages/SocialEvents";
+import EquipmentAndServicesPage from "./pages/EquipmentAndServicesPage";
 
 var hist = createBrowserHistory();
 
@@ -19,6 +20,7 @@ ReactDOM.render(
       <Route path="/login" exact component={LoginPage} />
       <Route path="/signup" exact component={SignUpPage} />
       <Route path="/social-events" exact component={SocialEventsPage} />
+      <Route path="/rent-equipment" exact component={EquipmentAndServicesPage} />
     </Switch>
   </Router>,
   document.getElementById("root")

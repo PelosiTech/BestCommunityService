@@ -14,11 +14,11 @@ import { makeStyles } from "@material-ui/core/styles";
 
 import styles from "../MaterialKitProReact/assets/jss/material-kit-pro-react/views/ecommerceStyle.js";
 import TripleCardShow from "../components/TripleCardShow";
-import SocialEvents from "../data/Event";
+import EquipmentData from "../data/EquipmentData";
 
 const useStyles = makeStyles(styles);
 
-export default function SocialEventsPage() {
+export default function EquipmentAndServicesPage() {
     React.useEffect(() => {
         window.scrollTo(0, 0);
         document.body.scrollTop = 0;
@@ -53,9 +53,9 @@ export default function SocialEventsPage() {
                             )}
                         >
                             <div className={classes.brand}>
-                                <h1 className={classes.title}>Social Events!</h1>
+                                <h1 className={classes.title}>Equipment & Services!</h1>
                                 <h4>
-                                    Check out the local social events we have in our community this week!
+                                    Check out the local equipment for rent and local services we have in our community this week!
                                 </h4>
                             </div>
                         </GridItem>
@@ -64,11 +64,11 @@ export default function SocialEventsPage() {
             </Parallax>
 
             <div className={classNames(classes.main, classes.mainRaised)}>
-                <h2 style={{color: "black", paddingTop: 30, textAlign: "center"}}>Social Events</h2>
-                <TripleCardShow data={SocialEvents}/>
-                <TripleCardShow data={SocialEvents}/>
-                <TripleCardShow data={SocialEvents}/>
-                <TripleCardShow data={SocialEvents}/>
+                <h2 style={{color: "black", paddingTop: 30, textAlign: "center"}}>Rent Equipment & Services</h2>
+                <TripleCardShow data={EquipmentData}/>
+                <TripleCardShow data={EquipmentData}/>
+                <TripleCardShow data={EquipmentData}/>
+                <TripleCardShow data={EquipmentData}/>
             </div>
         </div>
     );

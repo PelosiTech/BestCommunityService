@@ -111,7 +111,7 @@ export default function HeaderLinks(props) {
       <ListItem className={classes.listItem}>
         <Link to="/rent-equipment" className={classes.dropdownLink}>
           <Icon className={classes.dropdownIcons}>content_paste</Icon>
-          Rent Equipment
+          Equipment & Services
         </Link>
       </ListItem>
       <ListItem className={classes.listItem}>
