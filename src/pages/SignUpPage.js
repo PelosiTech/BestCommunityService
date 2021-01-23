@@ -52,6 +52,23 @@ export default function SignUpPage({ ...rest }) {
         document.body.scrollTop = 0;
     });
     const classes = useStyles();
+
+    const handleSignup = (e) => {
+        e.preventDefault();
+
+        Auth.signUp({
+            username,
+            password,
+        }).then((data) => {
+            console.log(data)
+        }).then(() => {
+            history.push({
+                pathname: '/verify',
+                state: { username }
+            })
+        }).catch(err => console.log(err))
+    }
+
     return (
         <div>
             <Header
