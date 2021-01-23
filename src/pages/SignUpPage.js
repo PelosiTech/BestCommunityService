@@ -1,5 +1,5 @@
 /*eslint-disable*/
-import React from "react";
+import React, {useState} from "react";
 // @material-ui/core ../MaterialKitProReact/components
 import { makeStyles } from "@material-ui/core/styles";
 import InputAdornment from "@material-ui/core/InputAdornment";
@@ -25,13 +25,18 @@ import InfoArea from "../MaterialKitProReact/components/InfoArea/InfoArea.js";
 import CustomInput from "../MaterialKitProReact/components/CustomInput/CustomInput.js";
 
 import signupPageStyle from "../MaterialKitProReact/assets/jss/material-kit-pro-react/views/signupPageStyle.js";
+import {useHistory} from 'react-router-dom';
 
 import image from "../MaterialKitProReact/assets/img/bg43.jpg";
+import {Auth} from "aws-amplify";
 
 const useStyles = makeStyles(signupPageStyle);
 
 export default function SignUpPage({ ...rest }) {
+    const history = useHistory();
     const [checked, setChecked] = React.useState([1]);
+    const [username, setUsername] = useState("");
+    const [password, setPassword] = useState("");
     const handleToggle = value => {
         const currentIndex = checked.indexOf(value);
         const newChecked = [...checked];
@@ -97,56 +102,38 @@ export default function SignUpPage({ ...rest }) {
                                         <GridItem xs={12} sm={5} md={5}>
                                             <form className={classes.form}>
                                                 <CustomInput
+                                                    id="email"
                                                     formControlProps={{
-                                                        fullWidth: true,
-                                                        className: classes.customFormControlClasses
+                                                        fullWidth: true
                                                     }}
                                                     inputProps={{
+                                                        placeholder: "Email...",
+                                                        onChange: (e) => setUsername(e.target.value),
+                                                        type: "email",
                                                         startAdornment: (
-                                                            <InputAdornment
-                                                                position="start"
-                                                                className={classes.inputAdornment}
-                                                            >
-                                                                <Face className={classes.inputAdornmentIcon} />
+                                                            <InputAdornment position="start">
+                                                                <Email className={classes.inputIconsColor}/>
                                                             </InputAdornment>
-                                                        ),
-                                                        placeholder: "First Name..."
+                                                        )
                                                     }}
                                                 />
                                                 <CustomInput
+                                                    id="pass"
                                                     formControlProps={{
-                                                        fullWidth: true,
-                                                        className: classes.customFormControlClasses
+                                                        fullWidth: true
                                                     }}
                                                     inputProps={{
+                                                        placeholder: "Password",
+                                                        type: "password",
+                                                        onChange: (e) => setPassword(e.target.value),
                                                         startAdornment: (
-                                                            <InputAdornment
-                                                                position="start"
-                                                                className={classes.inputAdornment}
-                                                            >
-                                                                <Email className={classes.inputAdornmentIcon} />
-                                                            </InputAdornment>
-                                                        ),
-                                                        placeholder: "Email..."
-                                                    }}
-                                                />
-                                                <CustomInput
-                                                    formControlProps={{
-                                                        fullWidth: true,
-                                                        className: classes.customFormControlClasses
-                                                    }}
-                                                    inputProps={{
-                                                        startAdornment: (
-                                                            <InputAdornment
-                                                                position="start"
-                                                                className={classes.inputAdornment}
-                                                            >
-                                                                <Icon className={classes.inputAdornmentIcon}>
-                                                                    lock_outline
+                                                            <InputAdornment position="start">
+                                                                <Icon className={classes.inputIconsColor}>
+                                                                    lock_utline
                                                                 </Icon>
                                                             </InputAdornment>
                                                         ),
-                                                        placeholder: "Password..."
+                                                        autoComplete: "off"
                                                     }}
                                                 />
                                                 <FormControlLabel
@@ -170,12 +157,11 @@ export default function SignUpPage({ ...rest }) {
                                                     }
                                                     label={
                                                         <span>
-                              I agree to the{" "}
-                                                            <a href="#pablo">terms and conditions</a>.
-                            </span>
+                                                            I agree to the{" "}terms and conditions.
+                                                        </span>
                                                     }
                                                 />
-                                                <div className={classes.textCenter}>
+                                                <div className={classes.textCenter} onClick={handleSignup}>
                                                     <Button round color="primary">
                                                         Get started
                                                     </Button>
