@@ -22,8 +22,9 @@ import loginPageStyle from "../MaterialKitProReact/assets/jss/material-kit-pro-r
 import {useHistory} from 'react-router-dom';
 
 import image from "../MaterialKitProReact/assets/img/bg43.jpg";
-import {Auth} from 'aws-amplify';
+import {API, Auth, graphqlOperation} from 'aws-amplify';
 import {Devices} from "@material-ui/icons";
+import {getUser} from "../graphql/queries";
 
 const useStyles = makeStyles(loginPageStyle);
 
@@ -47,11 +48,15 @@ export default function LoginPage() {
         Auth.signIn({
             username,
             password,
-        }).then((user) => {
+        }).then(async (user) => {
             console.log(user)
+            const info = await API.graphql(graphqlOperation(getUser,{
+                id: user.attributes.sub,
+            }))
+            console.log(info)
         }).then(() => {
             history.push('/')
-        }).catch(err => console.log(error))
+        }).catch(err => console.log(err))
     }
 
     return (
