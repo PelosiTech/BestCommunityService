@@ -10,6 +10,11 @@
       "StackName": "amplify-bestcommunityservice-dev-192252",
       "StackId": "arn:aws:cloudformation:us-west-2:542740894258:stack/amplify-bestcommunityservice-dev-192252/e76c23e0-5d21-11eb-bff6-02f69856dc3d",
       "AmplifyAppId": "d225qaiq3wjuiq"
+    },
+    "categories": {
+      "auth": {
+        "bestcommunityservicebe34f495": {}
+      }
     }
   }
 }
