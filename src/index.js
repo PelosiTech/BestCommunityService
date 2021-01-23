@@ -15,6 +15,7 @@ import ExternalServicesPage from "./pages/ExternalServicesPage";
 
 import Amplify from 'aws-amplify';
 import config from './aws-exports'
+import VerifyPage from "./pages/VerifyPage";
 Amplify.configure(config);
 
 
@@ -26,6 +27,7 @@ ReactDOM.render(
       <Route path="/" exact component={HomePage} />
       <Route path="/login" exact component={LoginPage} />
       <Route path="/signup" exact component={SignUpPage} />
+      <Route path="/verify" exact component={VerifyPage} />
       <Route path="/social-events" exact component={SocialEventsPage} />
       <Route path="/rent-equipment" exact component={EquipmentAndServicesPage} />
       <Route path="/in-house-services" exact component={InHouseServicesPage} />

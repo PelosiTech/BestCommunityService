@@ -22,7 +22,7 @@ import loginPageStyle from "../MaterialKitProReact/assets/jss/material-kit-pro-r
 import {useHistory} from 'react-router-dom';
 
 import image from "../MaterialKitProReact/assets/img/bg43.jpg";
-import {Auth, Hub} from 'aws-amplify';
+import {Auth} from 'aws-amplify';
 import {Devices} from "@material-ui/icons";
 
 const useStyles = makeStyles(loginPageStyle);
@@ -37,16 +37,21 @@ export default function LoginPage() {
     const history = useHistory();
 
     const [username, setUsername] = useState("");
-    const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
-    const [phoneNumber, setPhoneNumber] = useState("");
 
     const handleLogin = (e) => {
         e.preventDefault();
         console.log(username);
-        console.log(email);
         console.log(password);
-        console.log(phoneNumber);
+
+        Auth.signIn({
+            username,
+            password,
+        }).then((user) => {
+            console.log(user)
+        }).then(() => {
+            history.push('/')
+        }).catch(err => console.log(error))
     }
 
     return (
@@ -79,29 +84,13 @@ export default function LoginPage() {
                                     </CardHeader>
                                     <CardBody signup>
                                         <CustomInput
-                                            id="username"
-                                            formControlProps={{
-                                                fullWidth: true
-                                            }}
-                                            inputProps={{
-                                                placeholder: "Username",
-                                                type: "text",
-                                                onChange: (e) => setUsername(e.target.value),
-                                                startAdornment: (
-                                                    <InputAdornment position="start">
-                                                        <Face className={classes.inputIconsColor}/>
-                                                    </InputAdornment>
-                                                ),
-                                            }}
-                                        />
-                                        <CustomInput
                                             id="email"
                                             formControlProps={{
                                                 fullWidth: true
                                             }}
                                             inputProps={{
                                                 placeholder: "Email...",
-                                                onChange: (e) => setEmail(e.target.value),
+                                                onChange: (e) => setUsername(e.target.value),
                                                 type: "email",
                                                 startAdornment: (
                                                     <InputAdornment position="start">
@@ -127,22 +116,6 @@ export default function LoginPage() {
                                                     </InputAdornment>
                                                 ),
                                                 autoComplete: "off"
-                                            }}
-                                        />
-                                        <CustomInput
-                                            id="phoneNumber"
-                                            formControlProps={{
-                                                fullWidth: true
-                                            }}
-                                            inputProps={{
-                                                placeholder: "PhoneNumber",
-                                                type: "number",
-                                                onChange: (e) => setPhoneNumber(e.target.value),
-                                                startAdornment: (
-                                                    <InputAdornment position="start">
-                                                        <Devices className={classes.inputIconsColor}/>
-                                                    </InputAdornment>
-                                                )
                                             }}
                                         />
                                     </CardBody>
