@@ -33,7 +33,6 @@ export default function VerifyPage(props) {
         window.scrollTo(0, 0);
         document.body.scrollTop = 0;
     });
-    console.log(props)
     const classes = useStyles();
     const history = useHistory();
 

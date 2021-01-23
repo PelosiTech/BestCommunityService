@@ -30,6 +30,9 @@ import {useHistory} from 'react-router-dom';
 import image from "../MaterialKitProReact/assets/img/bg43.jpg";
 import {Auth} from "aws-amplify";
 
+import { API, graphqlOperation } from 'aws-amplify';
+import {createUser} from "../graphql/mutations";
+
 const useStyles = makeStyles(signupPageStyle);
 
 export default function SignUpPage({ ...rest }) {
@@ -63,8 +66,16 @@ export default function SignUpPage({ ...rest }) {
             attributes: {
                 name: user
             }
-        }).then((data) => {
+        }).then(async (data) => {
             console.log(data)
+            const info = await API.graphql(graphqlOperation(createUser,{
+                input: {
+                    id: data.userSub,
+                    name: user,
+                    position: 'user'
+                }
+            }))
+            console.log(info)
         }).then(() => {
             history.push({
                 pathname: '/verify',
