@@ -11,6 +11,7 @@ import SignUpPage from "./pages/SignUpPage";
 import SocialEventsPage from "./pages/SocialEvents";
 import EquipmentAndServicesPage from "./pages/EquipmentAndServicesPage";
 import InHouseServicesPage from "./pages/InHouseServices";
+import ExternalServicesPage from "./pages/ExternalServicesPage";
 
 var hist = createBrowserHistory();
 
@@ -23,6 +24,7 @@ ReactDOM.render(
       <Route path="/social-events" exact component={SocialEventsPage} />
       <Route path="/rent-equipment" exact component={EquipmentAndServicesPage} />
       <Route path="/in-house-services" exact component={InHouseServicesPage} />
+      <Route path="/external-services" exact component={ExternalServicesPage} />
     </Switch>
   </Router>,
   document.getElementById("root")
