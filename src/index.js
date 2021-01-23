@@ -13,6 +13,11 @@ import EquipmentAndServicesPage from "./pages/EquipmentAndServicesPage";
 import InHouseServicesPage from "./pages/InHouseServices";
 import ExternalServicesPage from "./pages/ExternalServicesPage";
 
+import Amplify from 'aws-amplify';
+import config from './aws-exports'
+Amplify.configure(config);
+
+
 var hist = createBrowserHistory();
 
 ReactDOM.render(
