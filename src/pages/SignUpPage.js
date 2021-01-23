@@ -36,6 +36,7 @@ export default function SignUpPage({ ...rest }) {
     const history = useHistory();
     const [checked, setChecked] = React.useState([1]);
     const [username, setUsername] = useState("");
+    const [user, setUser] = useState("");
     const [password, setPassword] = useState("");
     const handleToggle = value => {
         const currentIndex = checked.indexOf(value);
@@ -59,6 +60,9 @@ export default function SignUpPage({ ...rest }) {
         Auth.signUp({
             username,
             password,
+            attributes: {
+                name: user
+            }
         }).then((data) => {
             console.log(data)
         }).then(() => {
@@ -118,6 +122,22 @@ export default function SignUpPage({ ...rest }) {
                                         </GridItem>
                                         <GridItem xs={12} sm={5} md={5}>
                                             <form className={classes.form}>
+                                                <CustomInput
+                                                    id="username"
+                                                    formControlProps={{
+                                                        fullWidth: true
+                                                    }}
+                                                    inputProps={{
+                                                        placeholder: "Username",
+                                                        type: "text",
+                                                        onChange: (e) => setUser(e.target.value),
+                                                        startAdornment: (
+                                                            <InputAdornment position="start">
+                                                                <Face className={classes.inputIconsColor}/>
+                                                            </InputAdornment>
+                                                        ),
+                                                    }}
+                                                />
                                                 <CustomInput
                                                     id="email"
                                                     formControlProps={{
