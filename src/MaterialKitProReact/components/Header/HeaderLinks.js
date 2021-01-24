@@ -1,5 +1,5 @@
 /* eslint-disable */
-import React from "react";
+import React, {useEffect} from "react";
 // nodejs library to set properties for components
 import PropTypes from "prop-types";
 // react components for routing our app without refresh
@@ -43,6 +43,7 @@ import CustomDropdown from "MaterialKitProReact/components/CustomDropdown/Custom
 import Button from "MaterialKitProReact/components/CustomButtons/Button.js";
 
 import styles from "MaterialKitProReact/assets/jss/material-kit-pro-react/components/headerLinksStyle.js";
+import {useDispatch, useSelector} from "react-redux";
 
 const useStyles = makeStyles(styles);
 
@@ -85,6 +86,7 @@ export default function HeaderLinks(props) {
     animateScroll();
   };
   var onClickSections = {};
+  const user = useSelector(state => state.auth)
 
   const { dropdownHoverColor } = props;
   const classes = useStyles();
@@ -127,16 +129,29 @@ export default function HeaderLinks(props) {
       </Link>
     </ListItem>
       <ListItem className={classes.listItem}>
-        <Link to="/login">
+        {user.id ?
+          <Link to="/logout">
           <Button
-              color={window.innerWidth < 960 ? "info" : "success"}
+              color={window.innerWidth < 960 ? "info" : "danger"}
               target="_blank"
               className={classes.navButton}
               round
           >
-            <People className={classes.icons} /> Login
+            <People className={classes.icons} /> Logout
           </Button>
         </Link>
+            :
+            <Link to="/login">
+              <Button
+                  color={window.innerWidth < 960 ? "info" : "success"}
+                  target="_blank"
+                  className={classes.navButton}
+                  round
+              >
+                <People className={classes.icons} /> Login
+              </Button>
+            </Link>
+        }
       </ListItem>
     </List>
   );

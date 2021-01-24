@@ -1,4 +1,4 @@
-import React,{useEffect} from "react";
+import React from "react";
 import {createBrowserHistory} from "history";
 import {Router, Route, Switch} from "react-router";
 
@@ -11,7 +11,6 @@ import SocialEventsPage from "./pages/SocialEvents";
 import EquipmentAndServicesPage from "./pages/EquipmentAndServicesPage";
 import InHouseServicesPage from "./pages/InHouseServices";
 import ExternalServicesPage from "./pages/ExternalServicesPage";
-import {useDispatch, useSelector} from "react-redux";
 import VerifyPage from "./pages/VerifyPage";
 import LogoutPage from "./pages/LogoutPage";
 
