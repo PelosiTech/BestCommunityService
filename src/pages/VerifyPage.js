@@ -23,7 +23,6 @@ import {useHistory} from 'react-router-dom';
 
 import image from "../MaterialKitProReact/assets/img/bg43.jpg";
 import {Auth} from 'aws-amplify';
-import {Devices} from "@material-ui/icons";
 
 const useStyles = makeStyles(loginPageStyle);
 
