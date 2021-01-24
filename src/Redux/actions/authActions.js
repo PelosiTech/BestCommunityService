@@ -17,10 +17,10 @@ export const removeUser = () => {
 
 
 
-export const login = (id, email, name, services) => {
+export const login = (id, email, name, type, services) => {
 
     return dispatch => {
-        dispatch(setUser({id,email,name,services}));
+        dispatch(setUser({id,email,name,type,services}));
     };
 };
 
