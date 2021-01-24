@@ -25,6 +25,8 @@ import image from "../MaterialKitProReact/assets/img/bg43.jpg";
 import {API, Auth, graphqlOperation} from 'aws-amplify';
 import {Devices} from "@material-ui/icons";
 import {getUser} from "../graphql/queries";
+import {login} from "../Redux/actions/authActions";
+import {useDispatch} from "react-redux";
 
 const useStyles = makeStyles(loginPageStyle);
 
@@ -36,6 +38,7 @@ export default function LoginPage() {
     });
     const classes = useStyles();
     const history = useHistory();
+    const dispatch = useDispatch();
 
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
@@ -53,7 +56,9 @@ export default function LoginPage() {
             const info = await API.graphql(graphqlOperation(getUser,{
                 id: user.attributes.sub,
             }))
-            console.log(info)
+            const graphQLUser = info.data.getUser;
+            console.log(graphQLUser);
+            dispatch(login(graphQLUser.id, graphQLUser.email, graphQLUser.name, graphQLUser.position, graphQLUser.services));
         }).then(() => {
             history.push('/')
         }).catch(err => console.log(err))
