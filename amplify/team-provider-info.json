@@ -14,6 +14,12 @@
     "categories": {
       "auth": {
         "bestcommunityservicebe34f495": {}
+      },
+      "hosting": {
+        "amplifyhosting": {
+          "appId": "d225qaiq3wjuiq",
+          "type": "manual"
+        }
       }
     }
   }
