@@ -3,16 +3,28 @@ type User @model {
   name: String!
   position: String!
   services: [Service] @connection(keyName: "byUser", fields: ["id"])
+  bookedServices: [Booked] @connection(keyName: "byUser", fields: ["id"])
 }
 
 type Service @model @key(name: "byUser", fields:["userId"]) {
   id: ID!
   name: String!
   description: String!
+  quantity: String!
   type: String!
   date: String!
   imageUri: String!
   cost: String!
   userId: ID!
   user: User @connection(fields: ["userId"])
+  bookedUsers: [Booked] @connection(keyName: "byService", fields: ["id"])
+}
+
+type Booked @model @key(name: "byUser", fields:["userId"]) @key(name:"byService", fields:["serviceId"]) {
+  id: ID!
+  userId: ID!
+  bookedUser: User @connection(fields: ["userId"])
+  serviceId: ID!
+  service: Service @connection(fields:["serviceId"])
+  date: String!
 }

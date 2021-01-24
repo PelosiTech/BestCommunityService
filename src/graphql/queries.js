@@ -12,11 +12,23 @@ export const getUser = /* GraphQL */ `
           id
           name
           description
+          quantity
           type
           date
           imageUri
           cost
           userId
+          createdAt
+          updatedAt
+        }
+        nextToken
+      }
+      bookedServices {
+        items {
+          id
+          userId
+          serviceId
+          date
           createdAt
           updatedAt
         }
@@ -41,6 +53,9 @@ export const listUsers = /* GraphQL */ `
         services {
           nextToken
         }
+        bookedServices {
+          nextToken
+        }
         createdAt
         updatedAt
       }
@@ -54,6 +69,7 @@ export const getService = /* GraphQL */ `
       id
       name
       description
+      quantity
       type
       date
       imageUri
@@ -66,8 +82,22 @@ export const getService = /* GraphQL */ `
         services {
           nextToken
         }
+        bookedServices {
+          nextToken
+        }
         createdAt
         updatedAt
+      }
+      bookedUsers {
+        items {
+          id
+          userId
+          serviceId
+          date
+          createdAt
+          updatedAt
+        }
+        nextToken
       }
       createdAt
       updatedAt
@@ -85,6 +115,7 @@ export const listServices = /* GraphQL */ `
         id
         name
         description
+        quantity
         type
         date
         imageUri
@@ -97,6 +128,96 @@ export const listServices = /* GraphQL */ `
           createdAt
           updatedAt
         }
+        bookedUsers {
+          nextToken
+        }
+        createdAt
+        updatedAt
+      }
+      nextToken
+    }
+  }
+`;
+export const getBooked = /* GraphQL */ `
+  query GetBooked($id: ID!) {
+    getBooked(id: $id) {
+      id
+      userId
+      bookedUser {
+        id
+        name
+        position
+        services {
+          nextToken
+        }
+        bookedServices {
+          nextToken
+        }
+        createdAt
+        updatedAt
+      }
+      serviceId
+      service {
+        id
+        name
+        description
+        quantity
+        type
+        date
+        imageUri
+        cost
+        userId
+        user {
+          id
+          name
+          position
+          createdAt
+          updatedAt
+        }
+        bookedUsers {
+          nextToken
+        }
+        createdAt
+        updatedAt
+      }
+      date
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const listBookeds = /* GraphQL */ `
+  query ListBookeds(
+    $filter: ModelBookedFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    listBookeds(filter: $filter, limit: $limit, nextToken: $nextToken) {
+      items {
+        id
+        userId
+        bookedUser {
+          id
+          name
+          position
+          createdAt
+          updatedAt
+        }
+        serviceId
+        service {
+          id
+          name
+          description
+          quantity
+          type
+          date
+          imageUri
+          cost
+          userId
+          createdAt
+          updatedAt
+        }
+        date
         createdAt
         updatedAt
       }

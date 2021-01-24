@@ -12,11 +12,23 @@ export const onCreateUser = /* GraphQL */ `
           id
           name
           description
+          quantity
           type
           date
           imageUri
           cost
           userId
+          createdAt
+          updatedAt
+        }
+        nextToken
+      }
+      bookedServices {
+        items {
+          id
+          userId
+          serviceId
+          date
           createdAt
           updatedAt
         }
@@ -38,11 +50,23 @@ export const onUpdateUser = /* GraphQL */ `
           id
           name
           description
+          quantity
           type
           date
           imageUri
           cost
           userId
+          createdAt
+          updatedAt
+        }
+        nextToken
+      }
+      bookedServices {
+        items {
+          id
+          userId
+          serviceId
+          date
           createdAt
           updatedAt
         }
@@ -64,11 +88,23 @@ export const onDeleteUser = /* GraphQL */ `
           id
           name
           description
+          quantity
           type
           date
           imageUri
           cost
           userId
+          createdAt
+          updatedAt
+        }
+        nextToken
+      }
+      bookedServices {
+        items {
+          id
+          userId
+          serviceId
+          date
           createdAt
           updatedAt
         }
@@ -85,6 +121,7 @@ export const onCreateService = /* GraphQL */ `
       id
       name
       description
+      quantity
       type
       date
       imageUri
@@ -97,8 +134,22 @@ export const onCreateService = /* GraphQL */ `
         services {
           nextToken
         }
+        bookedServices {
+          nextToken
+        }
         createdAt
         updatedAt
+      }
+      bookedUsers {
+        items {
+          id
+          userId
+          serviceId
+          date
+          createdAt
+          updatedAt
+        }
+        nextToken
       }
       createdAt
       updatedAt
@@ -111,6 +162,7 @@ export const onUpdateService = /* GraphQL */ `
       id
       name
       description
+      quantity
       type
       date
       imageUri
@@ -123,8 +175,22 @@ export const onUpdateService = /* GraphQL */ `
         services {
           nextToken
         }
+        bookedServices {
+          nextToken
+        }
         createdAt
         updatedAt
+      }
+      bookedUsers {
+        items {
+          id
+          userId
+          serviceId
+          date
+          createdAt
+          updatedAt
+        }
+        nextToken
       }
       createdAt
       updatedAt
@@ -137,6 +203,7 @@ export const onDeleteService = /* GraphQL */ `
       id
       name
       description
+      quantity
       type
       date
       imageUri
@@ -149,9 +216,167 @@ export const onDeleteService = /* GraphQL */ `
         services {
           nextToken
         }
+        bookedServices {
+          nextToken
+        }
         createdAt
         updatedAt
       }
+      bookedUsers {
+        items {
+          id
+          userId
+          serviceId
+          date
+          createdAt
+          updatedAt
+        }
+        nextToken
+      }
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const onCreateBooked = /* GraphQL */ `
+  subscription OnCreateBooked {
+    onCreateBooked {
+      id
+      userId
+      bookedUser {
+        id
+        name
+        position
+        services {
+          nextToken
+        }
+        bookedServices {
+          nextToken
+        }
+        createdAt
+        updatedAt
+      }
+      serviceId
+      service {
+        id
+        name
+        description
+        quantity
+        type
+        date
+        imageUri
+        cost
+        userId
+        user {
+          id
+          name
+          position
+          createdAt
+          updatedAt
+        }
+        bookedUsers {
+          nextToken
+        }
+        createdAt
+        updatedAt
+      }
+      date
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const onUpdateBooked = /* GraphQL */ `
+  subscription OnUpdateBooked {
+    onUpdateBooked {
+      id
+      userId
+      bookedUser {
+        id
+        name
+        position
+        services {
+          nextToken
+        }
+        bookedServices {
+          nextToken
+        }
+        createdAt
+        updatedAt
+      }
+      serviceId
+      service {
+        id
+        name
+        description
+        quantity
+        type
+        date
+        imageUri
+        cost
+        userId
+        user {
+          id
+          name
+          position
+          createdAt
+          updatedAt
+        }
+        bookedUsers {
+          nextToken
+        }
+        createdAt
+        updatedAt
+      }
+      date
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const onDeleteBooked = /* GraphQL */ `
+  subscription OnDeleteBooked {
+    onDeleteBooked {
+      id
+      userId
+      bookedUser {
+        id
+        name
+        position
+        services {
+          nextToken
+        }
+        bookedServices {
+          nextToken
+        }
+        createdAt
+        updatedAt
+      }
+      serviceId
+      service {
+        id
+        name
+        description
+        quantity
+        type
+        date
+        imageUri
+        cost
+        userId
+        user {
+          id
+          name
+          position
+          createdAt
+          updatedAt
+        }
+        bookedUsers {
+          nextToken
+        }
+        createdAt
+        updatedAt
+      }
+      date
       createdAt
       updatedAt
     }

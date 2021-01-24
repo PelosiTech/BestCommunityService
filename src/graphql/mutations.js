@@ -15,11 +15,23 @@ export const createUser = /* GraphQL */ `
           id
           name
           description
+          quantity
           type
           date
           imageUri
           cost
           userId
+          createdAt
+          updatedAt
+        }
+        nextToken
+      }
+      bookedServices {
+        items {
+          id
+          userId
+          serviceId
+          date
           createdAt
           updatedAt
         }
@@ -44,11 +56,23 @@ export const updateUser = /* GraphQL */ `
           id
           name
           description
+          quantity
           type
           date
           imageUri
           cost
           userId
+          createdAt
+          updatedAt
+        }
+        nextToken
+      }
+      bookedServices {
+        items {
+          id
+          userId
+          serviceId
+          date
           createdAt
           updatedAt
         }
@@ -73,11 +97,23 @@ export const deleteUser = /* GraphQL */ `
           id
           name
           description
+          quantity
           type
           date
           imageUri
           cost
           userId
+          createdAt
+          updatedAt
+        }
+        nextToken
+      }
+      bookedServices {
+        items {
+          id
+          userId
+          serviceId
+          date
           createdAt
           updatedAt
         }
@@ -97,6 +133,7 @@ export const createService = /* GraphQL */ `
       id
       name
       description
+      quantity
       type
       date
       imageUri
@@ -109,8 +146,22 @@ export const createService = /* GraphQL */ `
         services {
           nextToken
         }
+        bookedServices {
+          nextToken
+        }
         createdAt
         updatedAt
+      }
+      bookedUsers {
+        items {
+          id
+          userId
+          serviceId
+          date
+          createdAt
+          updatedAt
+        }
+        nextToken
       }
       createdAt
       updatedAt
@@ -126,6 +177,7 @@ export const updateService = /* GraphQL */ `
       id
       name
       description
+      quantity
       type
       date
       imageUri
@@ -138,8 +190,22 @@ export const updateService = /* GraphQL */ `
         services {
           nextToken
         }
+        bookedServices {
+          nextToken
+        }
         createdAt
         updatedAt
+      }
+      bookedUsers {
+        items {
+          id
+          userId
+          serviceId
+          date
+          createdAt
+          updatedAt
+        }
+        nextToken
       }
       createdAt
       updatedAt
@@ -155,6 +221,7 @@ export const deleteService = /* GraphQL */ `
       id
       name
       description
+      quantity
       type
       date
       imageUri
@@ -167,9 +234,176 @@ export const deleteService = /* GraphQL */ `
         services {
           nextToken
         }
+        bookedServices {
+          nextToken
+        }
         createdAt
         updatedAt
       }
+      bookedUsers {
+        items {
+          id
+          userId
+          serviceId
+          date
+          createdAt
+          updatedAt
+        }
+        nextToken
+      }
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const createBooked = /* GraphQL */ `
+  mutation CreateBooked(
+    $input: CreateBookedInput!
+    $condition: ModelBookedConditionInput
+  ) {
+    createBooked(input: $input, condition: $condition) {
+      id
+      userId
+      bookedUser {
+        id
+        name
+        position
+        services {
+          nextToken
+        }
+        bookedServices {
+          nextToken
+        }
+        createdAt
+        updatedAt
+      }
+      serviceId
+      service {
+        id
+        name
+        description
+        quantity
+        type
+        date
+        imageUri
+        cost
+        userId
+        user {
+          id
+          name
+          position
+          createdAt
+          updatedAt
+        }
+        bookedUsers {
+          nextToken
+        }
+        createdAt
+        updatedAt
+      }
+      date
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const updateBooked = /* GraphQL */ `
+  mutation UpdateBooked(
+    $input: UpdateBookedInput!
+    $condition: ModelBookedConditionInput
+  ) {
+    updateBooked(input: $input, condition: $condition) {
+      id
+      userId
+      bookedUser {
+        id
+        name
+        position
+        services {
+          nextToken
+        }
+        bookedServices {
+          nextToken
+        }
+        createdAt
+        updatedAt
+      }
+      serviceId
+      service {
+        id
+        name
+        description
+        quantity
+        type
+        date
+        imageUri
+        cost
+        userId
+        user {
+          id
+          name
+          position
+          createdAt
+          updatedAt
+        }
+        bookedUsers {
+          nextToken
+        }
+        createdAt
+        updatedAt
+      }
+      date
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const deleteBooked = /* GraphQL */ `
+  mutation DeleteBooked(
+    $input: DeleteBookedInput!
+    $condition: ModelBookedConditionInput
+  ) {
+    deleteBooked(input: $input, condition: $condition) {
+      id
+      userId
+      bookedUser {
+        id
+        name
+        position
+        services {
+          nextToken
+        }
+        bookedServices {
+          nextToken
+        }
+        createdAt
+        updatedAt
+      }
+      serviceId
+      service {
+        id
+        name
+        description
+        quantity
+        type
+        date
+        imageUri
+        cost
+        userId
+        user {
+          id
+          name
+          position
+          createdAt
+          updatedAt
+        }
+        bookedUsers {
+          nextToken
+        }
+        createdAt
+        updatedAt
+      }
+      date
       createdAt
       updatedAt
     }
