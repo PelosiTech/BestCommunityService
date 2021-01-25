@@ -96,8 +96,10 @@ export const getService = /* GraphQL */ `
           date
           createdAt
           updatedAt
+          bookedUser {
+            name
+            }
         }
-        nextToken
       }
       createdAt
       updatedAt
