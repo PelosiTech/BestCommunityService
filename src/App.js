@@ -13,6 +13,7 @@ import InHouseServicesPage from "./pages/InHouseServices";
 import ExternalServicesPage from "./pages/ExternalServicesPage";
 import VerifyPage from "./pages/VerifyPage";
 import LogoutPage from "./pages/LogoutPage";
+import ServicePage from "./pages/ServicePage";
 
 function App() {
 
@@ -22,6 +23,7 @@ function App() {
         <Router history={hist}>
             <Switch>
                 <Route path="/" exact component={HomePage}/>
+                <Route path="/service/:id" exact component={ServicePage}/>
                 <Route path="/login" exact component={LoginPage}/>
                 <Route path="/logout" exact component={LogoutPage}/>
                 <Route path="/signup" exact component={SignUpPage}/>

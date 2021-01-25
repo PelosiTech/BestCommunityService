@@ -18,7 +18,7 @@ const ServiceCard = ({data}) => {
         return null
     }
     const firstCard = data;
-    const url = firstCard.type.replace(/\s/g, '') + '/' + firstCard.id;
+    const url = 'service/' + firstCard.id;
     return (
             <GridItem md={4} sm={4}>
                 <Card product plain>
