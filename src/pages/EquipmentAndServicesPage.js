@@ -1,5 +1,5 @@
 /*eslint-disable*/
-import React from "react";
+import React, {useEffect, useState} from "react";
 // nodejs library that concatenates classes
 import classNames from "classnames";
 // core ../MaterialKitProReact/components
@@ -15,6 +15,9 @@ import { makeStyles } from "@material-ui/core/styles";
 import styles from "../MaterialKitProReact/assets/jss/material-kit-pro-react/views/ecommerceStyle.js";
 import TripleCardShow from "../components/TripleCardShow";
 import EquipmentData from "../data/EquipmentData";
+import {API, graphqlOperation} from "aws-amplify";
+import {listServices} from "../graphql/queries";
+import ServiceCard from "../components/ServiceCard";
 
 const useStyles = makeStyles(styles);
 
@@ -24,6 +27,28 @@ export default function EquipmentAndServicesPage() {
         document.body.scrollTop = 0;
     });
     const classes = useStyles();
+    const [equipmentServices, setEquipmentServices] = useState([]);
+
+    const getInHouseServices = async () => {
+        const data = await API.graphql(graphqlOperation(listServices));
+        setEquipmentServices(data.data.listServices.items)
+    }
+
+    useEffect(() => {
+        getInHouseServices();
+    }, [])
+
+
+    const renderEquipment = () => {
+        if(equipmentServices.length > 0) {
+            return equipmentServices.map((event) => {
+                if(event.type === "equipment services") {
+                    return <ServiceCard data={event} key={event.id} />
+                }
+            })
+        }
+    }
+
     return (
         <div>
             <Header
@@ -65,10 +90,7 @@ export default function EquipmentAndServicesPage() {
 
             <div className={classNames(classes.main, classes.mainRaised)}>
                 <h2 style={{color: "black", paddingTop: 30, textAlign: "center"}}>Rent Equipment & Services</h2>
-                <TripleCardShow data={EquipmentData}/>
-                <TripleCardShow data={EquipmentData}/>
-                <TripleCardShow data={EquipmentData}/>
-                <TripleCardShow data={EquipmentData}/>
+                {renderEquipment()}
             </div>
         </div>
     );
