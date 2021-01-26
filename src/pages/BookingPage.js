@@ -40,14 +40,7 @@ export default function BookingPage(props) {
 
     const handleVerify = (e) => {
         e.preventDefault();
-        Auth.confirmSignUp(username, code, {
-            forceAliasCreation: true
-        }).then((data) => console.log(data))
-            .then(() => {
-                console.log("Verified and signed in correct");
-                history.push("/login");
-            })
-            .catch(err => console.log(err));
+        history.push("/confirmation-page");
     }
     return (
         <div>
@@ -75,16 +68,16 @@ export default function BookingPage(props) {
                                         signup
                                         className={classes.cardHeader}
                                     >
-                                        <h4 className={classes.cardTitle}>Verify</h4>
+                                        <h4 className={classes.cardTitle}>Booking</h4>
                                     </CardHeader>
                                     <CardBody signup>
                                         <CustomInput
-                                            id="verify"
+                                            id="Booking"
                                             formControlProps={{
                                                 fullWidth: true
                                             }}
                                             inputProps={{
-                                                placeholder: "Verify",
+                                                placeholder: "Booking",
                                                 type: "number",
                                                 onChange: (e) => setCode(e.target.value),
                                                 startAdornment: (
@@ -97,7 +90,7 @@ export default function BookingPage(props) {
                                     </CardBody>
                                     <div className={classes.textCenter}>
                                         <Button simple color="info" size="lg" onClick={handleVerify}>
-                                            Verify
+                                            Book Now!
                                         </Button>
                                     </div>
                                 </form>
