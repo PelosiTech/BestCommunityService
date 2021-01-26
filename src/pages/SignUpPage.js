@@ -36,6 +36,10 @@ import {createUser} from "../graphql/mutations";
 const useStyles = makeStyles(signupPageStyle);
 
 export default function SignUpPage({ ...rest }) {
+    React.useEffect(() => {
+        window.scrollTo(0, 0);
+        document.body.scrollTop = 0;
+    });
     const history = useHistory();
     const [checked, setChecked] = React.useState([1]);
     const [username, setUsername] = useState("");
