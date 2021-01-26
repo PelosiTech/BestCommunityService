@@ -14,6 +14,7 @@ import ExternalServicesPage from "./pages/ExternalServicesPage";
 import VerifyPage from "./pages/VerifyPage";
 import LogoutPage from "./pages/LogoutPage";
 import ServicePage from "./pages/ServicePage";
+import BookingPage from "./pages/BookingPage";
 
 function App() {
 
@@ -24,6 +25,7 @@ function App() {
             <Switch>
                 <Route path="/" exact component={HomePage}/>
                 <Route path="/service/:id" exact component={ServicePage}/>
+                <Route path="/booking/:id" exact component={BookingPage}/>
                 <Route path="/login" exact component={LoginPage}/>
                 <Route path="/logout" exact component={LogoutPage}/>
                 <Route path="/signup" exact component={SignUpPage}/>
