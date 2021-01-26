@@ -19,6 +19,10 @@ import Button from "../MaterialKitProReact/components/CustomButtons/Button";
 const useStyles = makeStyles(landingPageStyle);
 
 const HomePage = ({ ...rest }) => {
+    React.useEffect(() => {
+        window.scrollTo(0, 0);
+        document.body.scrollTop = 0;
+    });
     const classes = useStyles();
     const history = useHistory()
 
