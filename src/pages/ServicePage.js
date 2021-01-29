@@ -15,7 +15,7 @@ import GridItem from "../MaterialKitProReact/components/Grid/GridItem.js";
 import Button from "../MaterialKitProReact/components/CustomButtons/Button.js";
 import Accordion from "../MaterialKitProReact/components/Accordion/Accordion.js";
 
-import productStyle from "../MaterialKitProReact/../MaterialKitProReact/assets/jss/material-kit-pro-react/views/productStyle.js";
+import productStyle from "../MaterialKitProReact/assets/jss/material-kit-pro-react/views/productStyle.js";
 import {API, graphqlOperation} from "aws-amplify";
 import {getService} from "../graphql/queries";
 import Card from "../MaterialKitProReact/components/Card/Card";
@@ -26,10 +26,12 @@ import DialogContent from "@material-ui/core/DialogContent";
 import DialogActions from "@material-ui/core/DialogActions";
 import {Close} from "@material-ui/icons";
 import Transition from "react-transition-group/Transition";
+import style from "../MaterialKitProReact/assets/jss/material-kit-pro-react/modalStyle.js";
 
 // images
 
 const useStyles = makeStyles(productStyle);
+const useModalStyles = makeStyles(style);
 
 export default function ServicePage(props) {
     React.useEffect(() => {
@@ -40,6 +42,7 @@ export default function ServicePage(props) {
     const [bookedUsers, setBookedUsers] = React.useState([]);
     const [liveDemo, setLiveDemo] = React.useState(false);
     const classes = useStyles();
+    const modalClasses = useStyles();
     const id = props.location.pathname.slice(9);
 
     const getSocialEvents = async () => {
@@ -129,8 +132,8 @@ export default function ServicePage(props) {
                             </Button>
                             <Dialog
                                 classes={{
-                                    root: classes.modalRoot,
-                                    paper: classes.modal
+                                    root: modalClasses.modalRoot,
+                                    paper: modalClasses.modal
                                 }}
                                 open={liveDemo}
                                 TransitionComponent={Transition}
@@ -142,27 +145,27 @@ export default function ServicePage(props) {
                                 <DialogTitle
                                     id="classic-modal-slide-title"
                                     disableTypography
-                                    className={classes.modalHeader}
+                                    className={modalClasses.modalHeader}
                                 >
                                     <Button
                                         simple
-                                        className={classes.modalCloseButton}
+                                        className={modalClasses.modalCloseButton}
                                         key="close"
                                         aria-label="Close"
                                         onClick={() => setLiveDemo(false)}
                                     >
                                         {" "}
-                                        <Close className={classes.modalClose} />
+                                        <Close className={modalClasses.modalClose} />
                                     </Button>
-                                    <h4 className={classes.modalTitle}>Modal title</h4>
+                                    <h4 className={modalClasses.modalTitle}>Modal title</h4>
                                 </DialogTitle>
                                 <DialogContent
                                     id="classic-modal-slide-description"
-                                    className={classes.modalBody}
+                                    className={modalClasses.modalBody}
                                 >
                                     <p>Woohoo, you're reading this text in a modal!</p>
                                 </DialogContent>
-                                <DialogActions className={classes.modalFooter}>
+                                <DialogActions className={modalClasses.modalFooter}>
                                     <Button onClick={() => setLiveDemo(false)} color="secondary">
                                         Close
                                     </Button>
