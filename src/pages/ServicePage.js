@@ -20,6 +20,12 @@ import {API, graphqlOperation} from "aws-amplify";
 import {getService} from "../graphql/queries";
 import Card from "../MaterialKitProReact/components/Card/Card";
 import CardHeader from "../MaterialKitProReact/components/Card/CardHeader";
+import Dialog from "@material-ui/core/Dialog";
+import DialogTitle from "@material-ui/core/DialogTitle";
+import DialogContent from "@material-ui/core/DialogContent";
+import DialogActions from "@material-ui/core/DialogActions";
+import {Close} from "@material-ui/icons";
+import Transition from "react-transition-group/Transition";
 
 // images
 
@@ -32,6 +38,7 @@ export default function ServicePage(props) {
     });
     const [data, setData] = React.useState({});
     const [bookedUsers, setBookedUsers] = React.useState([]);
+    const [liveDemo, setLiveDemo] = React.useState(false);
     const classes = useStyles();
     const id = props.location.pathname.slice(9);
 
@@ -116,6 +123,53 @@ export default function ServicePage(props) {
                         <Button round color="info">
                             Book Now
                         </Button>
+                        <div>
+                            <Button color="primary" onClick={() => setLiveDemo(true)}>
+                                Launch Demo Modal
+                            </Button>
+                            <Dialog
+                                classes={{
+                                    root: classes.modalRoot,
+                                    paper: classes.modal
+                                }}
+                                open={liveDemo}
+                                TransitionComponent={Transition}
+                                keepMounted
+                                onClose={() => setLiveDemo(false)}
+                                aria-labelledby="classic-modal-slide-title"
+                                aria-describedby="classic-modal-slide-description"
+                            >
+                                <DialogTitle
+                                    id="classic-modal-slide-title"
+                                    disableTypography
+                                    className={classes.modalHeader}
+                                >
+                                    <Button
+                                        simple
+                                        className={classes.modalCloseButton}
+                                        key="close"
+                                        aria-label="Close"
+                                        onClick={() => setLiveDemo(false)}
+                                    >
+                                        {" "}
+                                        <Close className={classes.modalClose} />
+                                    </Button>
+                                    <h4 className={classes.modalTitle}>Modal title</h4>
+                                </DialogTitle>
+                                <DialogContent
+                                    id="classic-modal-slide-description"
+                                    className={classes.modalBody}
+                                >
+                                    <p>Woohoo, you're reading this text in a modal!</p>
+                                </DialogContent>
+                                <DialogActions className={classes.modalFooter}>
+                                    <Button onClick={() => setLiveDemo(false)} color="secondary">
+                                        Close
+                                    </Button>
+                                    <Button color="primary">Save changes</Button>
+                                </DialogActions>
+                            </Dialog>
+                        </div>
                     </GridContainer>
                 </GridItem>
             </GridContainer>
