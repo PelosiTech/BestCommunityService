@@ -40,7 +40,7 @@ export default function ServicePage(props) {
     });
     const [data, setData] = React.useState({});
     const [bookedUsers, setBookedUsers] = React.useState([]);
-    const [liveDemo, setLiveDemo] = React.useState(false);
+    const [showModal, setShowModal] = React.useState(false);
     const classes = useStyles();
     const modalClasses = useStyles();
     const id = props.location.pathname.slice(9);
@@ -123,22 +123,19 @@ export default function ServicePage(props) {
                         ]}
                     />
                     <GridContainer className={classes.pullRight}>
-                        <Button round color="info">
-                            Book Now
-                        </Button>
                         <div>
-                            <Button color="primary" onClick={() => setLiveDemo(true)}>
-                                Launch Demo Modal
+                            <Button color="info" onClick={() => setShowModal(true)}>
+                                Book Now
                             </Button>
                             <Dialog
                                 classes={{
                                     root: modalClasses.modalRoot,
                                     paper: modalClasses.modal
                                 }}
-                                open={liveDemo}
+                                open={showModal}
                                 TransitionComponent={Transition}
                                 keepMounted
-                                onClose={() => setLiveDemo(false)}
+                                onClose={() => setShowModal(false)}
                                 aria-labelledby="classic-modal-slide-title"
                                 aria-describedby="classic-modal-slide-description"
                             >
@@ -147,29 +144,23 @@ export default function ServicePage(props) {
                                     disableTypography
                                     className={modalClasses.modalHeader}
                                 >
-                                    <Button
-                                        simple
-                                        className={modalClasses.modalCloseButton}
-                                        key="close"
-                                        aria-label="Close"
-                                        onClick={() => setLiveDemo(false)}
-                                    >
-                                        {" "}
-                                        <Close className={modalClasses.modalClose} />
-                                    </Button>
-                                    <h4 className={modalClasses.modalTitle}>Modal title</h4>
+                                    <h4 className={modalClasses.modalTitle}>Event Details</h4>
                                 </DialogTitle>
                                 <DialogContent
                                     id="classic-modal-slide-description"
                                     className={modalClasses.modalBody}
                                 >
-                                    <p>Woohoo, you're reading this text in a modal!</p>
+                                    <div>
+                                        <h2 className={classes.title}>Event name: {data.name}</h2>
+                                        <h3 className={classes.mainPrice}>Event cost: ${data.cost}</h3>
+                                        <h3 className={classes.mainPrice}>Event Date: {data.date}</h3>
+                                    </div>
                                 </DialogContent>
                                 <DialogActions className={modalClasses.modalFooter}>
-                                    <Button onClick={() => setLiveDemo(false)} color="secondary">
+                                    <Button onClick={() => setShowModal(false)} color="secondary">
                                         Close
                                     </Button>
-                                    <Button color="primary">Save changes</Button>
+                                    <Button color="info">Book NOW</Button>
                                 </DialogActions>
                             </Dialog>
                         </div>
