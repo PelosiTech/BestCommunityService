@@ -27,7 +27,6 @@ import DialogActions from "@material-ui/core/DialogActions";
 import {Close} from "@material-ui/icons";
 import Transition from "react-transition-group/Transition";
 import style from "../MaterialKitProReact/assets/jss/material-kit-pro-react/modalStyle.js";
-import moment from "moment";
 
 // images
 
@@ -43,7 +42,7 @@ export default function ServicePage(props) {
     const [bookedUsers, setBookedUsers] = React.useState([]);
     const [showModal, setShowModal] = React.useState(false);
     const classes = useStyles();
-    const modalClasses = useStyles();
+    const modalClasses = useModalStyles();
     const id = props.location.pathname.slice(9);
 
     const getSocialEvents = async () => {
@@ -64,6 +63,11 @@ export default function ServicePage(props) {
                 return <div key={user.id}>{user.bookedUser.name}</div>
             })
         }
+    }
+
+    const handleBookNow = () => {
+        setShowModal(false);
+
     }
 
     const renderPage = () => {
@@ -145,23 +149,33 @@ export default function ServicePage(props) {
                                     disableTypography
                                     className={modalClasses.modalHeader}
                                 >
-                                    <h4 className={modalClasses.modalTitle}>Event Details</h4>
+                                    <Button
+                                        simple
+                                        className={modalClasses.modalCloseButton}
+                                        key="close"
+                                        aria-label="Close"
+                                        onClick={() => setShowModal(false)}
+                                    >
+                                        {" "}
+                                        <Close className={modalClasses.modalClose} />
+                                    </Button>
+                                    <h2 className={modalClasses.modalTitle}>Event Details</h2>
                                 </DialogTitle>
                                 <DialogContent
                                     id="classic-modal-slide-description"
                                     className={modalClasses.modalBody}
                                 >
                                     <div>
-                                        <h2 className={classes.title}>Event name: {data.name}</h2>
-                                        <h3 className={classes.mainPrice}>Event cost: ${data.cost}</h3>
-                                        <h3 className={classes.mainPrice}>Event Date: {moment(data.date).format('LL')}</h3>
+                                        <h4 className={classes.title}>Event name: {data.name}</h4>
+                                        <h4 className={classes.mainPrice}>Event cost: ${data.cost}</h4>
+                                        <h4 className={classes.mainPrice}>Event Date: {data.date}</h4>
                                     </div>
                                 </DialogContent>
                                 <DialogActions className={modalClasses.modalFooter}>
                                     <Button onClick={() => setShowModal(false)} color="secondary">
                                         Close
                                     </Button>
-                                    <Button color="info">Book NOW</Button>
+                                    <Button onClick={() => handleBookNow()} color="info">Book NOW</Button>
                                 </DialogActions>
                             </Dialog>
                         </div>
