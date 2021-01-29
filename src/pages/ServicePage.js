@@ -27,6 +27,7 @@ import DialogActions from "@material-ui/core/DialogActions";
 import {Close} from "@material-ui/icons";
 import Transition from "react-transition-group/Transition";
 import style from "../MaterialKitProReact/assets/jss/material-kit-pro-react/modalStyle.js";
+import moment from "moment";
 
 // images
 
@@ -153,7 +154,7 @@ export default function ServicePage(props) {
                                     <div>
                                         <h2 className={classes.title}>Event name: {data.name}</h2>
                                         <h3 className={classes.mainPrice}>Event cost: ${data.cost}</h3>
-                                        <h3 className={classes.mainPrice}>Event Date: {data.date}</h3>
+                                        <h3 className={classes.mainPrice}>Event Date: {moment(data.date).format('LL')}</h3>
                                     </div>
                                 </DialogContent>
                                 <DialogActions className={modalClasses.modalFooter}>
