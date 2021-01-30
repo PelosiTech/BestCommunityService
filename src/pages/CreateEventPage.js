@@ -17,7 +17,7 @@ import Accordion from "../MaterialKitProReact/components/Accordion/Accordion.js"
 import {useHistory} from 'react-router-dom';
 
 import productStyle from "../MaterialKitProReact/assets/jss/material-kit-pro-react/views/productStyle.js";
-import {API, graphqlOperation} from "aws-amplify";
+import {Storage, API, graphqlOperation} from "aws-amplify";
 import {getService} from "../graphql/queries";
 import Card from "../MaterialKitProReact/components/Card/Card";
 import CardHeader from "../MaterialKitProReact/components/Card/CardHeader";
@@ -28,8 +28,9 @@ import DialogActions from "@material-ui/core/DialogActions";
 import {Close} from "@material-ui/icons";
 import Transition from "react-transition-group/Transition";
 import style from "../MaterialKitProReact/assets/jss/material-kit-pro-react/modalStyle.js";
-import {createBooked} from "../graphql/mutations";
+import {createBooked, createService} from "../graphql/mutations";
 import {useSelector} from "react-redux";
+import awsExports from '../aws-exports';
 
 // images
 
@@ -49,6 +50,7 @@ export default function CreateEventPage(props) {
     const modalClasses = useModalStyles();
     const id = props.location.pathname.slice(9);
     const userId = useSelector((state) => state.auth.id);
+    const [file, setFile] = React.useState({});
 
     const renderBookedUsersList = () => {
         if(bookedUsers.length > 0) {
@@ -70,9 +72,59 @@ export default function CreateEventPage(props) {
         history.push(`/confirmation/${info.data.createBooked.id}`)
     }
 
+    const addImageToDB = async (image) => {
+        try {
+            await API.graphql(graphqlOperation(createService,{
+                input: {
+                    userId: 'e772568c-caba-46bc-a6a8-2ad1a0670bf0',
+                    type: 'social event',
+                    quantity: '20',
+                    name: 'React Study Group PART 2',
+                    description: 'Are you ready to start diving into React? You can start learning how to build awesome looking websites like this one. Join our React study group today!',
+                    date: '02062021',
+                    cost: '5',
+                    file: image
+                }
+            })).then(data => console.log(data))
+        } catch (err) {
+            console.log(err)
+        }
+    }
+
+    const fileChange = (e) => {
+        const image = e.target.files[0];
+        Storage.put(image.name, image, {
+            contentType: 'image/png'
+        }).then((result) => {
+            setFile({file: URL.createObjectURL(image)})
+            console.log(result)
+            const imageUpload = {
+                name: image.name,
+                file: {
+                    bucket: awsExports.aws_user_files_s3_bucket,
+                    region: awsExports.aws_user_files_s3_bucket_region,
+                    key: 'public/' + image.name
+                }
+            }
+            console.log(imageUpload)
+            addImageToDB(imageUpload.file);
+            console.log('added complete')
+        }).catch(err => console.log(err))
+    }
+
     const renderPage = () => {
         if(data.name === undefined) {
-            return null;
+            return (
+                <>
+                    <div>
+                        <p>Please select an image to upload</p>
+                        <input type="file" onChange={(e) => fileChange(e)} />
+                    </div>
+                    <div>
+                        <img src={file} />
+                    </div>
+                </>
+            )
         }
 
         return (

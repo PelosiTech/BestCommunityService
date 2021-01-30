@@ -96,10 +96,13 @@ export const getService = /* GraphQL */ `
           date
           createdAt
           updatedAt
-          bookedUser {
-            name
-            }
         }
+        nextToken
+      }
+      file {
+        bucket
+        region
+        key
       }
       createdAt
       updatedAt
@@ -132,6 +135,11 @@ export const listServices = /* GraphQL */ `
         }
         bookedUsers {
           nextToken
+        }
+        file {
+          bucket
+          region
+          key
         }
         createdAt
         updatedAt
@@ -177,12 +185,12 @@ export const getBooked = /* GraphQL */ `
           updatedAt
         }
         bookedUsers {
-          items {
-            bookedUser {
-                id
-                name
-            }
-          }
+          nextToken
+        }
+        file {
+          bucket
+          region
+          key
         }
         createdAt
         updatedAt

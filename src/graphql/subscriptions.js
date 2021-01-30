@@ -151,6 +151,11 @@ export const onCreateService = /* GraphQL */ `
         }
         nextToken
       }
+      file {
+        bucket
+        region
+        key
+      }
       createdAt
       updatedAt
     }
@@ -192,6 +197,11 @@ export const onUpdateService = /* GraphQL */ `
         }
         nextToken
       }
+      file {
+        bucket
+        region
+        key
+      }
       createdAt
       updatedAt
     }
@@ -232,6 +242,11 @@ export const onDeleteService = /* GraphQL */ `
           updatedAt
         }
         nextToken
+      }
+      file {
+        bucket
+        region
+        key
       }
       createdAt
       updatedAt
@@ -276,6 +291,11 @@ export const onCreateBooked = /* GraphQL */ `
         }
         bookedUsers {
           nextToken
+        }
+        file {
+          bucket
+          region
+          key
         }
         createdAt
         updatedAt
@@ -325,6 +345,11 @@ export const onUpdateBooked = /* GraphQL */ `
         bookedUsers {
           nextToken
         }
+        file {
+          bucket
+          region
+          key
+        }
         createdAt
         updatedAt
       }
@@ -372,6 +397,11 @@ export const onDeleteBooked = /* GraphQL */ `
         }
         bookedUsers {
           nextToken
+        }
+        file {
+          bucket
+          region
+          key
         }
         createdAt
         updatedAt
