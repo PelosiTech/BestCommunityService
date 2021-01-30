@@ -13,11 +13,18 @@ type Service @model @key(name: "byUser", fields:["userId"]) {
   quantity: String!
   type: String!
   date: String!
-  imageUri: String!
+  imageUri: String
   cost: String!
   userId: ID!
   user: User @connection(fields: ["userId"])
   bookedUsers: [Booked] @connection(keyName: "byService", fields: ["id"])
+  file: S3Object
+}
+
+type S3Object {
+  bucket: String!
+  region: String!
+  key: String!
 }
 
 type Booked @model @key(name: "byUser", fields:["userId"]) @key(name:"byService", fields:["serviceId"]) {
