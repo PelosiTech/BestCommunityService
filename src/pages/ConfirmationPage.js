@@ -26,7 +26,6 @@ import {useHistory} from 'react-router-dom';
 // images
 
 const useStyles = makeStyles(productStyle);
-const useModalStyles = makeStyles(style);
 
 export default function ConfirmationPage(props) {
     React.useEffect(() => {

@@ -18,6 +18,7 @@ import InHouseServices from "../data/InHouseServices";
 import {API, graphqlOperation} from "aws-amplify";
 import {listServices} from "../graphql/queries";
 import ServiceCard from "../components/ServiceCard";
+import Button from "../MaterialKitProReact/components/CustomButtons/Button";
 
 const useStyles = makeStyles(styles);
 
@@ -89,7 +90,12 @@ export default function InHouseServicesPage() {
             </Parallax>
 
             <div className={classNames(classes.main, classes.mainRaised)}>
-                <h2 style={{color: "black", paddingTop: 30, textAlign: "center"} }>In House Services</h2>
+                <div style={{display: 'flex', justifyContent: 'space-around', alignItems: 'center', padding: 10}}>
+                    <h2 style={{color: "black", paddingTop: 30, textAlign: "center"} }>In House Services</h2>
+                    <Button style={{height: '50%'}} round color="info" size="lg" onClick={() => history.push(`/create-event`)}>
+                        Create an In-House Service!
+                    </Button>
+                </div>
                 {renderInHouseServices()}
             </div>
         </div>

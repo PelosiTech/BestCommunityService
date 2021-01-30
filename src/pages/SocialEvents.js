@@ -16,6 +16,7 @@ import styles from "../MaterialKitProReact/assets/jss/material-kit-pro-react/vie
 import ServiceCard from "../components/ServiceCard";
 import {API, graphqlOperation} from "aws-amplify";
 import {listServices} from "../graphql/queries";
+import Button from "../MaterialKitProReact/components/CustomButtons/Button";
 
 const useStyles = makeStyles(styles);
 
@@ -87,7 +88,12 @@ export default function SocialEventsPage() {
             </Parallax>
 
             <div className={classNames(classes.main, classes.mainRaised)}>
-                <h2 style={{color: "black", paddingTop: 30, textAlign: "center"}}>Social Events</h2>
+                <div style={{display: 'flex', justifyContent: 'space-around', alignItems: 'center', padding: 10}}>
+                    <h2 style={{color: "black", textAlign: "center"}}>Social Events</h2>
+                    <Button style={{height: '50%'}} round color="info" size="lg" onClick={() => history.push(`/create-event`)}>
+                        Create an Event!
+                    </Button>
+                </div>
                 {renderSocialEvents()}
             </div>
         </div>
