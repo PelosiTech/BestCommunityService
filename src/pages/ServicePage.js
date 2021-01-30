@@ -14,6 +14,7 @@ import GridContainer from "../MaterialKitProReact/components/Grid/GridContainer.
 import GridItem from "../MaterialKitProReact/components/Grid/GridItem.js";
 import Button from "../MaterialKitProReact/components/CustomButtons/Button.js";
 import Accordion from "../MaterialKitProReact/components/Accordion/Accordion.js";
+import {useHistory} from 'react-router-dom';
 
 import productStyle from "../MaterialKitProReact/assets/jss/material-kit-pro-react/views/productStyle.js";
 import {API, graphqlOperation} from "aws-amplify";
@@ -40,6 +41,7 @@ export default function ServicePage(props) {
         window.scrollTo(0, 0);
         document.body.scrollTop = 0;
     });
+    const history = useHistory();
     const [data, setData] = React.useState({});
     const [bookedUsers, setBookedUsers] = React.useState([]);
     const [showModal, setShowModal] = React.useState(false);
@@ -77,7 +79,7 @@ export default function ServicePage(props) {
                 date: data.date
             }
         }))
-        console.log(info)
+        history.push(`/confirmation/${info.data.createBooked.id}`)
     }
 
     const renderPage = () => {

@@ -177,7 +177,12 @@ export const getBooked = /* GraphQL */ `
           updatedAt
         }
         bookedUsers {
-          nextToken
+          items {
+            bookedUser {
+                id
+                name
+            }
+          }
         }
         createdAt
         updatedAt
