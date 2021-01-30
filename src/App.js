@@ -15,6 +15,7 @@ import VerifyPage from "./pages/VerifyPage";
 import LogoutPage from "./pages/LogoutPage";
 import ServicePage from "./pages/ServicePage";
 import ConfirmationPage from "./pages/ConfirmationPage";
+import CreateEventPage from "./pages/CreateEventPage";
 
 function App() {
 
@@ -26,6 +27,7 @@ function App() {
                 <Route path="/" exact component={HomePage}/>
                 <Route path="/service/:id" exact component={ServicePage}/>
                 <Route path="/confirmation/:id" exact component={ConfirmationPage}/>
+                <Route path="/create-event" exact component={CreateEventPage} />
                 <Route path="/login" exact component={LoginPage}/>
                 <Route path="/logout" exact component={LogoutPage}/>
                 <Route path="/signup" exact component={SignUpPage}/>

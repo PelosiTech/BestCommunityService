@@ -17,7 +17,7 @@ import ServiceCard from "../components/ServiceCard";
 import {API, graphqlOperation} from "aws-amplify";
 import {listServices} from "../graphql/queries";
 import Button from "../MaterialKitProReact/components/CustomButtons/Button";
-
+import { useHistory } from 'react-router-dom';
 const useStyles = makeStyles(styles);
 
 export default function SocialEventsPage() {
@@ -25,6 +25,7 @@ export default function SocialEventsPage() {
         window.scrollTo(0, 0);
         document.body.scrollTop = 0;
     });
+    const history = useHistory();
     const classes = useStyles();
     const [socialEvents, setSocialEvents] = useState([]);
 

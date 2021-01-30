@@ -19,6 +19,7 @@ import {API, graphqlOperation} from "aws-amplify";
 import {listServices} from "../graphql/queries";
 import ServiceCard from "../components/ServiceCard";
 import Button from "../MaterialKitProReact/components/CustomButtons/Button";
+import { useHistory } from 'react-router-dom';
 
 const useStyles = makeStyles(styles);
 
@@ -27,6 +28,7 @@ export default function InHouseServicesPage() {
         window.scrollTo(0, 0);
         document.body.scrollTop = 0;
     });
+    const history = useHistory();
     const classes = useStyles();
     const [inHouseServices, setInHouseServices] = useState([]);
 

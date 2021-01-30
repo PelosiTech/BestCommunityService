@@ -24,7 +24,7 @@ const HomePage = ({ ...rest }) => {
         document.body.scrollTop = 0;
     });
     const classes = useStyles();
-    const history = useHistory()
+    const history = useHistory();
 
     return (
         <>
