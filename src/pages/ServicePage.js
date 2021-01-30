@@ -27,6 +27,8 @@ import DialogActions from "@material-ui/core/DialogActions";
 import {Close} from "@material-ui/icons";
 import Transition from "react-transition-group/Transition";
 import style from "../MaterialKitProReact/assets/jss/material-kit-pro-react/modalStyle.js";
+import {createBooked} from "../graphql/mutations";
+import {useSelector} from "react-redux";
 
 // images
 
@@ -44,6 +46,7 @@ export default function ServicePage(props) {
     const classes = useStyles();
     const modalClasses = useModalStyles();
     const id = props.location.pathname.slice(9);
+    const userId = useSelector((state) => state.auth.id);
 
     const getSocialEvents = async () => {
         const data = await API.graphql(graphqlOperation(getService,{
@@ -65,9 +68,16 @@ export default function ServicePage(props) {
         }
     }
 
-    const handleBookNow = () => {
+    const handleBookNow = async () => {
         setShowModal(false);
-
+        const info = await API.graphql(graphqlOperation(createBooked,{
+            input: {
+                userId: userId,
+                serviceId: id,
+                date: data.date
+            }
+        }))
+        console.log(info)
     }
 
     const renderPage = () => {
