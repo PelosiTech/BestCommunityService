@@ -102,7 +102,9 @@ export default function EquipmentAndServicesPage() {
                         Create a Equipment or Services Event!
                     </Button>
                 </div>
-                {renderEquipment()}
+                <GridContainer>
+                    {renderEquipment()}
+                </GridContainer>
             </div>
         </div>
     );

@@ -102,7 +102,9 @@ export default function InHouseServicesPage() {
                         Create an In-House Service!
                     </Button>
                 </div>
-                {renderInHouseServices()}
+                <GridContainer>
+                    {renderInHouseServices()}
+                </GridContainer>
             </div>
         </div>
     );

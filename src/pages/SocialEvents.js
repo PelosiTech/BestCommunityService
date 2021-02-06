@@ -99,7 +99,9 @@ export default function SocialEventsPage() {
                         Create an Event!
                     </Button>
                 </div>
-                {renderSocialEvents()}
+                <GridContainer>
+                    {renderSocialEvents()}
+                </GridContainer>
             </div>
         </div>
     );

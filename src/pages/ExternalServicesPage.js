@@ -102,7 +102,9 @@ export default function ExternalServicesPage() {
                         Create an External Service!
                     </Button>
                 </div>
-                {renderExternalServices()}
+                <GridContainer>
+                    {renderExternalServices()}
+                </GridContainer>
             </div>
         </div>
     );
