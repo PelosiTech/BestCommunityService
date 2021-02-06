@@ -113,36 +113,39 @@ export default function CreateEventPage(props) {
     }
 
     const renderPage = () => {
-        if(data.name === undefined) {
-            return (
-                <>
-                    <div>
-                        <p>Please select an image to upload</p>
-                        <input type="file" onChange={(e) => fileChange(e)} />
-                    </div>
-                    <div>
-                        <img src={file} />
-                    </div>
-                </>
-            )
-        }
+        // if(data.name === undefined) {
+        //     return (
+        //         <>
+        //             <div>
+        //                 <p>Please select an image to upload</p>
+        //                 <input type="file" onChange={(e) => fileChange(e)} />
+        //             </div>
+        //             <div>
+        //                 <img src={file} />
+        //             </div>
+        //         </>
+        //     )
+        // }
 
         return (
             <GridContainer>
                 <GridItem md={6} sm={6}>
                     <Card product plain>
                         <CardHeader image plain>
-                            <img src={data.imageUri} alt="..."/>
+                            <h2 className={classes.title}>Create An Event or Service </h2>
+                            <img src={"https://www.acenet.edu/PublishingImages/Interior-Page-Heroes/2018ACE-1045.JPG?RenditionID=10"} alt="..."/>
                             <div
                                 className={classes.coloredShadow}
-                                style={{backgroundImage: `url(${data.imageUri})`, opacity: 1}}
+                                style={{backgroundImage: `url(https://www.acenet.edu/PublishingImages/Interior-Page-Heroes/2018ACE-1045.JPG?RenditionID=10)`, opacity: 1}}
                             />
                         </CardHeader>
                     </Card>
                 </GridItem>
                 <GridItem md={6} sm={6}>
-                    <h2 className={classes.title}>{data.name}</h2>
-                    <h3 className={classes.mainPrice}>${data.cost}</h3>
+                    <h2 className={classes.title}>Name: </h2>
+                    <input />
+                    <h3 className={classes.mainPrice}>Cost: </h3>
+                    <input />
                     <Accordion
                         active={0}
                         activeColor="info"
@@ -151,17 +154,19 @@ export default function CreateEventPage(props) {
                                 title: "Description",
                                 content: (
                                     <p>
-                                        {data.description}
+                                       Description:
+                                        <input />
                                     </p>
+
                                 )
                             },
                             {
                                 title: "Date and Availability",
                                 content: (
                                     <>
-                                        <div>Date: {data.date}</div>
-                                        <div>Spots open: {data.quantity}</div>
-                                        <div>Type: {data.type}</div>
+                                        <div>Date: <input /></div>
+                                        <div>Spots open: <input /></div>
+                                        <div>Type: <input /></div>
                                     </>
                                 )
                             },
@@ -169,10 +174,9 @@ export default function CreateEventPage(props) {
                                 title: "Details",
                                 content: (
                                     <ul>
-                                        <li>Created By: {data.user.name}</li>
+                                        <li>Created By: <input /></li>
                                         <li>
                                             Current Users who have this booked:
-                                            {renderBookedUsersList()}
                                         </li>
                                     </ul>
                                 )
@@ -218,16 +222,16 @@ export default function CreateEventPage(props) {
                                     className={modalClasses.modalBody}
                                 >
                                     <div>
-                                        <h4 className={classes.title}>Event name: {data.name}</h4>
-                                        <h4 className={classes.mainPrice}>Event cost: ${data.cost}</h4>
-                                        <h4 className={classes.mainPrice}>Event Date: {data.date}</h4>
+                                        <h4 className={classes.title}>Event name: <input /></h4>
+                                        <h4 className={classes.mainPrice}>Event cost: $<input /></h4>
+                                        <h4 className={classes.mainPrice}>Event Date: <input /></h4>
                                     </div>
                                 </DialogContent>
                                 <DialogActions className={modalClasses.modalFooter}>
                                     <Button onClick={() => setShowModal(false)} color="secondary">
                                         Close
                                     </Button>
-                                    <Button onClick={() => handleCreateEvent()} color="info">Book NOW</Button>
+                                    <Button onClick={() => handleCreateEvent()} color="info">Create Event</Button>
                                 </DialogActions>
                             </Dialog>
                         </div>
