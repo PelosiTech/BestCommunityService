@@ -33,7 +33,13 @@ export default function InHouseServicesPage() {
     const [inHouseServices, setInHouseServices] = useState([]);
 
     const getInHouseServices = async () => {
-        const data = await API.graphql(graphqlOperation(listServices));
+        const data = await API.graphql(graphqlOperation(listServices, {
+            filter: {
+                type: {
+                    contains: 'in house service'
+                }
+            }
+        }));
         setInHouseServices(data.data.listServices.items)
     }
 

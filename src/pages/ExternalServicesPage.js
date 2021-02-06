@@ -33,7 +33,13 @@ export default function ExternalServicesPage() {
     const [externalServices, setExternalServices] = useState([]);
 
     const getExternalServices = async () => {
-        const data = await API.graphql(graphqlOperation(listServices));
+        const data = await API.graphql(graphqlOperation(listServices, {
+            filter: {
+                type: {
+                    contains: 'external service'
+                }
+            }
+        }));
         setExternalServices(data.data.listServices.items)
     }
 

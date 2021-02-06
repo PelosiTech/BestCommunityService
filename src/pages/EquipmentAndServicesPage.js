@@ -33,7 +33,13 @@ export default function EquipmentAndServicesPage() {
     const [equipmentServices, setEquipmentServices] = useState([]);
 
     const getInHouseServices = async () => {
-        const data = await API.graphql(graphqlOperation(listServices));
+        const data = await API.graphql(graphqlOperation(listServices, {
+            filter: {
+                type: {
+                    contains: 'equipment services'
+                }
+            }
+        }));
         setEquipmentServices(data.data.listServices.items)
     }
 
