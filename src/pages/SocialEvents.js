@@ -30,7 +30,13 @@ export default function SocialEventsPage() {
     const [socialEvents, setSocialEvents] = useState([]);
 
     const getSocialEvents = async () => {
-        const data = await API.graphql(graphqlOperation(listServices));
+        const data = await API.graphql(graphqlOperation(listServices, {
+            filter: {
+                type: {
+                    contains: 'social event'
+                }
+            }
+        }));
         setSocialEvents(data.data.listServices.items)
     }
 
