@@ -51,9 +51,7 @@ export default function ExternalServicesPage() {
     const renderExternalServices = () => {
         if(externalServices.length > 0) {
             return externalServices.map((event) => {
-                if(event.type === "external service") {
                     return <ServiceCard data={event} key={event.id} />
-                }
             })
         }
     }

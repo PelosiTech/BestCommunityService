@@ -48,9 +48,7 @@ export default function SocialEventsPage() {
     const renderSocialEvents = () => {
         if(socialEvents.length > 0) {
             return socialEvents.map((event) => {
-                if(event.type === "social event") {
                     return <ServiceCard data={event} key={event.id} />
-                }
             })
         }
     }

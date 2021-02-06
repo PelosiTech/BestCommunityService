@@ -51,9 +51,7 @@ export default function EquipmentAndServicesPage() {
     const renderEquipment = () => {
         if(equipmentServices.length > 0) {
             return equipmentServices.map((event) => {
-                if(event.type === "equipment services") {
                     return <ServiceCard data={event} key={event.id} />
-                }
             })
         }
     }

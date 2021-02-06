@@ -51,9 +51,7 @@ export default function InHouseServicesPage() {
     const renderInHouseServices = () => {
         if(inHouseServices.length > 0) {
             return inHouseServices.map((event) => {
-                if(event.type === "in house service") {
                     return <ServiceCard data={event} key={event.id} />
-                }
             })
         }
     }
