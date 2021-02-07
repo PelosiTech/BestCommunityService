@@ -30,6 +30,7 @@ export default function ServiceConfirmationPage(props) {
         document.body.scrollTop = 0;
     });
     const [data, setData] = React.useState({});
+    const [imageUrl, setImageUrl] = React.useState('');
     const classes = useStyles();
     const id = props.location.pathname.slice(22);
     const userId = useSelector((state) => state.auth.id);
@@ -40,8 +41,9 @@ export default function ServiceConfirmationPage(props) {
             id: id,
         }));
         setData(data.data.getService)
+        const keyUrl = data.data.getService.file.key.replaceAll(" ", "+");
+        setImageUrl("https://" + data.data.getService.file.bucket + ".s3-" + data.data.getService.file.region + ".amazonaws.com/" + keyUrl)
     }
-
     useEffect(() => {
         getSocialEvents();
     }, [])
@@ -56,10 +58,10 @@ export default function ServiceConfirmationPage(props) {
                 <GridItem md={6} sm={6}>
                     <Card product plain>
                         <CardHeader image plain>
-                            <img src={data.imageUri} alt="..."/>
+                            <img src={imageUrl} alt="..."/>
                             <div
                                 className={classes.coloredShadow}
-                                style={{backgroundImage: `url(${data.imageUri})`, opacity: 1}}
+                                style={{backgroundImage: `url(${imageUrl})`, opacity: 1}}
                             />
                         </CardHeader>
                     </Card>
