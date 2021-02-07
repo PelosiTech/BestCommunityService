@@ -1,11 +1,11 @@
 import {
-  primaryColor,
   dangerColor,
   successColor,
   whiteColor,
   grayColor,
   defaultFont
 } from "MaterialKitProReact/assets/jss/material-kit-pro-react.js";
+import {infoColor} from "../../material-kit-pro-react";
 
 const customInputStyle = {
   disabled: {
@@ -19,7 +19,7 @@ const customInputStyle = {
       borderBottomWidth: "1px !important"
     },
     "&:after": {
-      borderBottomColor: primaryColor[0]
+      borderBottomColor: infoColor[0]
     }
   },
   underlineError: {
@@ -62,7 +62,7 @@ const customInputStyle = {
     pointerEvents: "none"
   },
   formControl: {
-    margin: "0 0 17px 0",
+    margin: "0 0 0px 0",
     paddingTop: "27px",
     position: "relative",
     "& svg,& .fab,& .far,& .fal,& .fas,& .material-icons": {
