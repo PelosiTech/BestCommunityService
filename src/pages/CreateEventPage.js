@@ -15,6 +15,7 @@ import GridItem from "../MaterialKitProReact/components/Grid/GridItem.js";
 import Button from "../MaterialKitProReact/components/CustomButtons/Button.js";
 import Accordion from "../MaterialKitProReact/components/Accordion/Accordion.js";
 import {useHistory} from 'react-router-dom';
+import Datetime from "react-datetime";
 
 import productStyle from "../MaterialKitProReact/assets/jss/material-kit-pro-react/views/productStyle.js";
 import {Storage, API, graphqlOperation} from "aws-amplify";
@@ -36,6 +37,7 @@ import Select from "@material-ui/core/Select";
 import MenuItem from "@material-ui/core/MenuItem";
 import InputLabel from "@material-ui/core/InputLabel";
 import FormControl from "@material-ui/core/FormControl";
+import moment from "moment";
 
 // images
 
@@ -48,7 +50,7 @@ export default function CreateEventPage(props) {
         document.body.scrollTop = 0;
     });
     const history = useHistory();
-    const [type, setType] = React.useState(0);
+    const [type, setType] = React.useState('');
     const [quantity, setQuantity] = React.useState('');
     const [name, setName] = React.useState('');
     const [description, setDescription] = React.useState('');
@@ -63,6 +65,7 @@ export default function CreateEventPage(props) {
 
     const handleCreateEvent = async () => {
         setShowModal(false);
+        console.log(name, description, date, cost, type, quantity, imageFile)
         try {
             await API.graphql(graphqlOperation(createService,{
                 input: {
@@ -77,7 +80,7 @@ export default function CreateEventPage(props) {
                 }
             })).then(data => {
                 console.log(data)
-                history.push(`/confirmation/${info.data.createBooked.id}`)
+                history.push(`/confirmation/${info.data.createService.id}`)
             })
         } catch (err) {
             console.log(err)
@@ -210,6 +213,14 @@ export default function CreateEventPage(props) {
                             </MenuItem>
                         </Select>
                     </FormControl>
+                    <h3 className={classes.title}>Date of Event: </h3>
+                    <FormControl fullWidth>
+                        <Datetime
+                            timeFormat={false}
+                            inputProps={{ placeholder: "Date of Event", onChange:(e) => e.target.value }}
+                            onChange={(e)=> setDate(moment(e).format('MM-DD-YYYY'))}
+                        />
+                    </FormControl>
                     <h3 className={classes.title}>Cost: </h3>
                     <CustomInput
                         labelText="Cost"
@@ -227,15 +238,6 @@ export default function CreateEventPage(props) {
                             fullWidth: true
                         }}
                         inputProps={{onChange: (e)=> setQuantity(e.target.value)}}
-                    />
-                    <h3 className={classes.title}>Date: </h3>
-                    <CustomInput
-                        labelText="Date"
-                        id="date"
-                        formControlProps={{
-                            fullWidth: true
-                        }}
-                        inputProps={{onChange: (e)=> setDate(e.target.value)}}
                     />
                     <GridContainer className={classes.pullRight}>
                         <div>
