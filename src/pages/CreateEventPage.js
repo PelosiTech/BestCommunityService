@@ -125,9 +125,6 @@ export default function CreateEventPage(props) {
                                 <h3 className={classes.title}>Please select an image to upload for your event/service: </h3>
                                 <input type="file" onChange={(e) => fileChange(e)} />
                             </div>
-                            <div>
-                                <img src={file} />
-                            </div>
                         </CardHeader>
                     </Card>
                 </GridItem>
@@ -279,8 +276,8 @@ export default function CreateEventPage(props) {
                                 >
                                     <div>
                                         <h4 className={classes.title}>Event name: {name}</h4>
-                                        <h4 className={classes.mainPrice}>Event cost: ${cost}<input /></h4>
-                                        <h4 className={classes.mainPrice}>Event Date: {date}<input /></h4>
+                                        <h4 className={classes.mainPrice}>Event cost: ${cost}</h4>
+                                        <h4 className={classes.mainPrice}>Event Date: {date}</h4>
                                     </div>
                                 </DialogContent>
                                 <DialogActions className={modalClasses.modalFooter}>

@@ -55,27 +55,6 @@ export default function ConfirmationPage(props) {
         getSocialEvents();
     }, [])
 
-    const renderBookedUsersList = () => {
-        if(bookedUsers.length > 0) {
-            return bookedUsers.map((user) => {
-                return <div key={user.id}>{user.bookedUser.name}</div>
-            })
-        }
-    }
-
-    const handleBookNow = async () => {
-        setShowModal(false);
-        const info = await API.graphql(graphqlOperation(createBooked,{
-            input: {
-                userId: userId,
-                serviceId: id,
-                date: data.date
-            }
-        }))
-        console.log(info)
-        history.push(`confirmation:${info.data.id}`)
-    }
-
     const renderPage = () => {
         if(data.name === undefined) {
             return null;
