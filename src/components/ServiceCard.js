@@ -19,14 +19,17 @@ const ServiceCard = ({data}) => {
     }
     const firstCard = data;
     const url = 'service/' + firstCard.id;
+    console.log(firstCard);
+    const keyUrl = firstCard.file.key.replaceAll(" ", "+");
+    const imageUrl = ("https://" + firstCard.file.bucket + ".s3-" + firstCard.file.region + ".amazonaws.com/" + keyUrl)
     return (
             <GridItem md={4} sm={4}>
                 <Card product plain>
                     <CardHeader image plain>
-                        <img src={firstCard.imageUri} alt="..."/>
+                        <img src={imageUrl} alt="..."/>
                         <div
                             className={classes.coloredShadow}
-                            style={{backgroundImage: `url(${firstCard.imageUri})`, opacity: 1}}
+                            style={{backgroundImage: `url(${imageUrl})`, opacity: 1}}
                         />
                     </CardHeader>
                     <CardBody className={classes.textCenter} plain>
