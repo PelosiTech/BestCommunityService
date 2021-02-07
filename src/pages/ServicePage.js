@@ -45,6 +45,7 @@ export default function ServicePage(props) {
     const [data, setData] = React.useState({});
     const [bookedUsers, setBookedUsers] = React.useState([]);
     const [showModal, setShowModal] = React.useState(false);
+    const [imageUrl, setImageUrl] = React.useState("");
     const classes = useStyles();
     const modalClasses = useModalStyles();
     const id = props.location.pathname.slice(9);
@@ -56,6 +57,8 @@ export default function ServicePage(props) {
         }));
         setData(data.data.getService)
         setBookedUsers(data.data.getService.bookedUsers.items)
+        const keyUrl = data.data.getService.file.key.replaceAll(" ", "+");
+        setImageUrl("https://" + data.data.getService.file.bucket + ".s3-" + data.data.getService.file.region + ".amazonaws.com/" + keyUrl)
     }
 
     useEffect(() => {
@@ -92,10 +95,10 @@ export default function ServicePage(props) {
                 <GridItem md={6} sm={6}>
                     <Card product plain>
                         <CardHeader image plain>
-                            <img src={data.imageUri} alt="..."/>
+                            <img src={imageUrl} alt="..."/>
                             <div
                                 className={classes.coloredShadow}
-                                style={{backgroundImage: `url(${data.imageUri})`, opacity: 1}}
+                                style={{backgroundImage: `url(${imageUrl})`, opacity: 1}}
                             />
                         </CardHeader>
                     </Card>
