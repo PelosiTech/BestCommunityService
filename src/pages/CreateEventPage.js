@@ -31,6 +31,7 @@ import style from "../MaterialKitProReact/assets/jss/material-kit-pro-react/moda
 import {createBooked, createService} from "../graphql/mutations";
 import {useSelector} from "react-redux";
 import awsExports from '../aws-exports';
+import CustomInput from "../MaterialKitProReact/components/CustomInput/CustomInput";
 
 // images
 
@@ -44,21 +45,19 @@ export default function CreateEventPage(props) {
     });
     const history = useHistory();
     const [data, setData] = React.useState({});
-    const [bookedUsers, setBookedUsers] = React.useState([]);
+    const [type, setType] = React.useState('');
+    const [quantity, setQuantity] = React.useState('');
+    const [name, setName] = React.useState('');
+    const [description, setDescription] = React.useState('');
+    const [date, setDate] = React.useState('');
+    const [cost, setCost] = React.useState('');
+    const [imageFile, setImageFile] = React.useState({});
     const [showModal, setShowModal] = React.useState(false);
     const classes = useStyles();
     const modalClasses = useModalStyles();
     const id = props.location.pathname.slice(9);
     const userId = useSelector((state) => state.auth.id);
     const [file, setFile] = React.useState({});
-
-    const renderBookedUsersList = () => {
-        if(bookedUsers.length > 0) {
-            return bookedUsers.map((user) => {
-                return <div key={user.id}>{user.bookedUser.name}</div>
-            })
-        }
-    }
 
     const handleCreateEvent = async () => {
         setShowModal(false);
@@ -72,18 +71,18 @@ export default function CreateEventPage(props) {
         history.push(`/confirmation/${info.data.createBooked.id}`)
     }
 
-    const addImageToDB = async (image) => {
+    const uploadEvent = async () => {
         try {
             await API.graphql(graphqlOperation(createService,{
                 input: {
-                    userId: 'e772568c-caba-46bc-a6a8-2ad1a0670bf0',
-                    type: 'social event',
-                    quantity: '20',
-                    name: 'React Study Group PART 2',
-                    description: 'Are you ready to start diving into React? You can start learning how to build awesome looking websites like this one. Join our React study group today!',
-                    date: '02062021',
-                    cost: '5',
-                    file: image
+                    userId,
+                    type,
+                    quantity,
+                    name,
+                    description,
+                    date,
+                    cost,
+                    file: imageFile
                 }
             })).then(data => console.log(data))
         } catch (err) {
@@ -107,7 +106,7 @@ export default function CreateEventPage(props) {
                 }
             }
             console.log(imageUpload)
-            addImageToDB(imageUpload.file);
+            setImageFile(imageUpload.file);
             console.log('added complete')
         }).catch(err => console.log(err))
     }
@@ -138,50 +137,71 @@ export default function CreateEventPage(props) {
                                 className={classes.coloredShadow}
                                 style={{backgroundImage: `url(https://www.acenet.edu/PublishingImages/Interior-Page-Heroes/2018ACE-1045.JPG?RenditionID=10)`, opacity: 1}}
                             />
+                            <div>
+                                <h3 className={classes.title}>Please select an image to upload for your event/service: </h3>
+                                <input type="file" onChange={(e) => fileChange(e)} />
+                            </div>
+                            <div>
+                                <img src={file} />
+                            </div>
                         </CardHeader>
                     </Card>
                 </GridItem>
                 <GridItem md={6} sm={6}>
-                    <h2 className={classes.title}>Name: </h2>
-                    <input />
-                    <h3 className={classes.mainPrice}>Cost: </h3>
-                    <input />
-                    <Accordion
-                        active={0}
-                        activeColor="info"
-                        collapses={[
-                            {
-                                title: "Description",
-                                content: (
-                                    <p>
-                                       Description:
-                                        <input />
-                                    </p>
-
-                                )
-                            },
-                            {
-                                title: "Date and Availability",
-                                content: (
-                                    <>
-                                        <div>Date: <input /></div>
-                                        <div>Spots open: <input /></div>
-                                        <div>Type: <input /></div>
-                                    </>
-                                )
-                            },
-                            {
-                                title: "Details",
-                                content: (
-                                    <ul>
-                                        <li>Created By: <input /></li>
-                                        <li>
-                                            Current Users who have this booked:
-                                        </li>
-                                    </ul>
-                                )
-                            }
-                        ]}
+                    <h2 className={classes.title}>Enter in event/service information: </h2>
+                    <h3 className={classes.title}>Name: </h3>
+                    <CustomInput
+                        labelText="Name"
+                        id="name"
+                        formControlProps={{
+                            fullWidth: true
+                        }}
+                        inputProps={{onChange: (e)=> setName(e.target.value)}}
+                    />
+                    <h3 className={classes.title}>Description: </h3>
+                    <CustomInput
+                        labelText="Description"
+                        id="description"
+                        formControlProps={{
+                            fullWidth: true
+                        }}
+                        inputProps={{onChange: (e)=> setDescription(e.target.value)}}
+                    />
+                    <h3 className={classes.title}>Type of Event: </h3>
+                    <CustomInput
+                        labelText="Cost"
+                        id="cost"
+                        formControlProps={{
+                            fullWidth: true
+                        }}
+                        inputProps={{onChange: (e)=> setCost(e.target.value)}}
+                    />
+                    <h3 className={classes.title}>Cost: </h3>
+                    <CustomInput
+                        labelText="Cost"
+                        id="cost"
+                        formControlProps={{
+                            fullWidth: true
+                        }}
+                        inputProps={{onChange: (e)=> setCost(e.target.value)}}
+                    />
+                    <h3 className={classes.title}>Quantity of People allowed to rent/book: </h3>
+                    <CustomInput
+                        labelText="Quantity"
+                        id="quantity"
+                        formControlProps={{
+                            fullWidth: true
+                        }}
+                        inputProps={{onChange: (e)=> setQuantity(e.target.value)}}
+                    />
+                    <h3 className={classes.title}>Date: </h3>
+                    <CustomInput
+                        labelText="Date"
+                        id="date"
+                        formControlProps={{
+                            fullWidth: true
+                        }}
+                        inputProps={{onChange: (e)=> setDate(e.target.value)}}
                     />
                     <GridContainer className={classes.pullRight}>
                         <div>
