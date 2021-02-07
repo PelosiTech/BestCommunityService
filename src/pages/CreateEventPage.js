@@ -44,7 +44,6 @@ export default function CreateEventPage(props) {
         document.body.scrollTop = 0;
     });
     const history = useHistory();
-    const [data, setData] = React.useState({});
     const [type, setType] = React.useState('');
     const [quantity, setQuantity] = React.useState('');
     const [name, setName] = React.useState('');
@@ -55,23 +54,11 @@ export default function CreateEventPage(props) {
     const [showModal, setShowModal] = React.useState(false);
     const classes = useStyles();
     const modalClasses = useModalStyles();
-    const id = props.location.pathname.slice(9);
     const userId = useSelector((state) => state.auth.id);
     const [file, setFile] = React.useState({});
 
     const handleCreateEvent = async () => {
         setShowModal(false);
-        const info = await API.graphql(graphqlOperation(createBooked,{
-            input: {
-                userId: userId,
-                serviceId: id,
-                date: data.date
-            }
-        }))
-        history.push(`/confirmation/${info.data.createBooked.id}`)
-    }
-
-    const uploadEvent = async () => {
         try {
             await API.graphql(graphqlOperation(createService,{
                 input: {
@@ -84,7 +71,10 @@ export default function CreateEventPage(props) {
                     cost,
                     file: imageFile
                 }
-            })).then(data => console.log(data))
+            })).then(data => {
+                console.log(data)
+                history.push(`/confirmation/${info.data.createBooked.id}`)
+            })
         } catch (err) {
             console.log(err)
         }
@@ -112,19 +102,6 @@ export default function CreateEventPage(props) {
     }
 
     const renderPage = () => {
-        // if(data.name === undefined) {
-        //     return (
-        //         <>
-        //             <div>
-        //                 <p>Please select an image to upload</p>
-        //                 <input type="file" onChange={(e) => fileChange(e)} />
-        //             </div>
-        //             <div>
-        //                 <img src={file} />
-        //             </div>
-        //         </>
-        //     )
-        // }
 
         return (
             <GridContainer>
@@ -169,8 +146,8 @@ export default function CreateEventPage(props) {
                     />
                     <h3 className={classes.title}>Type of Event: </h3>
                     <CustomInput
-                        labelText="Cost"
-                        id="cost"
+                        labelText="Type Of Event"
+                        id="eventType"
                         formControlProps={{
                             fullWidth: true
                         }}
@@ -206,7 +183,7 @@ export default function CreateEventPage(props) {
                     <GridContainer className={classes.pullRight}>
                         <div>
                             <Button color="info" onClick={() => setShowModal(true)}>
-                                Book Now
+                                Create Event
                             </Button>
                             <Dialog
                                 classes={{
@@ -242,9 +219,9 @@ export default function CreateEventPage(props) {
                                     className={modalClasses.modalBody}
                                 >
                                     <div>
-                                        <h4 className={classes.title}>Event name: <input /></h4>
-                                        <h4 className={classes.mainPrice}>Event cost: $<input /></h4>
-                                        <h4 className={classes.mainPrice}>Event Date: <input /></h4>
+                                        <h4 className={classes.title}>Event name: {name}</h4>
+                                        <h4 className={classes.mainPrice}>Event cost: ${cost}<input /></h4>
+                                        <h4 className={classes.mainPrice}>Event Date: {date}<input /></h4>
                                     </div>
                                 </DialogContent>
                                 <DialogActions className={modalClasses.modalFooter}>
