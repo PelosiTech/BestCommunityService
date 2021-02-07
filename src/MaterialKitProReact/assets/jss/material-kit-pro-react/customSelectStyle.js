@@ -6,6 +6,7 @@ import {
   grayColor,
   hexToRgb
 } from "MaterialKitProReact/assets/jss/material-kit-pro-react.js";
+import {infoColor} from "../material-kit-pro-react";
 
 const customSelectStyle = {
   select: {
@@ -35,7 +36,7 @@ const customSelectStyle = {
         borderBottomColor: grayColor[11] + " !important"
       },
       "&:after": {
-        borderBottomColor: primaryColor[0] + "!important"
+        borderBottomColor: infoColor[0] + "!important"
       }
     }
   },
@@ -79,13 +80,13 @@ const customSelectStyle = {
     color: grayColor[8],
     paddingRight: "30px",
     "&:hover": {
-      backgroundColor: primaryColor[0],
+      backgroundColor: infoColor[0],
       color: whiteColor,
       ...primaryBoxShadow
     }
   },
   selectMenuItemSelected: {
-    backgroundColor: primaryColor[0] + "!important",
+    backgroundColor: infoColor[0] + "!important",
     color: whiteColor
   },
   selectMenuItemSelectedMultiple: {

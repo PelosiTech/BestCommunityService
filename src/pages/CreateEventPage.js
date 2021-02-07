@@ -32,6 +32,10 @@ import {createBooked, createService} from "../graphql/mutations";
 import {useSelector} from "react-redux";
 import awsExports from '../aws-exports';
 import CustomInput from "../MaterialKitProReact/components/CustomInput/CustomInput";
+import Select from "@material-ui/core/Select";
+import MenuItem from "@material-ui/core/MenuItem";
+import InputLabel from "@material-ui/core/InputLabel";
+import FormControl from "@material-ui/core/FormControl";
 
 // images
 
@@ -44,7 +48,7 @@ export default function CreateEventPage(props) {
         document.body.scrollTop = 0;
     });
     const history = useHistory();
-    const [type, setType] = React.useState('');
+    const [type, setType] = React.useState(0);
     const [quantity, setQuantity] = React.useState('');
     const [name, setName] = React.useState('');
     const [description, setDescription] = React.useState('');
@@ -145,14 +149,67 @@ export default function CreateEventPage(props) {
                         inputProps={{onChange: (e)=> setDescription(e.target.value)}}
                     />
                     <h3 className={classes.title}>Type of Event: </h3>
-                    <CustomInput
-                        labelText="Type Of Event"
-                        id="eventType"
-                        formControlProps={{
-                            fullWidth: true
-                        }}
-                        inputProps={{onChange: (e)=> setCost(e.target.value)}}
-                    />
+                    <FormControl fullWidth className={classes.selectFormControl}>
+                        <Select
+                            MenuProps={{
+                                className: classes.selectMenu
+                            }}
+                            classes={{
+                                select: classes.select
+                            }}
+                            value={type}
+                            onChange={(e) => setType(e.target.value)}
+                            inputProps={{
+                                name: "simpleSelect",
+                                id: "simple-select"
+                            }}
+                        >
+                            <MenuItem
+                                disabled
+                                classes={{
+                                    root: classes.selectMenuItem
+                                }}
+                            >
+                                Type Of Event
+                            </MenuItem>
+                            <MenuItem
+                                classes={{
+                                    root: classes.selectMenuItem,
+                                    selected: classes.selectMenuItemSelected
+                                }}
+                                value="social event"
+                            >
+                                Social Events
+                            </MenuItem>
+                            <MenuItem
+                                classes={{
+                                    root: classes.selectMenuItem,
+                                    selected: classes.selectMenuItemSelected
+                                }}
+                                value="equipment services"
+                            >
+                                Equipment & Services
+                            </MenuItem>
+                            <MenuItem
+                                classes={{
+                                    root: classes.selectMenuItem,
+                                    selected: classes.selectMenuItemSelected
+                                }}
+                                value="in house service"
+                            >
+                                In House Services
+                            </MenuItem>
+                            <MenuItem
+                                classes={{
+                                    root: classes.selectMenuItem,
+                                    selected: classes.selectMenuItemSelected
+                                }}
+                                value="external service"
+                            >
+                                External Services
+                            </MenuItem>
+                        </Select>
+                    </FormControl>
                     <h3 className={classes.title}>Cost: </h3>
                     <CustomInput
                         labelText="Cost"
