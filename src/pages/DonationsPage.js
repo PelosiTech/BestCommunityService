@@ -29,7 +29,7 @@ import DialogActions from "@material-ui/core/DialogActions";
 import {Close} from "@material-ui/icons";
 import Transition from "react-transition-group/Transition";
 import style from "../MaterialKitProReact/assets/jss/material-kit-pro-react/modalStyle.js";
-import {createBooked, createService} from "../graphql/mutations";
+import {createBooked, createService, updateUser} from "../graphql/mutations";
 import {useSelector} from "react-redux";
 import awsExports from '../aws-exports';
 import CustomInput from "../MaterialKitProReact/components/CustomInput/CustomInput";
@@ -50,62 +50,26 @@ export default function DonationsPage(props) {
         document.body.scrollTop = 0;
     });
     const history = useHistory();
-    const [type, setType] = React.useState('');
-    const [quantity, setQuantity] = React.useState('');
     const [donationAmount, setDonationAmount] = React.useState('');
-    const [description, setDescription] = React.useState('');
-    const [date, setDate] = React.useState('');
-    const [cost, setCost] = React.useState('');
-    const [imageFile, setImageFile] = React.useState({});
-    const [showModal, setShowModal] = React.useState(false);
+    const [showModal, setShowModal] = React.useState(false)
     const classes = useStyles();
     const modalClasses = useModalStyles();
     const userId = useSelector((state) => state.auth.id);
-    const [file, setFile] = React.useState({});
 
     const handleCreateEvent = async () => {
-        setShowModal(false);
-        console.log(donationAmount, description, date, cost, type, quantity, imageFile)
-        try {
-            await API.graphql(graphqlOperation(createService,{
-                input: {
-                    userId,
-                    type,
-                    quantity,
-                    name: donationAmount,
-                    description,
-                    date,
-                    cost,
-                    file: imageFile
-                }
-            })).then(data => {
-                console.log(data)
-                history.push(`/confirmation/${info.data.createService.id}`)
-            })
-        } catch (err) {
-            console.log(err)
-        }
-    }
-
-    const fileChange = (e) => {
-        const image = e.target.files[0];
-        Storage.put(image.name, image, {
-            contentType: 'image/png'
-        }).then((result) => {
-            setFile({file: URL.createObjectURL(image)})
-            console.log(result)
-            const imageUpload = {
-                name: image.name,
-                file: {
-                    bucket: awsExports.aws_user_files_s3_bucket,
-                    region: awsExports.aws_user_files_s3_bucket_region,
-                    key: 'public/' + image.name
-                }
-            }
-            console.log(imageUpload)
-            setImageFile(imageUpload.file);
-            console.log('added complete')
-        }).catch(err => console.log(err))
+        // try {
+        //     await API.graphql(graphqlOperation(updateUser,{
+        //         input: {
+        //             userId,
+        //             donationAmount
+        //         }
+        //     })).then(data => {
+        //         console.log(data)
+        //         history.push(`/confirmation/${info.data.updateUser.id}`)
+        //     })
+        // } catch (err) {
+        //     console.log(err)
+        // }
     }
 
     const renderPage = () => {
@@ -125,11 +89,12 @@ export default function DonationsPage(props) {
                     </Card>
                 </GridItem>
                 <GridItem md={6} sm={6}>
+                    <div>Thank you so much for your donation! We really appreciate it!</div>
                     <h2 className={classes.title}>Enter in your donation amount: </h2>
                     <h3 className={classes.title}>Amount: </h3>
                     <CustomInput
-                        labelText="Name"
-                        id="name"
+                        labelText="Amount"
+                        id="amount"
                         formControlProps={{
                             fullWidth: true
                         }}
@@ -138,7 +103,7 @@ export default function DonationsPage(props) {
                     <GridContainer className={classes.pullRight}>
                         <div>
                             <Button color="info" onClick={() => setShowModal(true)}>
-                                Create Event
+                                Donate now
                             </Button>
                             <Dialog
                                 classes={{
@@ -167,23 +132,22 @@ export default function DonationsPage(props) {
                                         {" "}
                                         <Close className={modalClasses.modalClose} />
                                     </Button>
-                                    <h2 className={modalClasses.modalTitle}>Event Details</h2>
+                                    <h2 className={modalClasses.modalTitle}>We really appreciate it!</h2>
                                 </DialogTitle>
                                 <DialogContent
                                     id="classic-modal-slide-description"
                                     className={modalClasses.modalBody}
                                 >
                                     <div>
-                                        <h4 className={classes.title}>Event name: {donationAmount}</h4>
-                                        <h4 className={classes.mainPrice}>Event cost: ${cost}</h4>
-                                        <h4 className={classes.mainPrice}>Event Date: {date}</h4>
+                                        <h3>Thank you so much for your donation!</h3>
+                                        <h4 className={classes.title}>Donation Amount: ${donationAmount}</h4>
                                     </div>
                                 </DialogContent>
                                 <DialogActions className={modalClasses.modalFooter}>
                                     <Button onClick={() => setShowModal(false)} color="secondary">
-                                        Close
+                                        Cancel
                                     </Button>
-                                    <Button onClick={() => handleCreateEvent()} color="info">Create Event</Button>
+                                    <Button onClick={() => handleCreateEvent()} color="info">Donate!</Button>
                                 </DialogActions>
                             </Dialog>
                         </div>
