@@ -10,6 +10,7 @@ export const createUser = /* GraphQL */ `
       id
       name
       position
+      donationAmount
       services {
         items {
           id
@@ -51,6 +52,7 @@ export const updateUser = /* GraphQL */ `
       id
       name
       position
+      donationAmount
       services {
         items {
           id
@@ -92,6 +94,7 @@ export const deleteUser = /* GraphQL */ `
       id
       name
       position
+      donationAmount
       services {
         items {
           id
@@ -143,6 +146,7 @@ export const createService = /* GraphQL */ `
         id
         name
         position
+        donationAmount
         services {
           nextToken
         }
@@ -192,6 +196,7 @@ export const updateService = /* GraphQL */ `
         id
         name
         position
+        donationAmount
         services {
           nextToken
         }
@@ -241,6 +246,7 @@ export const deleteService = /* GraphQL */ `
         id
         name
         position
+        donationAmount
         services {
           nextToken
         }
@@ -283,6 +289,7 @@ export const createBooked = /* GraphQL */ `
         id
         name
         position
+        donationAmount
         services {
           nextToken
         }
@@ -307,6 +314,7 @@ export const createBooked = /* GraphQL */ `
           id
           name
           position
+          donationAmount
           createdAt
           updatedAt
         }
@@ -339,6 +347,7 @@ export const updateBooked = /* GraphQL */ `
         id
         name
         position
+        donationAmount
         services {
           nextToken
         }
@@ -363,6 +372,7 @@ export const updateBooked = /* GraphQL */ `
           id
           name
           position
+          donationAmount
           createdAt
           updatedAt
         }
@@ -395,6 +405,7 @@ export const deleteBooked = /* GraphQL */ `
         id
         name
         position
+        donationAmount
         services {
           nextToken
         }
@@ -419,6 +430,7 @@ export const deleteBooked = /* GraphQL */ `
           id
           name
           position
+          donationAmount
           createdAt
           updatedAt
         }

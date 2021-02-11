@@ -2,6 +2,7 @@ type User @model {
   id: ID!
   name: String!
   position: String!
+  donationAmount: Int
   services: [Service] @connection(keyName: "byUser", fields: ["id"])
   bookedServices: [Booked] @connection(keyName: "byUser", fields: ["id"])
 }

@@ -7,6 +7,7 @@ export const onCreateUser = /* GraphQL */ `
       id
       name
       position
+      donationAmount
       services {
         items {
           id
@@ -45,6 +46,7 @@ export const onUpdateUser = /* GraphQL */ `
       id
       name
       position
+      donationAmount
       services {
         items {
           id
@@ -83,6 +85,7 @@ export const onDeleteUser = /* GraphQL */ `
       id
       name
       position
+      donationAmount
       services {
         items {
           id
@@ -131,6 +134,7 @@ export const onCreateService = /* GraphQL */ `
         id
         name
         position
+        donationAmount
         services {
           nextToken
         }
@@ -177,6 +181,7 @@ export const onUpdateService = /* GraphQL */ `
         id
         name
         position
+        donationAmount
         services {
           nextToken
         }
@@ -223,6 +228,7 @@ export const onDeleteService = /* GraphQL */ `
         id
         name
         position
+        donationAmount
         services {
           nextToken
         }
@@ -262,6 +268,7 @@ export const onCreateBooked = /* GraphQL */ `
         id
         name
         position
+        donationAmount
         services {
           nextToken
         }
@@ -286,6 +293,7 @@ export const onCreateBooked = /* GraphQL */ `
           id
           name
           position
+          donationAmount
           createdAt
           updatedAt
         }
@@ -315,6 +323,7 @@ export const onUpdateBooked = /* GraphQL */ `
         id
         name
         position
+        donationAmount
         services {
           nextToken
         }
@@ -339,6 +348,7 @@ export const onUpdateBooked = /* GraphQL */ `
           id
           name
           position
+          donationAmount
           createdAt
           updatedAt
         }
@@ -368,6 +378,7 @@ export const onDeleteBooked = /* GraphQL */ `
         id
         name
         position
+        donationAmount
         services {
           nextToken
         }
@@ -392,6 +403,7 @@ export const onDeleteBooked = /* GraphQL */ `
           id
           name
           position
+          donationAmount
           createdAt
           updatedAt
         }
