@@ -7,6 +7,7 @@ export const getUser = /* GraphQL */ `
       id
       name
       position
+      donationAmount
       services {
         items {
           id
@@ -50,6 +51,7 @@ export const listUsers = /* GraphQL */ `
         id
         name
         position
+        donationAmount
         services {
           nextToken
         }
@@ -79,6 +81,7 @@ export const getService = /* GraphQL */ `
         id
         name
         position
+        donationAmount
         services {
           nextToken
         }
@@ -133,6 +136,7 @@ export const listServices = /* GraphQL */ `
           id
           name
           position
+          donationAmount
           createdAt
           updatedAt
         }
@@ -160,6 +164,7 @@ export const getBooked = /* GraphQL */ `
         id
         name
         position
+        donationAmount
         services {
           nextToken
         }
@@ -184,6 +189,7 @@ export const getBooked = /* GraphQL */ `
           id
           name
           position
+          donationAmount
           createdAt
           updatedAt
         }
@@ -218,6 +224,7 @@ export const listBookeds = /* GraphQL */ `
           id
           name
           position
+          donationAmount
           createdAt
           updatedAt
         }

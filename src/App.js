@@ -17,6 +17,7 @@ import ServicePage from "./pages/ServicePage";
 import ConfirmationPage from "./pages/ConfirmationPage";
 import CreateEventPage from "./pages/CreateEventPage";
 import ServiceConfirmationPage from "./pages/ServiceConfirmationPage";
+import DonationsPage from "./pages/DonationsPage";
 
 function App() {
 
@@ -29,6 +30,7 @@ function App() {
                 <Route path="/service/:id" exact component={ServicePage}/>
                 <Route path="/service-confirmation/:id" exact component={ServiceConfirmationPage}/>
                 <Route path="/confirmation/:id" exact component={ConfirmationPage}/>
+                <Route path="/donations" exact component={DonationsPage}/>
                 <Route path="/create-event" exact component={CreateEventPage} />
                 <Route path="/login" exact component={LoginPage}/>
                 <Route path="/logout" exact component={LogoutPage}/>
