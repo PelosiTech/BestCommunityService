@@ -58,7 +58,7 @@ export default function LoginPage() {
             }))
             const graphQLUser = info.data.getUser;
             console.log(graphQLUser);
-            dispatch(login(graphQLUser.id, graphQLUser.email, graphQLUser.name, graphQLUser.position, graphQLUser.services));
+            dispatch(login(graphQLUser.id, graphQLUser.email, graphQLUser.name, graphQLUser.position, graphQLUser.services, graphQLUser.donationAmount));
         }).then(() => {
             history.push('/')
         }).catch(err => console.log(err))
