@@ -40,6 +40,7 @@ import FormControl from "@material-ui/core/FormControl";
 import moment from "moment";
 import {login} from "../Redux/actions/authActions";
 import {listUsersDonations} from "../queries/CustomQueries";
+import CardBody from "../MaterialKitProReact/components/Card/CardBody";
 
 // images
 
@@ -90,8 +91,7 @@ export default function DonationsPage(props) {
         try {
             const getUsersDonations = async () => {
                 await API.graphql(graphqlOperation(listUsersDonations)).then(data => {
-                    console.log(data.data.listUsers)
-
+                    setDonatedUsers(data.data.listUsers);
                 })
             }
             getUsersDonations();
@@ -99,6 +99,16 @@ export default function DonationsPage(props) {
             console.log(err)
         }
     }, [])
+
+    const renderDonaters = () => {
+        if (donatedUsers.length > 0 || donatedUsers.items !== undefined) {
+            return donatedUsers.items.map((user) => {
+                return <div key={user.id}>
+                    {user.donationAmount !== null ? <> <h4 style={{fontWeight: 'bold'}}>User: {user.name} Donation Amount: ${user.donationAmount}</h4> </> : null}
+                </div>
+            })
+        }
+    }
 
     const renderPage = () => {
 
@@ -114,6 +124,9 @@ export default function DonationsPage(props) {
                                 style={{backgroundImage: `url(https://nathanallotey.com/wp-content/uploads/2018/01/ecommerce-donation-na.jpg)`, opacity: 1}}
                             />
                         </CardHeader>
+                        <CardBody plain>
+                            {renderDonaters()}
+                        </CardBody>
                     </Card>
                 </GridItem>
                 { showThankYou
