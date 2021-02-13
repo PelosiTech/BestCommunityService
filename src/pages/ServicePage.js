@@ -5,7 +5,7 @@ import classNames from "classnames";
 // react component used to create nice image meadia player
 import ImageGallery from "react-image-gallery";
 // @material-ui/core ../MaterialKitProReact/components
-import { makeStyles } from "@material-ui/core/styles";
+import {makeStyles} from "@material-ui/core/styles";
 // core ../MaterialKitProReact/components
 import Header from "../MaterialKitProReact/components/Header/Header.js";
 import HeaderLinks from "../MaterialKitProReact/components/Header/HeaderLinks.js";
@@ -28,7 +28,7 @@ import DialogActions from "@material-ui/core/DialogActions";
 import {Close} from "@material-ui/icons";
 import Transition from "react-transition-group/Transition";
 import style from "../MaterialKitProReact/assets/jss/material-kit-pro-react/modalStyle.js";
-import {createBooked, deleteService} from "../graphql/mutations";
+import {createBooked, deleteService, updateService} from "../graphql/mutations";
 import {useSelector} from "react-redux";
 
 // images
@@ -46,6 +46,7 @@ export default function ServicePage(props) {
     const [bookedUsers, setBookedUsers] = React.useState([]);
     const [showModal, setShowModal] = React.useState(false);
     const [showDeleteModal, setShowDeleteModal] = React.useState(false);
+    const [showEditModal, setShowEditModal] = React.useState(false);
     const [imageUrl, setImageUrl] = React.useState("");
     const classes = useStyles();
     const modalClasses = useModalStyles();
@@ -53,7 +54,7 @@ export default function ServicePage(props) {
     const userId = useSelector((state) => state.auth.id);
 
     const getSocialEvents = async () => {
-        const data = await API.graphql(graphqlOperation(getService,{
+        const data = await API.graphql(graphqlOperation(getService, {
             id: id,
         }));
         setData(data.data.getService)
@@ -67,7 +68,7 @@ export default function ServicePage(props) {
     }, [])
 
     const renderBookedUsersList = () => {
-        if(bookedUsers.length > 0) {
+        if (bookedUsers.length > 0) {
             return bookedUsers.map((user) => {
                 return <div key={user.id}>{user.bookedUser.name}</div>
             })
@@ -76,7 +77,7 @@ export default function ServicePage(props) {
 
     const handleBookNow = async () => {
         setShowModal(false);
-        const info = await API.graphql(graphqlOperation(createBooked,{
+        const info = await API.graphql(graphqlOperation(createBooked, {
             input: {
                 userId: userId,
                 serviceId: id,
@@ -86,10 +87,10 @@ export default function ServicePage(props) {
         history.push(`/confirmation/${info.data.createBooked.id}`)
     }
 
-    const deleteEventService =  async () => {
+    const deleteEventService = async () => {
         setShowDeleteModal(false);
         try {
-            const info = await API.graphql(graphqlOperation(deleteService,{
+            const info = await API.graphql(graphqlOperation(deleteService, {
                 input: {
                     id
                 }
@@ -101,8 +102,131 @@ export default function ServicePage(props) {
         history.push(`/`)
     }
 
+    const editEventService = async () => {
+        setShowEditModal(false);
+        // try {
+        //     const info = await API.graphql(graphqlOperation(updateService, {
+        //         input: {
+        //             id
+        //         }
+        //     }))
+        //     console.log(info)
+        // } catch (err) {
+        //     console.log(err)
+        // }
+        history.push(`/`)
+    }
+
+    const renderDeleteButtonAndModal = () => {
+        return (
+            <>
+                <Button color="danger" onClick={() => setShowDeleteModal(true)}>
+                    DELETE SERVICE/EVENT
+                </Button>
+                <Dialog
+                    classes={{
+                        root: modalClasses.modalRoot,
+                        paper: modalClasses.modal
+                    }}
+                    open={showDeleteModal}
+                    TransitionComponent={Transition}
+                    keepMounted
+                    onClose={() => setShowDeleteModal(false)}
+                    aria-labelledby="classic-modal-slide-title"
+                    aria-describedby="classic-modal-slide-description"
+                >
+                    <DialogTitle
+                        id="delete-modal-slide-title"
+                        disableTypography
+                        className={modalClasses.modalHeader}
+                    >
+                        <Button
+                            simple
+                            className={modalClasses.modalCloseButton}
+                            key="close"
+                            aria-label="Close"
+                            onClick={() => setShowDeleteModal(false)}
+                        >
+                            {" "}
+                            <Close className={modalClasses.modalClose}/>
+                        </Button>
+                        <h2 className={modalClasses.modalTitle}>Delete Service/Event</h2>
+                    </DialogTitle>
+                    <DialogContent
+                        id="delete-modal-slide-description"
+                        className={modalClasses.modalBody}
+                    >
+                        <div>
+                            <h4 className={classes.title}>Event name: {data.name}</h4>
+                        </div>
+                    </DialogContent>
+                    <DialogActions className={modalClasses.modalFooter}>
+                        <Button onClick={() => setShowDeleteModal(false)} color="secondary">
+                            Close
+                        </Button>
+                        <Button onClick={() => deleteEventService()} color="danger">Delete NOW</Button>
+                    </DialogActions>
+                </Dialog>
+            </>
+        )
+    }
+
+    const renderEditButtonAndModal = () => {
+        return (
+            <>
+                <Button color="facebook" onClick={() => setShowEditModal(true)}>
+                    EDIT SERVICE/EVENT
+                </Button>
+                <Dialog
+                    classes={{
+                        root: modalClasses.modalRoot,
+                        paper: modalClasses.modal
+                    }}
+                    open={showEditModal}
+                    TransitionComponent={Transition}
+                    keepMounted
+                    onClose={() => setShowEditModal(false)}
+                    aria-labelledby="classic-modal-slide-title"
+                    aria-describedby="classic-modal-slide-description"
+                >
+                    <DialogTitle
+                        id="edit-modal-slide-title"
+                        disableTypography
+                        className={modalClasses.modalHeader}
+                    >
+                        <Button
+                            simple
+                            className={modalClasses.modalCloseButton}
+                            key="close"
+                            aria-label="Close"
+                            onClick={() => setShowEditModal(false)}
+                        >
+                            {" "}
+                            <Close className={modalClasses.modalClose}/>
+                        </Button>
+                        <h2 className={modalClasses.modalTitle}>Edit Service/Event</h2>
+                    </DialogTitle>
+                    <DialogContent
+                        id="edit-modal-slide-description"
+                        className={modalClasses.modalBody}
+                    >
+                        <div>
+                            <h4 className={classes.title}>Event name: {data.name}</h4>
+                        </div>
+                    </DialogContent>
+                    <DialogActions className={modalClasses.modalFooter}>
+                        <Button onClick={() => setShowEditModal(false)} color="secondary">
+                            Close
+                        </Button>
+                        <Button onClick={() => editEventService()} color="facebook">Edit NOW</Button>
+                    </DialogActions>
+                </Dialog>
+            </>
+        )
+    }
+
     const renderPage = () => {
-        if(data.name === undefined) {
+        if (data.name === undefined) {
             return null;
         }
 
@@ -163,56 +287,11 @@ export default function ServicePage(props) {
                             <Button color="info" onClick={() => setShowModal(true)}>
                                 Book Now
                             </Button>
-                            { data.userId === userId
+                            {data.userId === userId
                                 ?
                                 <>
-                                    <Button color="danger" onClick={() => setShowDeleteModal(true)}>
-                                        DELETE SERVICE/EVENT
-                                    </Button>
-                                    <Dialog
-                                        classes={{
-                                            root: modalClasses.modalRoot,
-                                            paper: modalClasses.modal
-                                        }}
-                                        open={showDeleteModal}
-                                        TransitionComponent={Transition}
-                                        keepMounted
-                                        onClose={() => setShowModal(false)}
-                                        aria-labelledby="classic-modal-slide-title"
-                                        aria-describedby="classic-modal-slide-description"
-                                    >
-                                        <DialogTitle
-                                            id="delete-modal-slide-title"
-                                            disableTypography
-                                            className={modalClasses.modalHeader}
-                                        >
-                                            <Button
-                                                simple
-                                                className={modalClasses.modalCloseButton}
-                                                key="close"
-                                                aria-label="Close"
-                                                onClick={() => setShowDeleteModal(false)}
-                                            >
-                                                {" "}
-                                                <Close className={modalClasses.modalClose} />
-                                            </Button>
-                                            <h2 className={modalClasses.modalTitle}>Delete Service/Event</h2>
-                                        </DialogTitle>
-                                        <DialogContent
-                                            id="delete-modal-slide-description"
-                                            className={modalClasses.modalBody}
-                                        >
-                                            <div>
-                                                <h4 className={classes.title}>Event name: {data.name}</h4>
-                                            </div>
-                                        </DialogContent>
-                                        <DialogActions className={modalClasses.modalFooter}>
-                                            <Button onClick={() => setShowDeleteModal(false)} color="secondary">
-                                                Close
-                                            </Button>
-                                            <Button onClick={() => deleteEventService()} color="danger">Delete NOW</Button>
-                                        </DialogActions>
-                                    </Dialog>
+                                    {renderEditButtonAndModal()}
+                                    {renderDeleteButtonAndModal()}
                                 </>
                                 : null}
                             <Dialog
@@ -240,7 +319,7 @@ export default function ServicePage(props) {
                                         onClick={() => setShowModal(false)}
                                     >
                                         {" "}
-                                        <Close className={modalClasses.modalClose} />
+                                        <Close className={modalClasses.modalClose}/>
                                     </Button>
                                     <h2 className={modalClasses.modalTitle}>Event Details</h2>
                                 </DialogTitle>
@@ -261,7 +340,6 @@ export default function ServicePage(props) {
                                     <Button onClick={() => handleBookNow()} color="info">Book NOW</Button>
                                 </DialogActions>
                             </Dialog>
-
                         </div>
                     </GridContainer>
                 </GridItem>
@@ -274,7 +352,7 @@ export default function ServicePage(props) {
         <div className={classes.productPage}>
             <Header
                 brand="Best Community Service"
-                links={<HeaderLinks dropdownHoverColor="info" />}
+                links={<HeaderLinks dropdownHoverColor="info"/>}
                 fixed
                 color="transparent"
                 changeColorOnScroll={{
