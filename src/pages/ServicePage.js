@@ -147,6 +147,12 @@ export default function ServicePage(props) {
                             <Button color="info" onClick={() => setShowModal(true)}>
                                 Book Now
                             </Button>
+                            { data.userId === userId
+                                ?
+                                <Button color="danger" onClick={() => setShowModal(true)}>
+                                    DELETE SERVICE/EVENT
+                                </Button>
+                                : null}
                             <Dialog
                                 classes={{
                                     root: modalClasses.modalRoot,
