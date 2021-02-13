@@ -45,6 +45,7 @@ export default function ServicePage(props) {
     const [data, setData] = React.useState({});
     const [bookedUsers, setBookedUsers] = React.useState([]);
     const [showModal, setShowModal] = React.useState(false);
+    const [showDeleteModal, setShowDeleteModal] = React.useState(false);
     const [imageUrl, setImageUrl] = React.useState("");
     const classes = useStyles();
     const modalClasses = useModalStyles();
@@ -149,9 +150,55 @@ export default function ServicePage(props) {
                             </Button>
                             { data.userId === userId
                                 ?
-                                <Button color="danger" onClick={() => setShowModal(true)}>
-                                    DELETE SERVICE/EVENT
-                                </Button>
+                                <>
+                                    <Button color="danger" onClick={() => setShowDeleteModal(true)}>
+                                        DELETE SERVICE/EVENT
+                                    </Button>
+                                    <Dialog
+                                        classes={{
+                                            root: modalClasses.modalRoot,
+                                            paper: modalClasses.modal
+                                        }}
+                                        open={showDeleteModal}
+                                        TransitionComponent={Transition}
+                                        keepMounted
+                                        onClose={() => setShowModal(false)}
+                                        aria-labelledby="classic-modal-slide-title"
+                                        aria-describedby="classic-modal-slide-description"
+                                    >
+                                        <DialogTitle
+                                            id="delete-modal-slide-title"
+                                            disableTypography
+                                            className={modalClasses.modalHeader}
+                                        >
+                                            <Button
+                                                simple
+                                                className={modalClasses.modalCloseButton}
+                                                key="close"
+                                                aria-label="Close"
+                                                onClick={() => setShowDeleteModal(false)}
+                                            >
+                                                {" "}
+                                                <Close className={modalClasses.modalClose} />
+                                            </Button>
+                                            <h2 className={modalClasses.modalTitle}>Delete Service/Event</h2>
+                                        </DialogTitle>
+                                        <DialogContent
+                                            id="delete-modal-slide-description"
+                                            className={modalClasses.modalBody}
+                                        >
+                                            <div>
+                                                <h4 className={classes.title}>Event name: {data.name}</h4>
+                                            </div>
+                                        </DialogContent>
+                                        <DialogActions className={modalClasses.modalFooter}>
+                                            <Button onClick={() => setShowDeleteModal(false)} color="secondary">
+                                                Close
+                                            </Button>
+                                            <Button onClick={() => console.log('delete event')} color="danger">Delete NOW</Button>
+                                        </DialogActions>
+                                    </Dialog>
+                                </>
                                 : null}
                             <Dialog
                                 classes={{
@@ -199,6 +246,7 @@ export default function ServicePage(props) {
                                     <Button onClick={() => handleBookNow()} color="info">Book NOW</Button>
                                 </DialogActions>
                             </Dialog>
+
                         </div>
                     </GridContainer>
                 </GridItem>
