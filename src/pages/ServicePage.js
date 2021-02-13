@@ -123,29 +123,31 @@ export default function ServicePage(props) {
 
     const editEventService = async () => {
         setShowEditModal(false);
-        console.log(name)
-        console.log(type)
-        console.log(quantity)
-        console.log(description)
-        console.log(date)
-        console.log(cost)
-        // try {
-        //     const info = await API.graphql(graphqlOperation(updateService, {
-        //         input: {
-        //             id,
-        //             type,
-        //             quantity,
-        //             name,
-        //             description,
-        //             date,
-        //             cost,
-        //         }
-        //     }))
-        //     console.log(info)
-        // } catch (err) {
-        //     console.log(err)
-        // }
-        history.push(`/`)
+        try {
+            const data = await API.graphql(graphqlOperation(updateService, {
+                input: {
+                    id,
+                    type,
+                    quantity,
+                    name,
+                    description,
+                    date,
+                    cost,
+                }
+            }))
+            console.log(data)
+            setData(data.data.updateService)
+            console.log(data.data.updateService)
+            setName(data.data.updateService.name)
+            setType(data.data.updateService.type)
+            setDescription(data.data.updateService.description)
+            setDate(data.data.updateService.date)
+            setCost(data.data.updateService.cost)
+            setQuantity(data.data.updateService.quantity)
+            setBookedUsers(data.data.updateService.bookedUsers.items)
+        } catch (err) {
+            console.log(err)
+        }
     }
 
     const renderDeleteButtonAndModal = () => {
@@ -327,8 +329,9 @@ export default function ServicePage(props) {
                             <FormControl fullWidth>
                                 <Datetime
                                     timeFormat={false}
-                                    inputProps={{ placeholder: "Date of Event", onChange:(e) => e.target.value, value: `${data.date}`}}
+                                    inputProps={{ placeholder: "Date of Event"}}
                                     onChange={(e)=> setDate(moment(e).format('MM-DD-YYYY'))}
+                                    value={date}
                                 />
                             </FormControl>
                             <h3 className={classes.title}>Cost: </h3>
