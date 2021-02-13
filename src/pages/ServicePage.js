@@ -28,7 +28,7 @@ import DialogActions from "@material-ui/core/DialogActions";
 import {Close} from "@material-ui/icons";
 import Transition from "react-transition-group/Transition";
 import style from "../MaterialKitProReact/assets/jss/material-kit-pro-react/modalStyle.js";
-import {createBooked} from "../graphql/mutations";
+import {createBooked, deleteService} from "../graphql/mutations";
 import {useSelector} from "react-redux";
 
 // images
@@ -84,6 +84,21 @@ export default function ServicePage(props) {
             }
         }))
         history.push(`/confirmation/${info.data.createBooked.id}`)
+    }
+
+    const deleteEventService =  async () => {
+        setShowDeleteModal(false);
+        try {
+            const info = await API.graphql(graphqlOperation(deleteService,{
+                input: {
+                    id
+                }
+            }))
+            console.log(info)
+        } catch (err) {
+            console.log(err)
+        }
+        history.push(`/`)
     }
 
     const renderPage = () => {
@@ -195,7 +210,7 @@ export default function ServicePage(props) {
                                             <Button onClick={() => setShowDeleteModal(false)} color="secondary">
                                                 Close
                                             </Button>
-                                            <Button onClick={() => console.log('delete event')} color="danger">Delete NOW</Button>
+                                            <Button onClick={() => deleteEventService()} color="danger">Delete NOW</Button>
                                         </DialogActions>
                                     </Dialog>
                                 </>
