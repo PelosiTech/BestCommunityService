@@ -30,6 +30,12 @@ import Transition from "react-transition-group/Transition";
 import style from "../MaterialKitProReact/assets/jss/material-kit-pro-react/modalStyle.js";
 import {createBooked, deleteService, updateService} from "../graphql/mutations";
 import {useSelector} from "react-redux";
+import CustomInput from "../MaterialKitProReact/components/CustomInput/CustomInput";
+import FormControl from "@material-ui/core/FormControl";
+import Select from "@material-ui/core/Select";
+import MenuItem from "@material-ui/core/MenuItem";
+import Datetime from "react-datetime";
+import moment from "moment";
 
 // images
 
@@ -52,12 +58,25 @@ export default function ServicePage(props) {
     const modalClasses = useModalStyles();
     const id = props.location.pathname.slice(9);
     const userId = useSelector((state) => state.auth.id);
+    const [type, setType] = React.useState('');
+    const [quantity, setQuantity] = React.useState('');
+    const [name, setName] = React.useState(``);
+    const [description, setDescription] = React.useState('');
+    const [date, setDate] = React.useState('');
+    const [cost, setCost] = React.useState('');
 
     const getSocialEvents = async () => {
         const data = await API.graphql(graphqlOperation(getService, {
             id: id,
         }));
         setData(data.data.getService)
+        console.log(data.data.getService)
+        setName(data.data.getService.name)
+        setType(data.data.getService.type)
+        setDescription(data.data.getService.description)
+        setDate(data.data.getService.date)
+        setCost(data.data.getService.cost)
+        setQuantity(data.data.getService.quantity)
         setBookedUsers(data.data.getService.bookedUsers.items)
         const keyUrl = data.data.getService.file.key.replaceAll(" ", "+");
         setImageUrl("https://" + data.data.getService.file.bucket + ".s3-" + data.data.getService.file.region + ".amazonaws.com/" + keyUrl)
@@ -104,10 +123,22 @@ export default function ServicePage(props) {
 
     const editEventService = async () => {
         setShowEditModal(false);
+        console.log(name)
+        console.log(type)
+        console.log(quantity)
+        console.log(description)
+        console.log(date)
+        console.log(cost)
         // try {
         //     const info = await API.graphql(graphqlOperation(updateService, {
         //         input: {
-        //             id
+        //             id,
+        //             type,
+        //             quantity,
+        //             name,
+        //             description,
+        //             date,
+        //             cost,
         //         }
         //     }))
         //     console.log(info)
@@ -211,7 +242,113 @@ export default function ServicePage(props) {
                         className={modalClasses.modalBody}
                     >
                         <div>
-                            <h4 className={classes.title}>Event name: {data.name}</h4>
+                            <h2 className={classes.title}>Enter in event/service information: </h2>
+                            <h3 className={classes.title}>Name: </h3>
+                            <CustomInput
+                                labelText="Name"
+                                id="name"
+                                formControlProps={{
+                                    fullWidth: true
+                                }}
+                                inputProps={{onChange: (e)=> setName(e.target.value), defaultValue: `${data.name}`}}
+                            />
+                            <h3 className={classes.title}>Description: </h3>
+                            <CustomInput
+                                labelText="Description"
+                                id="description"
+                                formControlProps={{
+                                    fullWidth: true
+                                }}
+                                inputProps={{onChange: (e)=> setDescription(e.target.value), defaultValue: `${data.description}`}}
+                            />
+                            <h3 className={classes.title}>Type of Event: </h3>
+                            <FormControl fullWidth className={classes.selectFormControl}>
+                                <Select
+                                    MenuProps={{
+                                        className: classes.selectMenu
+                                    }}
+                                    classes={{
+                                        select: classes.select
+                                    }}
+                                    value={type}
+                                    onChange={(e) => setType(e.target.value)}
+                                    inputProps={{
+                                        name: "simpleSelect",
+                                        id: "simple-select",
+                                    }}
+                                >
+                                    <MenuItem
+                                        disabled
+                                        classes={{
+                                            root: classes.selectMenuItem
+                                        }}
+                                    >
+                                        Type Of Event
+                                    </MenuItem>
+                                    <MenuItem
+                                        classes={{
+                                            root: classes.selectMenuItem,
+                                            selected: classes.selectMenuItemSelected
+                                        }}
+                                        value="social event"
+                                    >
+                                        Social Events
+                                    </MenuItem>
+                                    <MenuItem
+                                        classes={{
+                                            root: classes.selectMenuItem,
+                                            selected: classes.selectMenuItemSelected
+                                        }}
+                                        value="equipment services"
+                                    >
+                                        Equipment & Services
+                                    </MenuItem>
+                                    <MenuItem
+                                        classes={{
+                                            root: classes.selectMenuItem,
+                                            selected: classes.selectMenuItemSelected
+                                        }}
+                                        value="in house service"
+                                    >
+                                        In House Services
+                                    </MenuItem>
+                                    <MenuItem
+                                        classes={{
+                                            root: classes.selectMenuItem,
+                                            selected: classes.selectMenuItemSelected
+                                        }}
+                                        value="external service"
+                                    >
+                                        External Services
+                                    </MenuItem>
+                                </Select>
+                            </FormControl>
+                            <h3 className={classes.title}>Date of Event: </h3>
+                            <FormControl fullWidth>
+                                <Datetime
+                                    timeFormat={false}
+                                    inputProps={{ placeholder: "Date of Event", onChange:(e) => e.target.value, value: `${data.date}`}}
+                                    onChange={(e)=> setDate(moment(e).format('MM-DD-YYYY'))}
+                                />
+                            </FormControl>
+                            <h3 className={classes.title}>Cost: </h3>
+                            <CustomInput
+                                labelText="Cost"
+                                id="cost"
+                                formControlProps={{
+                                    fullWidth: true
+                                }}
+                                inputProps={{onChange: (e)=> setCost(e.target.value), defaultValue: `${data.cost}`}}
+                            />
+                            <h3 className={classes.title}>Quantity of People allowed to rent/book: </h3>
+                            <CustomInput
+                                labelText="Quantity"
+                                id="quantity"
+                                formControlProps={{
+                                    fullWidth: true
+                                }}
+                                inputProps={{onChange: (e)=> setQuantity(e.target.value), defaultValue: `${data.quantity}`}}
+                            />
                         </div>
                     </DialogContent>
                     <DialogActions className={modalClasses.modalFooter}>
