@@ -263,7 +263,7 @@ export default function ServicePage(props) {
                                 formControlProps={{
                                     fullWidth: true
                                 }}
-                                inputProps={{onChange: (e)=> setName(e.target.value), defaultValue: `${data.name}`}}
+                                inputProps={{onChange: (e) => setName(e.target.value), defaultValue: `${data.name}`}}
                             />
                             <h3 className={classes.title}>Description: </h3>
                             <CustomInput
@@ -272,7 +272,10 @@ export default function ServicePage(props) {
                                 formControlProps={{
                                     fullWidth: true
                                 }}
-                                inputProps={{onChange: (e)=> setDescription(e.target.value), defaultValue: `${data.description}`}}
+                                inputProps={{
+                                    onChange: (e) => setDescription(e.target.value),
+                                    defaultValue: `${data.description}`
+                                }}
                             />
                             <h3 className={classes.title}>Type of Event: </h3>
                             <FormControl fullWidth className={classes.selectFormControl}>
@@ -340,8 +343,8 @@ export default function ServicePage(props) {
                             <FormControl fullWidth>
                                 <Datetime
                                     timeFormat={false}
-                                    inputProps={{ placeholder: "Date of Event"}}
-                                    onChange={(e)=> setDate(moment(e).format('MM-DD-YYYY'))}
+                                    inputProps={{placeholder: "Date of Event"}}
+                                    onChange={(e) => setDate(moment(e).format('MM-DD-YYYY'))}
                                     value={date}
                                 />
                             </FormControl>
@@ -352,7 +355,7 @@ export default function ServicePage(props) {
                                 formControlProps={{
                                     fullWidth: true
                                 }}
-                                inputProps={{onChange: (e)=> setCost(e.target.value), defaultValue: `${data.cost}`}}
+                                inputProps={{onChange: (e) => setCost(e.target.value), defaultValue: `${data.cost}`}}
                             />
                             <h3 className={classes.title}>Quantity of People allowed to rent/book: </h3>
                             <CustomInput
@@ -361,7 +364,10 @@ export default function ServicePage(props) {
                                 formControlProps={{
                                     fullWidth: true
                                 }}
-                                inputProps={{onChange: (e)=> setQuantity(e.target.value), defaultValue: `${data.quantity}`}}
+                                inputProps={{
+                                    onChange: (e) => setQuantity(e.target.value),
+                                    defaultValue: `${data.quantity}`
+                                }}
                             />
                         </div>
                     </DialogContent>
@@ -370,6 +376,72 @@ export default function ServicePage(props) {
                             Close
                         </Button>
                         <Button onClick={() => editEventService()} color="facebook">Edit NOW</Button>
+                    </DialogActions>
+                </Dialog>
+            </>
+        )
+    }
+
+    const renderBookNowModal = () => {
+        if (userId === "" || userId === undefined || userId === null) {
+            return (
+                <div>
+                You must be logged in to book an event.
+                    <Button color="disabled">
+                        Book Now
+                    </Button>
+                </div>
+            )
+        }
+        return (
+            <>
+                <Button color="info" onClick={() => setShowModal(true)}>
+                    Book Now
+                </Button>
+                <Dialog
+                    classes={{
+                        root: modalClasses.modalRoot,
+                        paper: modalClasses.modal
+                    }}
+                    open={showModal}
+                    TransitionComponent={Transition}
+                    keepMounted
+                    onClose={() => setShowModal(false)}
+                    aria-labelledby="classic-modal-slide-title"
+                    aria-describedby="classic-modal-slide-description"
+                >
+                    <DialogTitle
+                        id="classic-modal-slide-title"
+                        disableTypography
+                        className={modalClasses.modalHeader}
+                    >
+                        <Button
+                            simple
+                            className={modalClasses.modalCloseButton}
+                            key="close"
+                            aria-label="Close"
+                            onClick={() => setShowModal(false)}
+                        >
+                            {" "}
+                            <Close className={modalClasses.modalClose}/>
+                        </Button>
+                        <h2 className={modalClasses.modalTitle}>Event Details</h2>
+                    </DialogTitle>
+                    <DialogContent
+                        id="classic-modal-slide-description"
+                        className={modalClasses.modalBody}
+                    >
+                        <div>
+                            <h4 className={classes.title}>Event name: {data.name}</h4>
+                            <h4 className={classes.mainPrice}>Event cost: ${data.cost}</h4>
+                            <h4 className={classes.mainPrice}>Event Date: {data.date}</h4>
+                        </div>
+                    </DialogContent>
+                    <DialogActions className={modalClasses.modalFooter}>
+                        <Button onClick={() => setShowModal(false)} color="secondary">
+                            Close
+                        </Button>
+                        <Button onClick={() => handleBookNow()} color="info">Book NOW</Button>
                     </DialogActions>
                 </Dialog>
             </>
@@ -436,9 +508,7 @@ export default function ServicePage(props) {
                     />
                     <GridContainer className={classes.pullRight}>
                         <div>
-                            <Button color="info" onClick={() => setShowModal(true)}>
-                                Book Now
-                            </Button>
+                            {renderBookNowModal()}
                             {data.userId === userId
                                 ?
                                 <>
@@ -446,52 +516,6 @@ export default function ServicePage(props) {
                                     {renderDeleteButtonAndModal()}
                                 </>
                                 : null}
-                            <Dialog
-                                classes={{
-                                    root: modalClasses.modalRoot,
-                                    paper: modalClasses.modal
-                                }}
-                                open={showModal}
-                                TransitionComponent={Transition}
-                                keepMounted
-                                onClose={() => setShowModal(false)}
-                                aria-labelledby="classic-modal-slide-title"
-                                aria-describedby="classic-modal-slide-description"
-                            >
-                                <DialogTitle
-                                    id="classic-modal-slide-title"
-                                    disableTypography
-                                    className={modalClasses.modalHeader}
-                                >
-                                    <Button
-                                        simple
-                                        className={modalClasses.modalCloseButton}
-                                        key="close"
-                                        aria-label="Close"
-                                        onClick={() => setShowModal(false)}
-                                    >
-                                        {" "}
-                                        <Close className={modalClasses.modalClose}/>
-                                    </Button>
-                                    <h2 className={modalClasses.modalTitle}>Event Details</h2>
-                                </DialogTitle>
-                                <DialogContent
-                                    id="classic-modal-slide-description"
-                                    className={modalClasses.modalBody}
-                                >
-                                    <div>
-                                        <h4 className={classes.title}>Event name: {data.name}</h4>
-                                        <h4 className={classes.mainPrice}>Event cost: ${data.cost}</h4>
-                                        <h4 className={classes.mainPrice}>Event Date: {data.date}</h4>
-                                    </div>
-                                </DialogContent>
-                                <DialogActions className={modalClasses.modalFooter}>
-                                    <Button onClick={() => setShowModal(false)} color="secondary">
-                                        Close
-                                    </Button>
-                                    <Button onClick={() => handleBookNow()} color="info">Book NOW</Button>
-                                </DialogActions>
-                            </Dialog>
                         </div>
                     </GridContainer>
                 </GridItem>
