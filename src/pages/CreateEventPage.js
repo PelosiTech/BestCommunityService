@@ -165,7 +165,27 @@ export default function CreateEventPage(props) {
     }
 
     const renderPage = () => {
-
+        if(userId === "" || userId === undefined || userId === null) {
+            return (
+                <GridContainer>
+                    <GridItem md={6} sm={6}>
+                        <Card product plain>
+                            <CardHeader image plain>
+                                <h2 className={classes.title}>Create An Event or Service </h2>
+                                <img src={"https://www.acenet.edu/PublishingImages/Interior-Page-Heroes/2018ACE-1045.JPG?RenditionID=10"} alt="..."/>
+                                <div
+                                    className={classes.coloredShadow}
+                                    style={{backgroundImage: `url(https://www.acenet.edu/PublishingImages/Interior-Page-Heroes/2018ACE-1045.JPG?RenditionID=10)`, opacity: 1}}
+                                />
+                            </CardHeader>
+                        </Card>
+                    </GridItem>
+                    <GridItem md={6} sm={6}>
+                        <h2 className={classes.title}>Please login to create an event </h2>
+                    </GridItem>
+                </GridContainer>
+            )
+        }
         return (
             <GridContainer>
                 <GridItem md={6} sm={6}>
