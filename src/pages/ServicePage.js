@@ -97,8 +97,7 @@ export default function ServicePage(props) {
 
     const handleBookNow = async () => {
         setShowModal(false);
-        console.log(data)
-        if (data.quantity === 0) {
+        if (data.quantity === "0") {
             return
         }
         const info = await API.graphql(graphqlOperation(createBooked, {
@@ -381,13 +380,14 @@ export default function ServicePage(props) {
             </>
         )
     }
+    console.log(data.quantity)
 
     const renderBookNowModal = () => {
         if (userId === "" || userId === undefined || userId === null) {
             return (
                 <div>
                 You must be logged in to book an event.
-                    <Button color="disabled">
+                    <Button>
                         Book Now
                     </Button>
                 </div>
@@ -441,7 +441,7 @@ export default function ServicePage(props) {
                         <Button onClick={() => setShowModal(false)} color="secondary">
                             Close
                         </Button>
-                        <Button onClick={() => handleBookNow()} color="info">Book NOW</Button>
+                        {data.quantity === "0" ? <Button>Event Full</Button> : <Button onClick={() => handleBookNow()} color="info">Book NOW</Button> }
                     </DialogActions>
                 </Dialog>
             </>
@@ -486,7 +486,7 @@ export default function ServicePage(props) {
                                 content: (
                                     <>
                                         <div>Date: {data.date}</div>
-                                        {data.quantity === 0 ? <div>This event is complete full</div> : null}
+                                        {data.quantity === "0" ? <div>This event is complete full</div> : null}
                                         <div>Spots open: {data.quantity}</div>
                                         <div>Type: {data.type}</div>
                                     </>
