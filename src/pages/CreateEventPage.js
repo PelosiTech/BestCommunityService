@@ -62,6 +62,13 @@ export default function CreateEventPage(props) {
     const modalClasses = useModalStyles();
     const userId = useSelector((state) => state.auth.id);
     const [file, setFile] = React.useState({});
+    const [nameError, setNameError] = React.useState(false);
+    const [descriptionError, setDescriptionError] = React.useState(false);
+    const [typeError, setTypeError] = React.useState(false);
+    const [dateError, setDateError] = React.useState(false);
+    const [costError, setCostError] = React.useState(false);
+    const [quantityError, setQuantityError] = React.useState(false);
+    const [imageError, setImageError] = React.useState(false);
 
     const handleCreateEvent = async () => {
         setShowModal(false);
@@ -108,6 +115,47 @@ export default function CreateEventPage(props) {
         }).catch(err => console.log(err))
     }
 
+    const checkRequiredThenShowModal = () => {
+        if(name === "") {
+            setNameError(true);
+        } else {
+            setNameError(false);
+        }
+        if (description === "") {
+            setDescriptionError(true);
+        } else {
+            setDescriptionError(false);
+        }
+        if (type === "") {
+            setTypeError(true);
+        } else {
+            setTypeError(false);
+        }
+        if (cost === "") {
+            setCostError(true);
+        } else {
+            setCostError(false);
+        }
+        if(quantity === "") {
+            setQuantityError(true);
+        } else {
+            setQuantityError(false);
+        }
+        if (date === "") {
+            setDateError(true);
+        } else {
+            setDateError(false);
+        }
+        if (imageFile === {}) {
+            setImageError(true);
+        } else {
+            setImageError(false);
+        }
+        if (nameError && descriptionError && typeError && dateError && costError && quantityError && imageError) {
+            setShowModal(true)
+        }
+    }
+
     const renderPage = () => {
 
         return (
@@ -134,6 +182,7 @@ export default function CreateEventPage(props) {
                     <CustomInput
                         labelText="Name"
                         id="name"
+                        error={nameError}
                         formControlProps={{
                             fullWidth: true
                         }}
@@ -143,6 +192,7 @@ export default function CreateEventPage(props) {
                     <CustomInput
                         labelText="Description"
                         id="description"
+                        error={descriptionError}
                         formControlProps={{
                             fullWidth: true
                         }}
@@ -157,6 +207,7 @@ export default function CreateEventPage(props) {
                             classes={{
                                 select: classes.select
                             }}
+                            error={typeError}
                             value={type}
                             onChange={(e) => setType(e.target.value)}
                             inputProps={{
@@ -222,6 +273,7 @@ export default function CreateEventPage(props) {
                     <CustomInput
                         labelText="Cost"
                         id="cost"
+                        error={costError}
                         formControlProps={{
                             fullWidth: true
                         }}
@@ -231,6 +283,7 @@ export default function CreateEventPage(props) {
                     <CustomInput
                         labelText="Quantity"
                         id="quantity"
+                        error={quantityError}
                         formControlProps={{
                             fullWidth: true
                         }}
@@ -238,7 +291,7 @@ export default function CreateEventPage(props) {
                     />
                     <GridContainer className={classes.pullRight}>
                         <div>
-                            <Button color="info" onClick={() => setShowModal(true)}>
+                            <Button color="info" onClick={() => checkRequiredThenShowModal()}>
                                 Create Event
                             </Button>
                             <Dialog
