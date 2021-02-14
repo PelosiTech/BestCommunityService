@@ -98,6 +98,7 @@ export default function CreateEventPage(props) {
         const image = e.target.files[0];
         Storage.put(image.name, image, {
             contentType: 'image/png',
+            level: 'public'
         }).then((result) => {
             setFile({file: URL.createObjectURL(image)})
             console.log(result)
@@ -106,7 +107,7 @@ export default function CreateEventPage(props) {
                 file: {
                     bucket: awsExports.aws_user_files_s3_bucket,
                     region: awsExports.aws_user_files_s3_bucket_region,
-                    key: 'public/' + image.name
+                    key: image.name
                 }
             }
             console.log(imageUpload)

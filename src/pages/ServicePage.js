@@ -17,7 +17,7 @@ import Accordion from "../MaterialKitProReact/components/Accordion/Accordion.js"
 import {useHistory} from 'react-router-dom';
 
 import productStyle from "../MaterialKitProReact/assets/jss/material-kit-pro-react/views/productStyle.js";
-import {API, graphqlOperation} from "aws-amplify";
+import {Storage, API, graphqlOperation} from "aws-amplify";
 import {getService} from "../graphql/queries";
 import Card from "../MaterialKitProReact/components/Card/Card";
 import CardHeader from "../MaterialKitProReact/components/Card/CardHeader";
@@ -78,8 +78,9 @@ export default function ServicePage(props) {
         setCost(data.data.getService.cost)
         setQuantity(data.data.getService.quantity)
         setBookedUsers(data.data.getService.bookedUsers.items)
-        const keyUrl = data.data.getService.file.key.replaceAll(" ", "+");
-        setImageUrl("https://" + data.data.getService.file.bucket + ".s3-" + data.data.getService.file.region + ".amazonaws.com/" + keyUrl)
+        Storage.get(data.data.getService.file.key).then((data) => {
+            setImageUrl(data)
+        })
     }
 
     useEffect(() => {

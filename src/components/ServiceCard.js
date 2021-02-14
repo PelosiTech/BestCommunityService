@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import Card from "../MaterialKitProReact/components/Card/Card";
 import CardHeader from "../MaterialKitProReact/components/Card/CardHeader";
 import CardBody from "../MaterialKitProReact/components/Card/CardBody";
@@ -8,28 +8,33 @@ import styles
 import GridItem from "../MaterialKitProReact/components/Grid/GridItem";
 import Button from "../MaterialKitProReact/components/CustomButtons/Button";
 import { useHistory } from "react-router-dom";
+import {Storage} from "aws-amplify";
 
 const useStyles = makeStyles(styles);
 
 const ServiceCard = ({data}) => {
     const classes = useStyles();
     const history = useHistory()
+    const [imageUrl, setImageUrl] = React.useState('')
+    useEffect(() => {
+        Storage.get(firstCard.file.key).then((data) => {
+            setImageUrl(data)
+        })
+    }, [])
+
     if (!data) {
         return null
     }
     const firstCard = data;
     const url = 'service/' + firstCard.id;
-    console.log(firstCard);
-    const keyUrl = firstCard.file.key.replaceAll(" ", "+");
-    const imageUrl = ("https://" + firstCard.file.bucket + ".s3-" + firstCard.file.region + ".amazonaws.com/" + keyUrl)
     return (
             <GridItem md={4} sm={4}>
                 <Card product plain>
                     <CardHeader image plain>
-                        <img src={imageUrl} alt="..."/>
+                        <img src={imageUrl} alt="..."  height={300} width={300} />
                         <div
                             className={classes.coloredShadow}
-                            style={{backgroundImage: `url(${imageUrl})`, opacity: 1}}
+                            style={{backgroundImage: `url(${imageUrl})`, opacity: 1, height: 300, width: 300}}
                         />
                     </CardHeader>
                     <CardBody className={classes.textCenter} plain>
