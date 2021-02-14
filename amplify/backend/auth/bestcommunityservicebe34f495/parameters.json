@@ -1,6 +1,6 @@
 {
     "identityPoolName": "bestcommunityservicebe34f495_identitypool_be34f495",
-    "allowUnauthenticatedIdentities": false,
+    "allowUnauthenticatedIdentities": true,
     "resourceNameTruncated": "bestcobe34f495",
     "userPoolName": "bestcommunityservicebe34f495_userpool_be34f495",
     "autoVerifiedAttributes": [
