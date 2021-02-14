@@ -22,6 +22,22 @@ The application is built off a handmade API backend using GraphQL, AWS AppSync, 
 ## Log In:
 <img width="600" src="https://i.gyazo.com/54c47e64d067f66ae6a259bafda47236.jpg">
 
+## Sign Up Page:
+<img width="600" src="https://i.gyazo.com/a56163990aba19d3b011d6543880c36c.jpg">
+
+## Donate Page:
+<img width="600" src="https://i.gyazo.com/84cf65c275e98ddb4b08211ff9cb500f.png">
+
+## Landing Events Page:
+<img width="600" src="https://i.gyazo.com/cee5b8e14dc179302040ee26b71c6371.jpg">
+
+## Social Events Page:
+<img width="600" src="https://i.gyazo.com/fa60fecf810645e0d20d1682d9e1cb68.jpg">
+
+## Events Detail Page:
+<img width="600" src="https://i.gyazo.com/386cfe2de0dc97b852b77d70117aa5de.png">
+
+
 # App Description
 -   Full stack application utilizing state management and a handmade custom GraphQL backend.  
 
