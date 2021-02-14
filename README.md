@@ -61,36 +61,45 @@ The application is built off a handmade API backend using GraphQL, AWS AppSync, 
 
 ## Tables
 
-type User @model {
-  id: ID!
-  name: String!
-  position: String!
-  services: [Service] @connection(keyName: "byUser", fields: ["id"])
-  bookedServices: [Booked] @connection(keyName: "byUser", fields: ["id"])
-}
 
-type Service @model @key(name: "byUser", fields:["userId"]) {
-  id: ID!
-  name: String!
-  description: String!
-  quantity: String!
-  type: String!
-  date: String!
-  imageUri: String!
-  cost: String!
-  userId: ID!
-  user: User @connection(fields: ["userId"])
-  bookedUsers: [Booked] @connection(keyName: "byService", fields: ["id"])
-}
+### User
+- type User @model 
+-  id: ID!
+-  name: String!
+-  position: String!
+-  services: [Service] @connection(keyName: "byUser", fields: ["id"])
+-  bookedServices: [Booked] @connection(keyName: "byUser", fields: ["id"])
 
-type Booked @model @key(name: "byUser", fields:["userId"]) @key(name:"byService", fields:["serviceId"]) {
-  id: ID!
-  userId: ID!
-  bookedUser: User @connection(fields: ["userId"])
-  serviceId: ID!
-  service: Service @connection(fields:["serviceId"])
-  date: String!
-}
+### Service
+- type Service @model @key(name: "byUser", fields:["userId"])
+-  id: ID!
+-  name: String!
+-  description: String!
+-  quantity: String!
+-  type: String!
+-  date: String!
+-  file: S3Object!
+-  cost: String!
+-  userId: ID!
+-  user: User @connection(fields: ["userId"])
+- bookedUsers: [Booked] @connection(keyName: "byService", fields: ["id"])
+
+### Booked
+- type Booked @model @key(name: "byUser", fields:["userId"]) @key(name:"byService", fields:["serviceId"]) 
+-  id: ID!
+-  userId: ID!
+-  bookedUser: User @connection(fields: ["userId"])
+-  serviceId: ID!
+-  service: Service @connection(fields:["serviceId"])
+-  date: String!
+
 
 ## Features / MVP
+
+* User Authentication with AWS Amplify
+* Database with GraphQL
+* Add new events with graphQL
+* Query all events with graphQL
+* Update events with mutations graphQL
+* Store user logged in with redux persist
 
