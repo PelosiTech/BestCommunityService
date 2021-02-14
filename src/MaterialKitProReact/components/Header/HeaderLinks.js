@@ -3,10 +3,10 @@ import React, {useEffect} from "react";
 // nodejs library to set properties for components
 import PropTypes from "prop-types";
 // react components for routing our app without refresh
-import { Link } from "react-router-dom";
+import {Link} from "react-router-dom";
 
 // @material-ui/core components
-import { makeStyles } from "@material-ui/core/styles";
+import {makeStyles} from "@material-ui/core/styles";
 import List from "@material-ui/core/List";
 import ListItem from "@material-ui/core/ListItem";
 import Icon from "@material-ui/core/Icon";
@@ -48,127 +48,127 @@ import {useDispatch, useSelector} from "react-redux";
 const useStyles = makeStyles(styles);
 
 export default function HeaderLinks(props) {
-  const easeInOutQuad = (t, b, c, d) => {
-    t /= d / 2;
-    if (t < 1) return (c / 2) * t * t + b;
-    t--;
-    return (-c / 2) * (t * (t - 2) - 1) + b;
-  };
-
-  const smoothScroll = (e, target) => {
-    if (window.location.pathname === "/sections") {
-      var isMobile = navigator.userAgent.match(
-        /(iPad)|(iPhone)|(iPod)|(android)|(webOS)/i
-      );
-      if (isMobile) {
-        // if we are on mobile device the scroll into view will be managed by the browser
-      } else {
-        e.preventDefault();
-        var targetScroll = document.getElementById(target);
-        scrollGo(document.documentElement, targetScroll.offsetTop, 1250);
-      }
-    }
-  };
-  const scrollGo = (element, to, duration) => {
-    var start = element.scrollTop,
-      change = to - start,
-      currentTime = 0,
-      increment = 20;
-
-    var animateScroll = function() {
-      currentTime += increment;
-      var val = easeInOutQuad(currentTime, start, change, duration);
-      element.scrollTop = val;
-      if (currentTime < duration) {
-        setTimeout(animateScroll, increment);
-      }
+    const easeInOutQuad = (t, b, c, d) => {
+        t /= d / 2;
+        if (t < 1) return (c / 2) * t * t + b;
+        t--;
+        return (-c / 2) * (t * (t - 2) - 1) + b;
     };
-    animateScroll();
-  };
-  var onClickSections = {};
-  const user = useSelector(state => state.auth)
 
-  const { dropdownHoverColor } = props;
-  const classes = useStyles();
-  return (
-    <List className={classes.list + " " + classes.mlAuto}>
-      <ListItem className={classes.listItem}>
-        <Link to="/donations">
-          <Button
-              color={window.innerWidth < 960 ? "info" : "secondary"}
-              target="_blank"
-              className={classes.navButton}
-              round
-          >
-            <MonetizationOn className={classes.icons} /> Donations
-          </Button>
-        </Link>
-      </ListItem>
-      <ListItem className={classes.listItem}>
-        <Link to="/social-events" className={classes.dropdownLink}>
-          <Layers className={classes.dropdownIcons} />
-          Social Events
-        </Link>
-      </ListItem>
-      <ListItem className={classes.listItem}>
-        <Link to="/rent-equipment" className={classes.dropdownLink}>
-          <Icon className={classes.dropdownIcons}>content_paste</Icon>
-          Equipment & Services
-        </Link>
-      </ListItem>
-      <ListItem className={classes.listItem}>
-        <Link to="/in-house-services" className={classes.dropdownLink}>
-          <LineStyle className={classes.dropdownIcons} />
-          In House Services
-        </Link>
-      </ListItem>
-      <ListItem className={classes.listItem}>
-      <Link to="/external-services" className={classes.dropdownLink}>
-        <Icon className={classes.dropdownIcons}>content_paste</Icon>
-        External Services
-      </Link>
-    </ListItem>
-      <ListItem className={classes.listItem}>
-        {user.id ?
-          <Link to="/logout">
-          <Button
-              color={window.innerWidth < 960 ? "info" : "danger"}
-              target="_blank"
-              className={classes.navButton}
-              round
-          >
-            <People className={classes.icons} /> Logout
-          </Button>
-        </Link>
-            :
-            <Link to="/login">
-              <Button
-                  color={window.innerWidth < 960 ? "info" : "success"}
-                  target="_blank"
-                  className={classes.navButton}
-                  round
-              >
-                <People className={classes.icons} /> Login
-              </Button>
-            </Link>
+    const smoothScroll = (e, target) => {
+        if (window.location.pathname === "/sections") {
+            var isMobile = navigator.userAgent.match(
+                /(iPad)|(iPhone)|(iPod)|(android)|(webOS)/i
+            );
+            if (isMobile) {
+                // if we are on mobile device the scroll into view will be managed by the browser
+            } else {
+                e.preventDefault();
+                var targetScroll = document.getElementById(target);
+                scrollGo(document.documentElement, targetScroll.offsetTop, 1250);
+            }
         }
-      </ListItem>
-    </List>
-  );
+    };
+    const scrollGo = (element, to, duration) => {
+        var start = element.scrollTop,
+            change = to - start,
+            currentTime = 0,
+            increment = 20;
+
+        var animateScroll = function () {
+            currentTime += increment;
+            var val = easeInOutQuad(currentTime, start, change, duration);
+            element.scrollTop = val;
+            if (currentTime < duration) {
+                setTimeout(animateScroll, increment);
+            }
+        };
+        animateScroll();
+    };
+    var onClickSections = {};
+    const user = useSelector(state => state.auth)
+
+    const {dropdownHoverColor} = props;
+    const classes = useStyles();
+    return (
+        <List className={classes.list + " " + classes.mlAuto}>
+            <ListItem className={classes.listItem}>
+                <Link to="/donations">
+                    <Button
+                        color={window.innerWidth < 960 ? "info" : "secondary"}
+                        target="_blank"
+                        className={classes.navButton}
+                        round
+                    >
+                        <MonetizationOn className={classes.icons}/> Donations
+                    </Button>
+                </Link>
+            </ListItem>
+            <ListItem className={classes.listItem}>
+                <Link to="/social-events" className={classes.dropdownLink}>
+                    <Layers className={classes.dropdownIcons}/>
+                    Social Events
+                </Link>
+            </ListItem>
+            <ListItem className={classes.listItem}>
+                <Link to="/rent-equipment" className={classes.dropdownLink}>
+                    <Icon className={classes.dropdownIcons}>content_paste</Icon>
+                    Equipment & Services
+                </Link>
+            </ListItem>
+            <ListItem className={classes.listItem}>
+                <Link to="/in-house-services" className={classes.dropdownLink}>
+                    <LineStyle className={classes.dropdownIcons}/>
+                    In House Services
+                </Link>
+            </ListItem>
+            <ListItem className={classes.listItem}>
+                <Link to="/external-services" className={classes.dropdownLink}>
+                    <Icon className={classes.dropdownIcons}>content_paste</Icon>
+                    External Services
+                </Link>
+            </ListItem>
+            <ListItem className={classes.listItem}>
+                {user.id ?
+                    <Link to="/logout">
+                        <Button
+                            color={window.innerWidth < 960 ? "info" : "danger"}
+                            target="_blank"
+                            className={classes.navButton}
+                            round
+                        >
+                            <People className={classes.icons}/> Logout
+                        </Button>
+                    </Link>
+                    :
+                    <Link to="/login">
+                        <Button
+                            color={window.innerWidth < 960 ? "info" : "success"}
+                            target="_blank"
+                            className={classes.navButton}
+                            round
+                        >
+                            <People className={classes.icons}/> Login
+                        </Button>
+                    </Link>
+                }
+            </ListItem>
+        </List>
+    );
 }
 
 HeaderLinks.defaultProps = {
-  hoverColor: "primary"
+    hoverColor: "primary"
 };
 
 HeaderLinks.propTypes = {
-  dropdownHoverColor: PropTypes.oneOf([
-    "dark",
-    "primary",
-    "info",
-    "success",
-    "warning",
-    "danger",
-    "rose"
-  ])
+    dropdownHoverColor: PropTypes.oneOf([
+        "dark",
+        "primary",
+        "info",
+        "success",
+        "warning",
+        "danger",
+        "rose"
+    ])
 };
