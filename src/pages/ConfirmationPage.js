@@ -14,7 +14,7 @@ import GridContainer from "../MaterialKitProReact/components/Grid/GridContainer.
 import GridItem from "../MaterialKitProReact/components/Grid/GridItem.js";
 
 import productStyle from "../MaterialKitProReact/assets/jss/material-kit-pro-react/views/productStyle.js";
-import {API, graphqlOperation} from "aws-amplify";
+import {API, graphqlOperation, Storage} from "aws-amplify";
 import {getBooked} from "../graphql/queries";
 import Card from "../MaterialKitProReact/components/Card/Card";
 import CardHeader from "../MaterialKitProReact/components/Card/CardHeader";
@@ -35,6 +35,7 @@ export default function ConfirmationPage(props) {
     const [bookingUser, setBookingUser] = React.useState({});
     const [data, setData] = React.useState({});
     const [bookedUsers, setBookedUsers] = React.useState([]);
+    const [imageUrl, setImageUrl] = React.useState("");
     const classes = useStyles();
     const id = props.location.pathname.slice(14);
     const userId = useSelector((state) => state.auth.id);
@@ -49,6 +50,9 @@ export default function ConfirmationPage(props) {
         setBookingUser(data.data.getBooked.bookedUser)
         setData(data.data.getBooked.service)
         setBookedUsers(data.data.getBooked.service.bookedUsers.items)
+        Storage.get(data.data.getBooked.service.file.key).then((data) => {
+            setImageUrl(data)
+        })
     }
 
     useEffect(() => {
@@ -65,10 +69,10 @@ export default function ConfirmationPage(props) {
                 <GridItem md={6} sm={6}>
                     <Card product plain>
                         <CardHeader image plain>
-                            <img src={data.imageUri} alt="..."/>
+                            <img src={imageUrl} alt="..."/>
                             <div
                                 className={classes.coloredShadow}
-                                style={{backgroundImage: `url(${data.imageUri})`, opacity: 1}}
+                                style={{backgroundImage: `url(${imageUrl})`, opacity: 1}}
                             />
                         </CardHeader>
                     </Card>

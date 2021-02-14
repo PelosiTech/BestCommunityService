@@ -14,7 +14,7 @@ import GridContainer from "../MaterialKitProReact/components/Grid/GridContainer.
 import GridItem from "../MaterialKitProReact/components/Grid/GridItem.js";
 
 import productStyle from "../MaterialKitProReact/assets/jss/material-kit-pro-react/views/productStyle.js";
-import {API, graphqlOperation} from "aws-amplify";
+import {API, graphqlOperation, Storage} from "aws-amplify";
 import { getService} from "../graphql/queries";
 import Card from "../MaterialKitProReact/components/Card/Card";
 import CardHeader from "../MaterialKitProReact/components/Card/CardHeader";
@@ -41,8 +41,9 @@ export default function ServiceConfirmationPage(props) {
             id: id,
         }));
         setData(data.data.getService)
-        const keyUrl = data.data.getService.file.key.replaceAll(" ", "+");
-        setImageUrl("https://" + data.data.getService.file.bucket + ".s3-" + data.data.getService.file.region + ".amazonaws.com/" + keyUrl)
+        Storage.get(data.data.getService.file.key).then((data) => {
+            setImageUrl(data)
+        })
     }
     useEffect(() => {
         getSocialEvents();
