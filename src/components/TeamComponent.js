@@ -60,20 +60,27 @@ const TeamComponent = () => {
                                             <h6 className={classes.cardCategory}>FOUNDER | SOFTWARE ENGINEER</h6>
                                         </Muted>
                                         <p className={classes.description}>
-                                            Don{"'"}t be scared of the truth because we need to
-                                            restart the human foundation in truth...
+                                            First solve the problem
+                                            AND then write the code...
                                         </p>
                                     </CardBody>
                                     <CardFooter profile plain>
-                                        <Button justIcon simple color="twitter">
-                                            <i className="fab fa-twitter"/>
-                                        </Button>
-                                        <Button justIcon simple color="facebook">
-                                            <i className="fab fa-facebook-square"/>
-                                        </Button>
-                                        <Button justIcon simple color="google">
-                                            <i className="fab fa-google"/>
-                                        </Button>
+                                        <a href="https://github.com/PelosiTech/Rubiks-World-Site">
+                                            <Button justIcon simple color="github">
+                                                <i className="fab fa-github"/>
+                                            </Button>
+                                        </a>
+                                        <a href="http://carlopelosi.com/#about-me">
+                                            <Button justIcon simple color="dribbble">
+                                                <i className="fab fa-dribbble"/>
+                                            </Button>
+                                        </a>
+                                        <a href="https://www.linkedin.com/in/carlopelosi/">
+                                            <Button justIcon simple color="linkedin">
+                                                <i className="fab fa-linkedin"/>
+                                            </Button>
+                                        </a>
+
                                     </CardFooter>
                                 </GridItem>
                             </GridContainer>
