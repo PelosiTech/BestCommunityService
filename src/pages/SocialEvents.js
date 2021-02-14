@@ -95,6 +95,8 @@ export default function SocialEventsPage() {
             <div className={classNames(classes.main, classes.mainRaised)}>
                 <div style={{display: 'flex', justifyContent: 'space-around', alignItems: 'center', padding: 10}}>
                     <h2 style={{color: "black", textAlign: "center"}}>Social Events</h2>
+                </div>
+                <div style={{display: 'flex', justifyContent: 'space-around', alignItems: 'center', padding: 10}}>
                     <Button style={{height: '50%'}} round color="info" size="lg" onClick={() => history.push(`/create-event`)}>
                         Create an Event!
                     </Button>

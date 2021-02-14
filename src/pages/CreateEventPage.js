@@ -207,7 +207,7 @@ export default function CreateEventPage(props) {
                 </GridItem>
                 <GridItem md={6} sm={6}>
                     <h2 className={classes.title}>Enter in event/service information: </h2>
-                    <h3 className={classes.title}>Name: </h3>
+                    <h3 className={classes.title}>Name of Event/Service: </h3>
                     <CustomInput
                         labelText="Name"
                         id="name"

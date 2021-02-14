@@ -31,10 +31,10 @@ const ServiceCard = ({data}) => {
             <GridItem md={4} sm={4}>
                 <Card product plain>
                     <CardHeader image plain>
-                        <img src={imageUrl} alt="..."  height={300} width={300} />
+                        <img src={imageUrl} alt="..."  height={350} width={300} />
                         <div
                             className={classes.coloredShadow}
-                            style={{backgroundImage: `url(${imageUrl})`, opacity: 1, height: 300, width: 300}}
+                            style={{backgroundImage: `url(${imageUrl})`, opacity: 1, height: 350, width: 300}}
                         />
                     </CardHeader>
                     <CardBody className={classes.textCenter} plain>

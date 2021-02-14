@@ -10,7 +10,7 @@ import Parallax from "../MaterialKitProReact/components/Parallax/Parallax.js";
 // sections for this page
 import HeaderLinks from "../MaterialKitProReact/components/Header/HeaderLinks.js";
 // @material-ui/core ../MaterialKitProReact/components
-import { makeStyles } from "@material-ui/core/styles";
+import {makeStyles} from "@material-ui/core/styles";
 
 import styles from "../MaterialKitProReact/assets/jss/material-kit-pro-react/views/ecommerceStyle.js";
 import TripleCardShow from "../components/TripleCardShow";
@@ -19,7 +19,7 @@ import {API, graphqlOperation} from "aws-amplify";
 import {listServices} from "../graphql/queries";
 import ServiceCard from "../components/ServiceCard";
 import Button from "../MaterialKitProReact/components/CustomButtons/Button";
-import { useHistory } from 'react-router-dom';
+import {useHistory} from 'react-router-dom';
 
 const useStyles = makeStyles(styles);
 
@@ -49,9 +49,9 @@ export default function EquipmentAndServicesPage() {
 
 
     const renderEquipment = () => {
-        if(equipmentServices.length > 0) {
+        if (equipmentServices.length > 0) {
             return equipmentServices.map((event) => {
-                    return <ServiceCard data={event} key={event.id} />
+                return <ServiceCard data={event} key={event.id}/>
             })
         }
     }
@@ -60,7 +60,7 @@ export default function EquipmentAndServicesPage() {
         <div>
             <Header
                 brand="Best Community Service"
-                links={<HeaderLinks dropdownHoverColor="info" />}
+                links={<HeaderLinks dropdownHoverColor="info"/>}
                 fixed
                 color="transparent"
                 changeColorOnScroll={{
@@ -87,7 +87,8 @@ export default function EquipmentAndServicesPage() {
                             <div className={classes.brand}>
                                 <h1 className={classes.title}>Equipment & Services!</h1>
                                 <h4>
-                                    Check out the local equipment for rent and local services we have in our community this week!
+                                    Check out the local equipment for rent and local services we have in our community
+                                    this week!
                                 </h4>
                             </div>
                         </GridItem>
@@ -98,7 +99,10 @@ export default function EquipmentAndServicesPage() {
             <div className={classNames(classes.main, classes.mainRaised)}>
                 <div style={{display: 'flex', justifyContent: 'space-around', alignItems: 'center', padding: 10}}>
                     <h2 style={{color: "black", paddingTop: 30, textAlign: "center"}}>Rent Equipment & Services</h2>
-                    <Button style={{height: '50%'}} round color="info" size="lg" onClick={() => history.push(`/create-event`)}>
+                </div>
+                <div style={{display: 'flex', justifyContent: 'space-around', alignItems: 'center', padding: 10}}>
+                    <Button style={{height: '50%'}} round color="info" size="lg"
+                            onClick={() => history.push(`/create-event`)}>
                         Create a Equipment or Services Event!
                     </Button>
                 </div>

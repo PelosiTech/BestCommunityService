@@ -35,7 +35,7 @@ export default function LoginPage() {
     React.useEffect(() => {
         window.scrollTo(0, 0);
         document.body.scrollTop = 0;
-    });
+    },[]);
     const classes = useStyles();
     const history = useHistory();
     const dispatch = useDispatch();

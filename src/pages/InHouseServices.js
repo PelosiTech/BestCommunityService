@@ -102,6 +102,11 @@ export default function InHouseServicesPage() {
                         Create an In-House Service!
                     </Button>
                 </div>
+                <div style={{display: 'flex', justifyContent: 'space-around', alignItems: 'center', padding: 10}}>
+                <Button style={{height: '50%'}} round color="info" size="lg" onClick={() => history.push(`/create-event`)}>
+                    Create an External Service!
+                </Button>
+                </div>
                 <GridContainer>
                     {renderInHouseServices()}
                 </GridContainer>

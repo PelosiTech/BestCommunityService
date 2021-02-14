@@ -51,7 +51,7 @@ export default function DonationsPage(props) {
     React.useEffect(() => {
         window.scrollTo(0, 0);
         document.body.scrollTop = 0;
-    });
+    },[]);
     const history = useHistory();
     const dispatch = useDispatch();
     const [donationAmount, setDonationAmount] = React.useState('');
