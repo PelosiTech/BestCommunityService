@@ -97,11 +97,21 @@ export default function ServicePage(props) {
 
     const handleBookNow = async () => {
         setShowModal(false);
+        console.log(data)
+        if (data.quantity === 0) {
+            return
+        }
         const info = await API.graphql(graphqlOperation(createBooked, {
             input: {
                 userId: userId,
                 serviceId: id,
                 date: data.date
+            }
+        }));
+        await API.graphql(graphqlOperation(updateService, {
+            input: {
+                id,
+                quantity: (data.quantity - 1)
             }
         }))
         history.push(`/confirmation/${info.data.createBooked.id}`)
@@ -404,6 +414,7 @@ export default function ServicePage(props) {
                                 content: (
                                     <>
                                         <div>Date: {data.date}</div>
+                                        {data.quantity === 0 ? <div>This event is complete full</div> : null}
                                         <div>Spots open: {data.quantity}</div>
                                         <div>Type: {data.type}</div>
                                     </>
