@@ -48,7 +48,7 @@ export default function CreateEventPage(props) {
     React.useEffect(() => {
         window.scrollTo(0, 0);
         document.body.scrollTop = 0;
-    });
+    }, []);
     const history = useHistory();
     const [type, setType] = React.useState('');
     const [quantity, setQuantity] = React.useState('');
@@ -287,7 +287,7 @@ export default function CreateEventPage(props) {
                         formControlProps={{
                             fullWidth: true
                         }}
-                        inputProps={{onChange: (e)=> setQuantity(e.target.value)}}
+                        inputProps={{onChange: (e) => setQuantity(e.target.value)}}
                     />
                     <GridContainer className={classes.pullRight}>
                         <div>
