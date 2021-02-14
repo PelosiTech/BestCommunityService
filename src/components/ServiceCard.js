@@ -15,18 +15,18 @@ const useStyles = makeStyles(styles);
 const ServiceCard = ({data}) => {
     const classes = useStyles();
     const history = useHistory()
+    const firstCard = data;
+    const url = 'service/' + firstCard.id;
     const [imageUrl, setImageUrl] = React.useState('')
     useEffect(() => {
         Storage.get(firstCard.file.key).then((data) => {
             setImageUrl(data)
         })
-    }, [])
+    }, [firstCard.file.key])
 
     if (!data) {
         return null
     }
-    const firstCard = data;
-    const url = 'service/' + firstCard.id;
     return (
             <GridItem md={4} sm={4}>
                 <Card product plain>
