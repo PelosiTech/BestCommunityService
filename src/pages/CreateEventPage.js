@@ -87,7 +87,7 @@ export default function CreateEventPage(props) {
                 }
             })).then(data => {
                 console.log(data)
-                history.push(`/confirmation/${info.data.createService.id}`)
+                history.push(`/service-confirmation/${data.data.createService.id}`)
             })
         } catch (err) {
             console.log(err)
@@ -97,7 +97,7 @@ export default function CreateEventPage(props) {
     const fileChange = (e) => {
         const image = e.target.files[0];
         Storage.put(image.name, image, {
-            contentType: 'image/png'
+            contentType: 'image/png',
         }).then((result) => {
             setFile({file: URL.createObjectURL(image)})
             console.log(result)
@@ -152,6 +152,14 @@ export default function CreateEventPage(props) {
             setImageError(false);
         }
         if (nameError && descriptionError && typeError && dateError && costError && quantityError && imageError) {
+            console.log(nameError)
+            console.log(descriptionError)
+            console.log(typeError)
+            console.log(dateError)
+            console.log(costError)
+            console.log(quantityError)
+            console.log(imageError)
+        } else {
             setShowModal(true)
         }
     }
