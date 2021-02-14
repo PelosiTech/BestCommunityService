@@ -147,22 +147,18 @@ export default function CreateEventPage(props) {
         } else {
             setDateError(false);
         }
-        if (imageFile === {}) {
+        if (imageFile.key === undefined) {
             setImageError(true);
         } else {
             setImageError(false);
         }
-        if (nameError && descriptionError && typeError && dateError && costError && quantityError && imageError) {
-            console.log(nameError)
-            console.log(descriptionError)
-            console.log(typeError)
-            console.log(dateError)
-            console.log(costError)
-            console.log(quantityError)
-            console.log(imageError)
+
+        if (name === "" || description === "" || type === "" || cost === "" || quantity === "" || date === "" || imageFile.key === undefined) {
+
         } else {
             setShowModal(true)
         }
+
     }
 
     const renderPage = () => {
@@ -201,6 +197,7 @@ export default function CreateEventPage(props) {
                             <div>
                                 <h3 className={classes.title}>Please select an image to upload for your event/service: </h3>
                                 <input type="file" onChange={(e) => fileChange(e)} />
+                                { imageError ? <h2 style={{color: 'red'}}>An Image is Required</h2> : null}
                             </div>
                         </CardHeader>
                     </Card>
