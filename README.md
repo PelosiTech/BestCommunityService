@@ -31,6 +31,9 @@ The application is built off a handmade API backend using GraphQL, AWS AppSync, 
 ## Landing Events Page:
 <img width="600" src="https://i.gyazo.com/cee5b8e14dc179302040ee26b71c6371.jpg">
 
+## Create Event Page:
+<img width="600" src="https://i.gyazo.com/294e1e2b542b51e1cb0cd49fcaf41fa2.jpg">
+
 ## Social Events Page:
 <img width="600" src="https://i.gyazo.com/fa60fecf810645e0d20d1682d9e1cb68.jpg">
 

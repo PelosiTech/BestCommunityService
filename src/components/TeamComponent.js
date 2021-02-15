@@ -65,7 +65,7 @@ const TeamComponent = () => {
                                         </p>
                                     </CardBody>
                                     <CardFooter profile plain>
-                                        <a href="https://github.com/PelosiTech/Rubiks-World-Site">
+                                        <a href="https://github.com/PelosiTech/BestCommunityService">
                                             <Button justIcon simple color="github">
                                                 <i className="fab fa-github"/>
                                             </Button>

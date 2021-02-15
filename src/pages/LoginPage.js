@@ -64,6 +64,23 @@ export default function LoginPage() {
         }).catch(err => console.log(err))
     }
 
+    const handleDemo = (e) => {
+        e.preventDefault();
+
+        Auth.signIn({
+            username: "c10sup10@yahoo.com",
+            password: "password",
+        }).then(async (user) => {
+            const info = await API.graphql(graphqlOperation(getUser,{
+                id: user.attributes.sub,
+            }))
+            const graphQLUser = info.data.getUser;
+            dispatch(login(graphQLUser.id, graphQLUser.email, graphQLUser.name, graphQLUser.position, graphQLUser.services, graphQLUser.donationAmount));
+        }).then(() => {
+            history.push('/')
+        }).catch(err => console.log(err))
+    }
+
     return (
         <div>
             <Header
@@ -139,6 +156,13 @@ export default function LoginPage() {
                                         <Button simple color="facebook" size="lg"
                                                 onClick={() => history.push("/signup")}>
                                             Sign Up / Make An Account
+                                        </Button>
+                                        <div style={{color: "darkred"}}>
+                                            OR
+                                        </div>
+                                        <Button simple color="twitter" size="lg"
+                                                onClick={handleDemo}>
+                                            Demo User
                                         </Button>
                                     </div>
                                 </form>
