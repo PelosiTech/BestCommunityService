@@ -1,5 +1,5 @@
 # Best-Community-Service
-*By Carlo Pelosi - [Visit Best-Community-Service](https://dev.d225qaiq3wjuiq.amplifyapp.com/)*
+*By Carlo Pelosi - [Visit Best-Community-Service](https://www.bestcommunityservice.com/)*
 
 **Browse Community Service Events**
 
