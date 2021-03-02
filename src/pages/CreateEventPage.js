@@ -303,7 +303,7 @@ export default function CreateEventPage(props) {
                         formControlProps={{
                             fullWidth: true
                         }}
-                        inputProps={{onChange: (e)=> setCost(e.target.value)}}
+                        inputProps={{onChange: (e)=> setCost(e.target.value), inputType: 'number'}}
                     />
                     <h3 className={classes.title}>Quantity of People allowed to rent/book: </h3>
                     <CustomInput
@@ -313,7 +313,7 @@ export default function CreateEventPage(props) {
                         formControlProps={{
                             fullWidth: true
                         }}
-                        inputProps={{onChange: (e) => setQuantity(e.target.value)}}
+                        inputProps={{onChange: (e) => setQuantity(e.target.value), inputType: 'number'}}
                     />
                     <GridContainer className={classes.pullRight}>
                         <div>
