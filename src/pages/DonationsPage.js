@@ -155,7 +155,11 @@ export default function DonationsPage(props) {
                         />
                         <GridContainer className={classes.pullRight}>
                             <div>
-                                <Button color="info" onClick={() => setShowModal(true)}>
+                                <Button color="info" onClick={() => {
+                                    if (userId !== null && userId !== undefined) {
+                                        setShowModal(true)
+                                    }
+                                }}>
                                     Donate now
                                 </Button>
                                 <Dialog
