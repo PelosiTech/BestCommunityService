@@ -65,28 +65,43 @@ export default function DonationsPage(props) {
 
     const handleCreateEvent = async () => {
         if (userId === null || userId === undefined) {
-            
-        }
-        let amount;
-        if (currentDonate === null) {
-            amount = parseInt(donationAmount)
+            let anonAmount;
+            anonAmount = parseInt(donationAmount)
+            try {
+                await API.graphql(graphqlOperation(updateUser,{
+                    input: {
+                        id: "67488249-fccc-4fa2-901b-06c477abb6b3",
+                        donationAmount: parseInt(anonAmount)
+                    }
+                })).then(data => {
+                    console.log(data)
+                    setShowThankYou(true)
+                })
+            } catch (err) {
+                console.log(err)
+            }
         } else {
-            amount = parseInt(donationAmount) + parseInt(currentDonate)
-        }
-        try {
-            await API.graphql(graphqlOperation(updateUser,{
-                input: {
-                    id: userId,
-                    donationAmount: parseInt(amount)
-                }
-            })).then(data => {
-                console.log(data)
-                const graphQLUser = data.data.updateUser;
-                dispatch(login(graphQLUser.id, graphQLUser.email, graphQLUser.name, graphQLUser.position, graphQLUser.services, graphQLUser.donationAmount));
-                setShowThankYou(true)
-            })
-        } catch (err) {
-            console.log(err)
+            let amount;
+            if (currentDonate === null) {
+                amount = parseInt(donationAmount)
+            } else {
+                amount = parseInt(donationAmount) + parseInt(currentDonate)
+            }
+            try {
+                await API.graphql(graphqlOperation(updateUser,{
+                    input: {
+                        id: userId,
+                        donationAmount: parseInt(amount)
+                    }
+                })).then(data => {
+                    console.log(data)
+                    const graphQLUser = data.data.updateUser;
+                    dispatch(login(graphQLUser.id, graphQLUser.email, graphQLUser.name, graphQLUser.position, graphQLUser.services, graphQLUser.donationAmount));
+                    setShowThankYou(true)
+                })
+            } catch (err) {
+                console.log(err)
+            }
         }
     }
 
